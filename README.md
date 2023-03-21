@@ -9,7 +9,7 @@
 
 ## Changelog
 - ### 21 March 2023
-* Created a simple Node.js web server.
+* Created a simple Node.js web server. (go to server and type [node index.js]
 * This server supports some kind of routing.
 * You can create many files in UI folder, and if the files are named like route name, then it will work. Ex (/login = ./login.html)
 * This Node.js server support static files, such as css and js, more in future.
