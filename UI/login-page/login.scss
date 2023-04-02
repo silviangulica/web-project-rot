@@ -1,0 +1,108 @@
+@import "../global/variables";
+
+* {
+  font-family: $roboto-font;
+}
+body {
+  background-image: radial-gradient(
+    circle,
+    $color-primary,
+    #4a82f5,
+    #667aea,
+    #7a71de,
+    $color-secondary
+  );
+  background-size: 100vw 100vh;
+  background-repeat: no-repeat;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 100vw;
+  min-height: 100vh;
+  margin: 0;
+}
+.login-panel {
+  background-color: #fff;
+  border-radius: 5%;
+  padding: 20px;
+
+  min-width: $min-width-login;
+  max-width: $max-width-login;
+  width: 100vw;
+  min-height: $min-height-login;
+  max-height: $max-height-login;
+
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 3em;
+    margin-top: 1em;
+  }
+
+  &__title {
+    font-size: 2.5em;
+    font-weight: 900;
+  }
+  &__input {
+    border-radius: 1em;
+    border: 1px solid transparent;
+    padding: 10px 0;
+    height: 2.3em;
+    font-size: 1.2em;
+    padding-left: 1em;
+    padding-right: 1em;
+    outline: none;
+    transition: border-bottom 0.3s;
+    box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.395);
+    width: 80%;
+    margin: 0 auto;
+    transition: border 0.5s ease-in-out;
+    &:focus {
+      border: 1px solid $color-tertiary;
+      transition: border 0.5s ease-in-out;
+      outline: none;
+    }
+  }
+  .submit-btn__login {
+    background-color: $color-tertiary;
+    border: none;
+    border-radius: 30em;
+    margin: 0 auto;
+    width: 6em;
+    height: 2.3em;
+    color: white;
+    text-align: center;
+    font-size: 1.5em;
+    cursor: pointer;
+    box-shadow: 0 1px 10px 0px $color-tertiary;
+    transition: background-color 0.3s;
+    &:hover {
+      background-color: $color-secondary;
+      box-shadow: 0 1px 10px 0px $color-secondary;
+      transition: background-color 0.3s;
+    }
+  }
+
+  .signup {
+    margin-top: auto;
+    font-size: 1.2em;
+    color: #888;
+    &__link {
+      color: $color-tertiary;
+      text-decoration: none;
+      font-weight: 700;
+      &:hover {
+        transition: color 0.3s;
+        color: $color-secondary;
+        cursor: pointer;
+      }
+    }
+  }
+}
