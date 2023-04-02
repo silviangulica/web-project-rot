@@ -9,6 +9,16 @@ html {
 body {
   margin: 0;
 }
+body::-webkit-scrollbar {
+  width: 0.5em;
+}
+body::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+body::-webkit-scrollbar-thumb {
+  background-color: #00b691;
+  border-radius: 1em;
+}
 
 .header {
   background: radial-gradient(circle, rgba(0, 139, 255, 0.7), rgba(74, 130, 245, 0.7), rgba(102, 122, 234, 0.7), rgba(122, 113, 222, 0.7), rgba(136, 104, 209, 0.7)), url("../img/stopimage.jpg");
@@ -20,8 +30,6 @@ body {
 .header .menu__nav {
   color: white;
   min-width: 100vw;
-  padding: 0 2em;
-  background-color: red;
   text-align: center;
   display: flex;
   justify-content: space-between;
@@ -29,13 +37,14 @@ body {
   min-height: 5em;
   background-color: transparent;
   position: fixed;
-  transition: padding-top 0.5s ease-in-out;
+  transition-property: padding-top, color, background-color;
+  transition-duration: 0.5s;
+  transition-timing-function: ease-in-out;
   padding-top: 2.5vh;
 }
 .header .menu__nav--scrolled {
   background-color: white;
   transition: all 0.5s ease-in-out;
-  -webkit-appearance: none;
   padding-top: 0px;
   box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.395);
   color: black;
@@ -43,6 +52,8 @@ body {
 .header .menu__logo {
   text-decoration: none;
   font-size: 2.5em;
+  padding-left: 5vw;
+  box-sizing: border-box;
 }
 .header .menu__list {
   display: flex;
@@ -51,7 +62,7 @@ body {
   list-style: none;
 }
 .header .menu__list-item {
-  margin-right: 5vh;
+  margin-right: 5vw;
 }
 .header .menu__list-item .anchor--not-selected,
 .header .menu__list-item .anchor--selected {
@@ -74,6 +85,7 @@ body {
 }
 .header .hero {
   padding-top: 15em;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 .header .hero__content {
   display: flex;
@@ -86,8 +98,30 @@ body {
 }
 .header .hero__title {
   margin: 0;
+  font-size: 4em;
+}
+.header .hero__description {
+  font-size: 2em;
+  padding: 0 5vw;
+}
+.header .hero__button {
+  text-decoration: none;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
+  padding: 1em 2em;
+  border: none;
+  border-radius: 0.5em;
+  background-color: #00b691;
+  color: white;
+  font-size: 1.5em;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+.header .hero__button:hover {
+  background-color: rgb(3, 210, 168);
+  transition: all 0.2s ease-in-out;
 }
 
 .stats {
-  min-height: 300000px;
+  min-height: 200vh;
 }/*# sourceMappingURL=homepage.css.map */
