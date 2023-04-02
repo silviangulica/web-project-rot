@@ -1,0 +1,93 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap%27");
+html {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+.header {
+  background: radial-gradient(circle, rgba(0, 139, 255, 0.7), rgba(74, 130, 245, 0.7), rgba(102, 122, 234, 0.7), rgba(122, 113, 222, 0.7), rgba(136, 104, 209, 0.7)), url("../img/stopimage.jpg");
+  background-size: 100vw 100vh;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 75vh;
+}
+.header .menu__nav {
+  color: white;
+  min-width: 100vw;
+  padding: 0 2em;
+  background-color: red;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 5em;
+  background-color: transparent;
+  position: fixed;
+  transition: padding-top 0.5s ease-in-out;
+  padding-top: 2.5vh;
+}
+.header .menu__nav--scrolled {
+  background-color: white;
+  transition: all 0.5s ease-in-out;
+  -webkit-appearance: none;
+  padding-top: 0px;
+  box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.395);
+  color: black;
+}
+.header .menu__logo {
+  text-decoration: none;
+  font-size: 2.5em;
+}
+.header .menu__list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+}
+.header .menu__list-item {
+  margin-right: 5vh;
+}
+.header .menu__list-item .anchor--not-selected,
+.header .menu__list-item .anchor--selected {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  font-size: 1.5em;
+  padding: 0.5em;
+  padding-top: 0.1em;
+  padding-bottom: 0.1em;
+}
+.header .menu__list-item .anchor--not-selected:hover {
+  color: #00b691;
+  transform: scale(1.1);
+  transition: transform 0.2s ease-in-out;
+}
+.header .menu__list-item .anchor--selected {
+  color: #00b691;
+  pointer-events: none;
+}
+.header .hero {
+  padding-top: 15em;
+}
+.header .hero__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  vertical-align: center;
+  color: white;
+  text-align: center;
+}
+.header .hero__title {
+  margin: 0;
+}
+
+.stats {
+  min-height: 300000px;
+}/*# sourceMappingURL=homepage.css.map */

@@ -1,0 +1,108 @@
+@import "../global/variables";
+html {
+  //min-height: 100vh;
+  //min-width: 100vw;
+  user-select: none;
+  font-family: $roboto-font;
+}
+body {
+  margin: 0;
+}
+
+.header {
+  background: radial-gradient(
+      circle,
+      rgba($color-primary, $gradient-opacity-login),
+      rgba(#4a82f5, $gradient-opacity-login),
+      rgba(#667aea, $gradient-opacity-login),
+      rgba(#7a71de, $gradient-opacity-login),
+      rgba($color-secondary, $gradient-opacity-login)
+    ),
+    url("../img/stopimage.jpg");
+
+  background-size: 100vw 100vh;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 75vh;
+
+  .menu {
+    &__nav {
+      color: white;
+      min-width: 100vw;
+      padding: 0 2em;
+      background-color: red;
+      text-align: center;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: $min-height-nav;
+      background-color: transparent;
+      position: fixed;
+      transition: padding-top 0.5s ease-in-out;
+      padding-top: 2.5vh;
+      &--scrolled {
+        background-color: white;
+        transition: all 0.5s ease-in-out;
+        -webkit-appearance: none;
+        padding-top: 0px;
+        box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.395);
+        color: black;
+      }
+    }
+    &__logo {
+      text-decoration: none;
+
+      font-size: 2.5em;
+    }
+    &__list {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      list-style: none;
+      &-item {
+        margin-right: 5vh;
+        .anchor--not-selected,
+        .anchor--selected {
+          display: block;
+          text-decoration: none;
+          color: inherit;
+
+          font-size: 1.5em;
+          padding: 0.5em;
+          padding-top: 0.1em;
+          padding-bottom: 0.1em;
+        }
+        .anchor--not-selected {
+          &:hover {
+            color: $color-quaternary;
+            transform: scale(1.1);
+            transition: transform 0.2s ease-in-out;
+          }
+        }
+        .anchor--selected {
+          color: $color-quaternary;
+          pointer-events: none;
+        }
+      }
+    }
+  }
+  .hero {
+    padding-top: calc($min-height-nav + 10em);
+    &__content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      vertical-align: center;
+      color: white;
+      text-align: center;
+    }
+    &__title {
+      margin: 0;
+    }
+  }
+}
+
+.stats {
+  min-height: 300000px;
+}
