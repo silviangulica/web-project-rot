@@ -37,9 +37,6 @@ body {
   min-height: $min-height-login;
   max-height: $max-height-login;
 }
-.panel--flip {
-  transform: rotateY(180deg);
-}
 
 .login-panel,
 .sign-up-panel {
@@ -65,6 +62,7 @@ body {
     font-weight: 900;
   }
   &__input {
+    -webkit-appearance: none; // fix for box shadows on iPhones
     border-radius: 1em;
     border: 1px solid transparent;
     padding: 10px 0;
@@ -74,7 +72,7 @@ body {
     padding-right: 1em;
     outline: none;
     transition: border-bottom 0.3s;
-    box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.395);
+
     width: 70%;
     margin: 0 auto;
     transition: border 0.5s ease-in-out;
@@ -83,6 +81,7 @@ body {
       transition: border 0.5s ease-in-out;
       outline: none;
     }
+    box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.395);
   }
   &__submit-btn {
     background-color: $color-tertiary;
