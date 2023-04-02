@@ -13,17 +13,43 @@
 
 <body>
     <main class="main">
-        <div class="login-panel" class="login-panel">
-            <h1 class="login-panel__title">Login</h1>
-            <form action="http://localhost:3000/login" method="POST" class="login-panel__form">
-                <input type="text" name="username" class="login-panel__input" placeholder="username"
-                    required="required" />
-                <input type="password" name="password" class="login-panel__input" placeholder="password"
-                    required="required" />
-                <button type="submit" class="submit-btn submit-btn__login">LOGIN</button>
+        <div class="background"></div>
+        <div class="panel" id="panel">
+            <div class="login-panel" id="login-panel">
+                <h1 class="login-panel__title">Login</h1>
+                <form action="http://localhost:3000/login" method="POST" class="login-panel__form">
+                    <input type="text" name="username" class="login-panel__input" placeholder="username"
+                        required="required" />
+                    <input type="password" name="password" class="login-panel__input" placeholder="password"
+                        required="required" />
+                    <button type="submit" class="login-panel__submit-btn">LOGIN</button>
 
-            </form>
-            <p class="signup">Don't have an account? <a class="signup__link">Sign up</a></p>
+                </form>
+                <p class="login-panel__footer">Don't have an account? <a class="login-panel__footer-anchor">Sign
+                        up</a>
+                </p>
+            </div>
+
+
+            <div class="sign-up-panel" id="sign-up-panel">
+                <h1 class="sign-up-panel__title">Sign up</h1>
+                <form action="http://localhost:3000/login" method="POST" class="sign-up-panel__form">
+                    <input type="text" name="username" class="sign-up-panel__input" placeholder="username"
+                        required="required" />
+                    <input type="email" name="email" class="sign-up-panel__input" placeholder="email"
+                        required="required" />
+                    <input type="password" name="password" class="sign-up-panel__input" placeholder="password"
+                        required="required" />
+                    <input type="password" name="password" class="sign-up-panel__input" placeholder="confirm password"
+                        required="required" />
+
+                    <button type="submit" class="sign-up-panel__submit-btn">SIGN UP</button>
+
+                </form>
+                <p class="sign-up-panel__footer">Already have an account? <a
+                        class="sign-up-panel__footer-anchor">Login</a>
+                </p>
+            </div>
         </div>
     </main>
 </body>
