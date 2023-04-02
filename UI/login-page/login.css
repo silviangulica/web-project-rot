@@ -29,10 +29,6 @@ body {
   max-height: 45em;
 }
 
-.panel--flip {
-  transform: rotateY(180deg);
-}
-
 .login-panel,
 .sign-up-panel {
   background-color: #fff;

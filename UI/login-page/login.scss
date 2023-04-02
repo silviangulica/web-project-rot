@@ -37,9 +37,6 @@ body {
   min-height: $min-height-login;
   max-height: $max-height-login;
 }
-.panel--flip {
-  transform: rotateY(180deg);
-}
 
 .login-panel,
 .sign-up-panel {
@@ -65,7 +62,7 @@ body {
     font-weight: 900;
   }
   &__input {
-    -webkit-appearance: none;
+    -webkit-appearance: none; // fix for box shadows on iPhones
     border-radius: 1em;
     border: 1px solid transparent;
     padding: 10px 0;
