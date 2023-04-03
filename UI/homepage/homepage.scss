@@ -38,13 +38,13 @@ body {
   background-size: 100vw 100vh;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  min-height: 75vh;
+  min-height: 80vh;
 
   .menu {
     &__nav {
       color: white;
       min-width: 100vw;
-
+      z-index: 999;
       text-align: center;
       display: flex;
       justify-content: space-between;
@@ -69,7 +69,7 @@ body {
     &__logo {
       text-decoration: none;
       font-size: 2.5em;
-      padding-left: 5vw;
+      padding-left: $margin-padding-1;
       box-sizing: border-box;
     }
     &__list {
@@ -78,7 +78,12 @@ body {
       align-items: center;
       list-style: none;
       &-item {
-        margin-right: 5vw;
+        margin-right: 2vw;
+
+        &:last-of-type {
+          margin-right: $margin-padding-1;
+        }
+
         .anchor--not-selected,
         .anchor--selected {
           display: block;
@@ -90,6 +95,7 @@ body {
           padding-top: 0.1em;
           padding-bottom: 0.1em;
         }
+
         .anchor--not-selected {
           &:hover {
             color: $color-quaternary;
@@ -118,11 +124,11 @@ body {
     }
     &__title {
       margin: 0;
-      font-size: 4em;
+      font-size: 4rem;
     }
     &__description {
-      font-size: 2em;
-      padding: 0 5vw;
+      font-size: 2rem;
+      padding: 0 $margin-padding-1;
     }
     &__button {
       text-decoration: none;
@@ -144,6 +150,180 @@ body {
   }
 }
 
-.stats {
-  min-height: 200vh;
+.info {
+  text-align: center;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-top: 10vh;
+  padding: 0 $margin-padding-1;
+  gap: 1em;
+  &__content {
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.5em;
+    padding: 0 2rem;
+    height: calc(1em + 30vh);
+    width: calc(1em + 30vw);
+    color: black;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: all 0.2s ease-in-out;
+    &--selected {
+      background-color: $color-quaternary;
+      color: white;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      transition: all 0.2s ease-in-out;
+    }
+    &:hover {
+      background-color: $color-quaternary;
+      color: white;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      transition: all 0.2s ease-in-out;
+      cursor: pointer;
+    }
+  }
+}
+
+.main {
+  &__titlu {
+    padding: 0 $margin-padding-1;
+    font-size: 2.5rem;
+    margin-top: 10vh;
+    margin-bottom: 0;
+  }
+
+  .description {
+    font-size: 2rem;
+    margin-top: 10vh;
+
+    &__item {
+      display: none;
+    }
+    &__item--show {
+      display: block;
+    }
+    position: relative;
+    padding: 0 $margin-padding-1;
+    &__text {
+      margin-top: 0;
+      text-align: center;
+    }
+    &__image {
+      margin: 0 auto;
+      height: 40vh;
+      width: 50vw;
+      border: 2px solid $color-quaternary;
+      img {
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+}
+.footer {
+  background-color: #333;
+  color: #fff;
+  font-size: 1.2rem;
+  padding: 2rem;
+  margin-top: 10vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  &__social-link {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 1vw;
+    &:hover {
+      color: $color-quaternary;
+      transition: all 0.2s ease-in-out;
+    }
+    transition: all 0.2s ease-in-out;
+  }
+}
+
+//->media queries
+@media screen and (max-width: 1024px) {
+  .main {
+    &__titlu {
+      margin-left: 0;
+    }
+    .description {
+      &__image {
+        width: 100%;
+      }
+    }
+  }
+}
+@media screen and (max-width: 786px) {
+  html {
+    font-size: 11px;
+  }
+  .header {
+    background-position: center 0;
+    .menu {
+      &__logo {
+        padding-left: $margin-padding-2;
+      }
+      &__list {
+        &-item {
+          &:last-of-type {
+            margin-right: 0;
+          }
+        }
+      }
+    }
+  }
+  .info {
+    flex-direction: column;
+    padding: 0 $margin-padding-1;
+    gap: 1em;
+    &__content {
+      width: 76vw;
+      font-size: 1.5rem;
+      box-sizing: border-box;
+    }
+  }
+
+  .main {
+    &__titlu {
+      margin-left: 0;
+    }
+    .description {
+      &__image {
+        width: 100%;
+      }
+    }
+  }
+
+  .footer {
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    &__social-link {
+      padding: 0, 2em;
+    }
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .main {
+    &__titlu {
+    }
+    .description {
+      padding: 0;
+      &__text {
+        padding: 0 $margin-padding-1;
+      }
+    }
+  }
 }
