@@ -101,10 +101,10 @@ body::-webkit-scrollbar-thumb {
 }
 .header .hero__title {
   margin: 0;
-  font-size: 4em;
+  font-size: 4rem;
 }
 .header .hero__description {
-  font-size: 2em;
+  font-size: 2rem;
   padding: 0 12vw;
 }
 .header .hero__button {
@@ -149,6 +149,12 @@ body::-webkit-scrollbar-thumb {
 }
 
 @media screen and (max-width: 786px) {
+  html {
+    font-size: 10px;
+  }
+  .header {
+    background-size: 100vw 200vh;
+  }
   .header .menu__logo {
     padding-left: 0;
   }

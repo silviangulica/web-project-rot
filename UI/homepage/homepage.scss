@@ -124,10 +124,10 @@ body {
     }
     &__title {
       margin: 0;
-      font-size: 4em;
+      font-size: 4rem;
     }
     &__description {
-      font-size: 2em;
+      font-size: 2rem;
       padding: 0 $margin-padding-1;
     }
     &__button {
@@ -176,8 +176,13 @@ body {
     text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   }
 }
+
 @media screen and (max-width: 786px) {
+  html {
+    font-size: 10px;
+  }
   .header {
+    background-size: 100vw 200vh;
     .menu {
       &__logo {
         padding-left: 0;
