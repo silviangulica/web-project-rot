@@ -232,6 +232,6 @@ body::-webkit-scrollbar-thumb {
     gap: 1em;
   }
   .footer__social-link {
-    margin: 1em, 2em;
+    padding: 0, 2em;
   }
 }/*# sourceMappingURL=homepage.css.map */
