@@ -9,3 +9,14 @@ function changeNavBarColor() {
 }
 
 window.addEventListener("scroll", changeNavBarColor);
+
+const infoContents = document.querySelectorAll(".info__content");
+
+infoContents.forEach((infoContent) => {
+  infoContent.addEventListener("click", () => {
+    infoContents.forEach((content) => {
+      content.classList.remove("info__content--selected");
+    });
+    infoContent.classList.add("info__content--selected");
+  });
+});

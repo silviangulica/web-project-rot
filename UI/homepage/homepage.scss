@@ -158,31 +158,84 @@ body {
   align-items: center;
 
   margin-top: 10vh;
-  margin-bottom: 20vh;
   padding: 0 $margin-padding-1;
   gap: 1em;
-  &__content-1,
-  &__content-2,
-  &__content-3 {
-    background-color: $color-quaternary;
+  &__content {
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border-radius: 0.5em;
+    padding: 0 2rem;
     height: calc(1em + 30vh);
     width: calc(1em + 30vw);
-    color: white;
+    color: black;
     text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: all 0.2s ease-in-out;
+    &--selected {
+      background-color: $color-quaternary;
+      color: white;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      transition: all 0.2s ease-in-out;
+    }
+    &:hover {
+      background-color: $color-quaternary;
+      color: white;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      transition: all 0.2s ease-in-out;
+      cursor: pointer;
+    }
   }
 }
 
+.main {
+  &__titlu {
+    padding: 0 $margin-padding-1;
+    font-size: 2.5rem;
+    margin-top: 10vh;
+    margin-bottom: 0;
+  }
+
+  .description {
+    padding: 0 $margin-padding-1;
+    font-size: 2rem;
+    margin-top: 10vh;
+    &__text {
+      margin-top: 0;
+    }
+  }
+}
+.footer {
+  background-color: #333;
+  color: #fff;
+  font-size: 1.2rem;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  &__social-link {
+    color: #fff;
+    text-decoration: none;
+    &:hover {
+      color: $color-quaternary;
+      transition: all 0.2s ease-in-out;
+    }
+    transition: all 0.2s ease-in-out;
+  }
+}
+
+//->media queries
 @media screen and (max-width: 786px) {
   html {
     font-size: 10px;
   }
   .header {
-    background-size: 100vw 200vh;
+    background-size: 100vw 100vh;
+    background-position: center 0;
     .menu {
       &__logo {
         padding-left: $margin-padding-2;
@@ -198,12 +251,27 @@ body {
   }
   .info {
     flex-direction: column;
-    padding: 0;
+    padding: 0 $margin-padding-1;
     gap: 1em;
-    &__content-1,
-    &__content-2,
-    &__content-3 {
-      width: 80vw;
+    &__content {
+      width: 76vw;
+      font-size: 1.5rem;
+      box-sizing: border-box;
+    }
+  }
+
+  .main {
+    &__titlu {
+      margin-left: 0;
+    }
+  }
+
+  .footer {
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    &__social-link {
+      margin: 1em, 2em;
     }
   }
 }

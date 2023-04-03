@@ -131,21 +131,72 @@ body::-webkit-scrollbar-thumb {
   justify-content: space-between;
   align-items: center;
   margin-top: 10vh;
-  margin-bottom: 20vh;
   padding: 0 12vw;
   gap: 1em;
 }
-.info__content-1, .info__content-2, .info__content-3 {
-  background-color: #00b691;
+.info__content {
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   border-radius: 0.5em;
+  padding: 0 2rem;
   height: calc(1em + 30vh);
   width: calc(1em + 30vw);
+  color: black;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  transition: all 0.2s ease-in-out;
+}
+.info__content--selected {
+  background-color: #00b691;
   color: white;
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  transition: all 0.2s ease-in-out;
+}
+.info__content:hover {
+  background-color: #00b691;
+  color: white;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.main__titlu {
+  padding: 0 12vw;
+  font-size: 2.5rem;
+  margin-top: 10vh;
+  margin-bottom: 0;
+}
+.main .description {
+  padding: 0 12vw;
+  font-size: 2rem;
+  margin-top: 10vh;
+}
+.main .description__text {
+  margin-top: 0;
+}
+
+.footer {
+  background-color: #333;
+  color: #fff;
+  font-size: 1.2rem;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.footer__social-link {
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+.footer__social-link:hover {
+  color: #00b691;
+  transition: all 0.2s ease-in-out;
 }
 
 @media screen and (max-width: 786px) {
@@ -153,7 +204,8 @@ body::-webkit-scrollbar-thumb {
     font-size: 10px;
   }
   .header {
-    background-size: 100vw 200vh;
+    background-size: 100vw 100vh;
+    background-position: center 0;
   }
   .header .menu__logo {
     padding-left: 2.5vw;
@@ -163,10 +215,23 @@ body::-webkit-scrollbar-thumb {
   }
   .info {
     flex-direction: column;
-    padding: 0;
+    padding: 0 12vw;
     gap: 1em;
   }
-  .info__content-1, .info__content-2, .info__content-3 {
-    width: 80vw;
+  .info__content {
+    width: 76vw;
+    font-size: 1.5rem;
+    box-sizing: border-box;
+  }
+  .main__titlu {
+    margin-left: 0;
+  }
+  .footer {
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+  }
+  .footer__social-link {
+    margin: 1em, 2em;
   }
 }/*# sourceMappingURL=homepage.css.map */
