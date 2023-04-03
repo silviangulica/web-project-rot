@@ -185,7 +185,7 @@ body {
     background-size: 100vw 200vh;
     .menu {
       &__logo {
-        padding-left: 0;
+        padding-left: $margin-padding-2;
       }
       &__list {
         &-item {

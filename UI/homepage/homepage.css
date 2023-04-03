@@ -156,7 +156,7 @@ body::-webkit-scrollbar-thumb {
     background-size: 100vw 200vh;
   }
   .header .menu__logo {
-    padding-left: 0;
+    padding-left: 2.5vw;
   }
   .header .menu__list-item:last-of-type {
     margin-right: 0;
