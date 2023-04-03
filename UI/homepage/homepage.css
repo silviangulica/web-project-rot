@@ -25,11 +25,12 @@ body::-webkit-scrollbar-thumb {
   background-size: 100vw 100vh;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  min-height: 75vh;
+  min-height: 80vh;
 }
 .header .menu__nav {
   color: white;
   min-width: 100vw;
+  z-index: 999;
   text-align: center;
   display: flex;
   justify-content: space-between;
@@ -170,12 +171,30 @@ body::-webkit-scrollbar-thumb {
   margin-bottom: 0;
 }
 .main .description {
-  padding: 0 12vw;
   font-size: 2rem;
   margin-top: 10vh;
+  position: relative;
+  padding: 0 12vw;
+}
+.main .description__item {
+  display: none;
+}
+.main .description__item--show {
+  display: block;
 }
 .main .description__text {
   margin-top: 0;
+  text-align: center;
+}
+.main .description__image {
+  margin: 0 auto;
+  height: 40vh;
+  width: 50vw;
+  border: 2px solid #00b691;
+}
+.main .description__image img {
+  height: 100%;
+  width: 100%;
 }
 
 .footer {
@@ -183,15 +202,18 @@ body::-webkit-scrollbar-thumb {
   color: #fff;
   font-size: 1.2rem;
   padding: 2rem;
+  margin-top: 10vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  text-align: center;
   flex-direction: row;
   flex-wrap: wrap;
 }
 .footer__social-link {
   color: #fff;
   text-decoration: none;
+  margin-left: 1vw;
   transition: all 0.2s ease-in-out;
 }
 .footer__social-link:hover {
@@ -199,12 +221,19 @@ body::-webkit-scrollbar-thumb {
   transition: all 0.2s ease-in-out;
 }
 
+@media screen and (max-width: 1024px) {
+  .main__titlu {
+    margin-left: 0;
+  }
+  .main .description__image {
+    width: 100%;
+  }
+}
 @media screen and (max-width: 786px) {
   html {
-    font-size: 10px;
+    font-size: 11px;
   }
   .header {
-    background-size: 100vw 100vh;
     background-position: center 0;
   }
   .header .menu__logo {
@@ -226,6 +255,9 @@ body::-webkit-scrollbar-thumb {
   .main__titlu {
     margin-left: 0;
   }
+  .main .description__image {
+    width: 100%;
+  }
   .footer {
     flex-direction: column;
     align-items: center;
@@ -233,5 +265,13 @@ body::-webkit-scrollbar-thumb {
   }
   .footer__social-link {
     padding: 0, 2em;
+  }
+}
+@media screen and (max-width: 550px) {
+  .main .description {
+    padding: 0;
+  }
+  .main .description__text {
+    padding: 0 12vw;
   }
 }/*# sourceMappingURL=homepage.css.map */

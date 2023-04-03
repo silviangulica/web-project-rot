@@ -38,13 +38,13 @@ body {
   background-size: 100vw 100vh;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  min-height: 75vh;
+  min-height: 80vh;
 
   .menu {
     &__nav {
       color: white;
       min-width: 100vw;
-
+      z-index: 999;
       text-align: center;
       display: flex;
       justify-content: space-between;
@@ -199,11 +199,30 @@ body {
   }
 
   .description {
-    padding: 0 $margin-padding-1;
     font-size: 2rem;
     margin-top: 10vh;
+
+    &__item {
+      display: none;
+    }
+    &__item--show {
+      display: block;
+    }
+    position: relative;
+    padding: 0 $margin-padding-1;
     &__text {
       margin-top: 0;
+      text-align: center;
+    }
+    &__image {
+      margin: 0 auto;
+      height: 40vh;
+      width: 50vw;
+      border: 2px solid $color-quaternary;
+      img {
+        height: 100%;
+        width: 100%;
+      }
     }
   }
 }
@@ -212,14 +231,18 @@ body {
   color: #fff;
   font-size: 1.2rem;
   padding: 2rem;
+  margin-top: 10vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  text-align: center;
   flex-direction: row;
   flex-wrap: wrap;
+
   &__social-link {
     color: #fff;
     text-decoration: none;
+    margin-left: 1vw;
     &:hover {
       color: $color-quaternary;
       transition: all 0.2s ease-in-out;
@@ -229,12 +252,23 @@ body {
 }
 
 //->media queries
+@media screen and (max-width: 1024px) {
+  .main {
+    &__titlu {
+      margin-left: 0;
+    }
+    .description {
+      &__image {
+        width: 100%;
+      }
+    }
+  }
+}
 @media screen and (max-width: 786px) {
   html {
-    font-size: 10px;
+    font-size: 11px;
   }
   .header {
-    background-size: 100vw 100vh;
     background-position: center 0;
     .menu {
       &__logo {
@@ -264,6 +298,11 @@ body {
     &__titlu {
       margin-left: 0;
     }
+    .description {
+      &__image {
+        width: 100%;
+      }
+    }
   }
 
   .footer {
@@ -272,6 +311,19 @@ body {
     gap: 1em;
     &__social-link {
       padding: 0, 2em;
+    }
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .main {
+    &__titlu {
+    }
+    .description {
+      padding: 0;
+      &__text {
+        padding: 0 $margin-padding-1;
+      }
     }
   }
 }
