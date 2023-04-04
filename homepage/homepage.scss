@@ -300,6 +300,7 @@ body {
     }
     .description {
       &__image {
+        box-sizing: border-box;
         width: 100%;
       }
     }

@@ -256,6 +256,7 @@ body::-webkit-scrollbar-thumb {
     margin-left: 0;
   }
   .main .description__image {
+    box-sizing: border-box;
     width: 100%;
   }
   .footer {
