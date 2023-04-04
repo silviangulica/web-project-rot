@@ -129,4 +129,26 @@ body {
 
 .sign-up-panel {
   transform: rotateY(180deg);
+}
+
+@media screen and (max-width: 480px) {
+  body {
+    align-items: flex-start;
+  }
+  .panel {
+    min-width: 100vw;
+    max-width: 100vw;
+    min-height: 85vh;
+    max-height: 85vh;
+  }
+  .panel .login-panel__form,
+  .panel .sign-up-panel__form {
+    gap: 1.5em;
+  }
+}
+@media screen and (max-width: 320px) {
+  .panel {
+    min-height: 100vh;
+    max-height: 100vh;
+  }
 }/*# sourceMappingURL=login.css.map */
