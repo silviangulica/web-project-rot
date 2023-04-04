@@ -29,3 +29,22 @@ infoContents.forEach((infoContent, index) => {
     infoDescription[index].classList.add("description__item--show");
   });
 });
+
+const hiddenElements = document.querySelectorAll(".hidable");
+hiddenElements.forEach((element) => {
+  element.style.opacity = 0;
+});
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    console.log(entry);
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show");
+    } else {
+      entry.target.classList.remove("show");
+    }
+  });
+});
+
+const scrollAnimation = document.querySelectorAll(".hidable");
+
+scrollAnimation.forEach((element) => observer.observe(element));
