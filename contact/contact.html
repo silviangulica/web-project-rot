@@ -10,22 +10,49 @@
   <body>
     <div class="main">
       <div class="main__right-panel">
-        <form action="" method="POST" class="main__form">
-          <h2>Trimite un mesaj</h2>
+        <form action="" method="POST" class="form">
+          <h2 class="form__title">Trimite un mesaj</h2>
           <div class="form__name">
-            <label for="name">Nume</label>
-            <input type="text" id="name" name="name" required />
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              class="form__input"
+              placeholder="Nume"
+            />
           </div>
           <div class="form__email">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required />
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form__input"
+              required
+              placeholder="Email"
+            />
           </div>
           <div class="form__phone">
-            <label for="telefon">Telefon</label>
-            <input type="number" id="telefon" name="telefon" required />
+            <input
+              type="number"
+              id="phone"
+              name="phone"
+              required
+              class="form__input"
+              placeholder="Numar de telefon"
+            />
+          </div>
+          <div class="form__subject">
+            <input
+              type="text"
+              id="subject"
+              name="subject"
+              required
+              class="form__input"
+              placeholder="Subiect"
+            />
           </div>
           <div class="form__message">
-            <label for="message">Message</label>
             <textarea id="message" name="message" required></textarea>
           </div>
           <button type="submit">Send</button>

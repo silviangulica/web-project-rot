@@ -6,8 +6,19 @@ html {
   //max-height: 100vh;
   user-select: none;
   font-family: $roboto-font;
+  background: radial-gradient(
+      circle,
+      rgba($color-primary, $gradient-opacity-login),
+      rgba(#4a82f5, $gradient-opacity-login),
+      rgba(#667aea, $gradient-opacity-login),
+      rgba(#7a71de, $gradient-opacity-login),
+      rgba($color-secondary, $gradient-opacity-login)
+    ),
+    url("../img/stopimage.jpg");
 }
-
+body {
+  margin: 0;
+}
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -30,5 +41,89 @@ input[type="number"] {
 
   // right panel
   &__right-panel {
+    background-color: $color-secondary;
+    height: 40em;
+    width: 40em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    .form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto auto auto auto;
+      grid-gap: 10px;
+
+      gap: 2em;
+      &__name {
+        grid-column: 1 / 2;
+        grid-row: 2 / 3;
+      }
+      &__email {
+        grid-column: 2 / 3;
+        grid-row: 2 / 3;
+      }
+      &__phone {
+        grid-column: 1 / 2;
+        grid-row: 3 / 4;
+      }
+      &__message {
+        grid-column: 1 / 3;
+        grid-row: 4 / 5;
+        align-self: center;
+        display: flex;
+        justify-content: center;
+        #message {
+          resize: none;
+          width: 40em;
+          height: 100px;
+        }
+      }
+      &__subject {
+        grid-column: 2/3;
+        grid-row: 3/4;
+      }
+
+      &__title {
+        grid-column: 1 / 3;
+        grid-row: 1 / 2;
+        font-size: 2em;
+
+        text-align: center;
+      }
+      &__input {
+        -webkit-appearance: none; // fix for box shadows on iPhones
+        border-radius: 1em;
+        border: 1px solid transparent;
+        padding: 10px 0;
+        height: 2.3em;
+        font-size: 1.2em;
+        padding-left: 1em;
+        padding-right: 1em;
+        outline: none;
+        transition: border-bottom 0.3s;
+
+        margin: 0;
+        transition: border 0.5s ease-in-out;
+        &:focus {
+          border: 1px solid $color-tertiary;
+          transition: border 0.5s ease-in-out;
+          outline: none;
+        }
+        box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.395);
+      }
+    }
+  }
+  &__left-panel {
+    background-color: $color-primary;
+    height: 40em;
+    width: 30em;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+    position: relative;
+    padding-left: 5em;
   }
 }
