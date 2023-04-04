@@ -251,12 +251,14 @@ body {
   }
 }
 
-.hidden {
-  opacity: 0;
+.hidable {
+  filter: blur(2px);
 }
+
 .show {
   opacity: 1 !important;
   transition: all 1.5s;
+  filter: blur(0);
 }
 
 //->media queries
