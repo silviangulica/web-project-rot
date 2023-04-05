@@ -1,0 +1,132 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap%27");
+html {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  margin: 0;
+}
+body::-webkit-scrollbar {
+  width: 0.5em;
+}
+body::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+body::-webkit-scrollbar-thumb {
+  background-color: #00b691;
+  border-radius: 1em;
+}
+
+.nav {
+  color: white;
+  min-width: 100vw;
+  z-index: 999;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 5em;
+  background-color: rgba(255, 255, 255, 0.538);
+  color: black;
+  position: fixed;
+  z-index: 999;
+  transition-property: padding-top, color, background-color;
+  transition-duration: 0.5s;
+  transition-timing-function: ease-in-out;
+  padding-top: 2.5vh;
+}
+.nav--scrolled {
+  background-color: white;
+  transition: all 0.5s ease-in-out;
+  padding-top: 0px;
+  box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.395);
+  color: black;
+}
+.nav__logo {
+  text-decoration: none;
+  font-size: 2.5em;
+  padding-left: 12vw;
+  box-sizing: border-box;
+}
+.nav__list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+}
+.nav__list-item {
+  margin-right: 2vw;
+}
+.nav__list-item:last-of-type {
+  margin-right: 12vw;
+}
+.nav__list-item .anchor--not-selected,
+.nav__list-item .anchor--selected {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  font-size: 1.5em;
+  padding: 0.5em;
+  padding-top: 0.1em;
+  padding-bottom: 0.1em;
+}
+.nav__list-item .anchor--not-selected:hover {
+  color: #00b691;
+  transform: scale(1.1);
+  transition: transform 0.2s ease-in-out;
+}
+.nav__list-item .anchor--selected {
+  color: #00b691;
+  pointer-events: none;
+}
+
+.profile {
+  z-index: 0;
+  min-height: 40vh;
+  background: radial-gradient(circle, rgba(0, 139, 255, 0.7), rgba(74, 130, 245, 0.7), rgba(102, 122, 234, 0.7), rgba(122, 113, 222, 0.7), rgba(136, 104, 209, 0.7)), url("../img/road.jpg");
+  background-repeat: no-repeat;
+  background-size: 100vw;
+  background-position: center;
+}
+
+.main {
+  min-height: 200vh;
+}
+.main .container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas: "stats profile-picture Leaderboard" "stats last-quizz Leaderboard";
+}
+.main .container .stats {
+  grid-area: stats;
+  background-color: yellow;
+  min-height: 30vh;
+  min-width: 30vw;
+}
+.main .container .last-quizz {
+  grid-area: last-quizz;
+  background-color: coral;
+  min-height: 30vh;
+  min-width: 30vw;
+}
+.main .container .Leaderboard {
+  grid-area: Leaderboard;
+  background-color: green;
+  min-height: 30vh;
+  min-width: 30vw;
+}
+.main .container .profile-picture {
+  grid-area: profile-picture;
+  background-color: blue;
+  min-height: 30vh;
+  min-width: 30vw;
+  position: relative;
+  z-index: 2;
+  margin-top: -6em;
+}/*# sourceMappingURL=dashboard.css.map */
