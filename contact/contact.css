@@ -31,8 +31,8 @@ input[type=number] {
   height: 100vh;
   width: 100vw;
 }
-.main__right-panel {
-  background-color: #8868d1;
+.main__left-panel {
+  background-color: white;
   height: 40em;
   width: 40em;
   display: flex;
@@ -41,75 +41,147 @@ input[type=number] {
   justify-content: center;
   position: relative;
 }
-.main__right-panel .form {
+.main__left-panel .form {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto auto auto auto auto;
   grid-gap: 10px;
   gap: 2em;
 }
-.main__right-panel .form__name {
+.main__left-panel .form__name {
   grid-column: 1/2;
   grid-row: 2/3;
 }
-.main__right-panel .form__email {
+.main__left-panel .form__email {
   grid-column: 2/3;
   grid-row: 2/3;
 }
-.main__right-panel .form__phone {
+.main__left-panel .form__phone {
   grid-column: 1/2;
   grid-row: 3/4;
 }
-.main__right-panel .form__message {
+.main__left-panel .form__message {
   grid-column: 1/3;
   grid-row: 4/5;
   align-self: center;
   display: flex;
   justify-content: center;
+  font-size: 1.1em;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
 }
-.main__right-panel .form__message #message {
+.main__left-panel .form__message #message {
   resize: none;
-  width: 40em;
-  height: 100px;
-}
-.main__right-panel .form__subject {
-  grid-column: 2/3;
-  grid-row: 3/4;
-}
-.main__right-panel .form__title {
-  grid-column: 1/3;
-  grid-row: 1/2;
-  font-size: 2em;
-  text-align: center;
-}
-.main__right-panel .form__input {
   -webkit-appearance: none;
+  height: 5em;
   border-radius: 1em;
   border: 1px solid transparent;
-  padding: 10px 0;
-  height: 2.3em;
-  font-size: 1.2em;
-  padding-left: 1em;
-  padding-right: 1em;
+  padding: 10px 1em;
+  font-size: 1.1em;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  width: 80%;
   outline: none;
   transition: border-bottom 0.3s;
   margin: 0;
   transition: border 0.5s ease-in-out;
   box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.395);
 }
-.main__right-panel .form__input:focus {
+.main__left-panel .form__message #message:focus {
   border: 1px solid #a53c7d;
   transition: border 0.5s ease-in-out;
   outline: none;
 }
-.main__left-panel {
-  background-color: #008bff;
-  height: 40em;
-  width: 30em;
+.main__left-panel .form__button--submit {
+  grid-column: 1/3;
+  grid-row: 5/6;
+  align-self: center;
+  margin: 0 auto;
+  background-color: #a53c7d;
+  border: none;
+  border-radius: 30em;
+  margin: 0 auto;
+  width: 6em;
+  height: 2.3em;
+  color: white;
+  text-align: center;
+  font-size: 1.5em;
+  cursor: pointer;
+  box-shadow: 0 1px 10px 0px #a53c7d;
+  transition: background-color 0.3s;
+}
+.main__left-panel .form__button--submit:hover {
+  background-color: #8868d1;
+  box-shadow: 0 1px 10px 0px #8868d1;
+  transition: background-color 0.3s;
+}
+.main__left-panel .form__subject {
+  grid-column: 2/3;
+  grid-row: 3/4;
+}
+.main__left-panel .form__title {
+  grid-column: 1/3;
+  grid-row: 1/2;
+  font-size: 2em;
+  text-align: center;
+}
+.main__left-panel .form__input {
+  -webkit-appearance: none;
+  height: 2.3em;
+  border-radius: 1em;
+  border: 1px solid transparent;
+  padding: 10px 1em;
+  font-size: 1.2em;
+  outline: none;
+  transition: border-bottom 0.3s;
+  margin: 0;
+  transition: border 0.5s ease-in-out;
+  box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.395);
+}
+.main__left-panel .form__input:focus {
+  border: 1px solid #a53c7d;
+  transition: border 0.5s ease-in-out;
+  outline: none;
+}
+.main__right-panel {
+  background-color: #00b691;
+  height: 24.65em;
+  width: 22em;
   display: flex;
   flex-direction: column;
-  align-items: left;
-  justify-content: center;
-  position: relative;
-  padding-left: 5em;
+  padding-left: 5vw;
+  padding-top: 2em;
+  font-size: 1.5em;
+}
+
+@media screen and (max-width: 1024px) {
+  .main {
+    display: block;
+    height: auto;
+  }
+  .main__left-panel {
+    width: auto;
+    height: auto;
+  }
+  .main__left-panel .form {
+    display: flex;
+    flex-direction: column;
+  }
+  .main__left-panel .form__title {
+    padding-top: 1em;
+  }
+  .main__left-panel .form__button--submit {
+    margin-bottom: 2em;
+  }
+  .main__right-panel {
+    width: auto;
+    padding: 0;
+    text-align: center;
+    min-height: 50vh;
+  }
+}
+@media screen and (max-height: 400px) {
+  .main__right-panel {
+    height: auto;
+  }
 }/*# sourceMappingURL=contact.css.map */

@@ -1,71 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="contact.css" />
-    <title>Contact RoT Team</title>
-  </head>
-  <body>
-    <div class="main">
-      <div class="main__right-panel">
-        <form action="" method="POST" class="form">
-          <h2 class="form__title">Trimite un mesaj</h2>
-          <div class="form__name">
-            <input
-              type="text"
-              id="name"
-              name="name"
-              required
-              class="form__input"
-              placeholder="Nume"
-            />
-          </div>
-          <div class="form__email">
-            <input
-              type="email"
-              id="email"
-              name="email"
-              class="form__input"
-              required
-              placeholder="Email"
-            />
-          </div>
-          <div class="form__phone">
-            <input
-              type="number"
-              id="phone"
-              name="phone"
-              required
-              class="form__input"
-              placeholder="Numar de telefon"
-            />
-          </div>
-          <div class="form__subject">
-            <input
-              type="text"
-              id="subject"
-              name="subject"
-              required
-              class="form__input"
-              placeholder="Subiect"
-            />
-          </div>
-          <div class="form__message">
-            <textarea id="message" name="message" required></textarea>
-          </div>
-          <button type="submit">Send</button>
-        </form>
-      </div>
-      <div class="main__left-panel">
-        <h2>Contact RoT Team</h2>
-        <ul>
-          <li><strong>Email:</strong> team@rot.com</li>
-          <li><strong>Phone:</strong> +1-555-1234</li>
-          <li><strong>Address:</strong> 123 Main St, Anytown USA</li>
-        </ul>
-      </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="contact.css" />
+  <title>Contact RoT Team</title>
+</head>
+
+<body>
+  <div class="main">
+    <div class="main__left-panel">
+      <form action="" method="POST" class="form">
+        <h2 class="form__title">Trimite un mesaj</h2>
+        <div class="form__name">
+          <input type="text" id="name" name="name" required class="form__input" placeholder="Nume" />
+        </div>
+        <div class="form__email">
+          <input type="email" id="email" name="email" class="form__input" required placeholder="Email" />
+        </div>
+        <div class="form__phone">
+          <input type="number" id="phone" name="phone" required class="form__input" placeholder="Numar de telefon" />
+        </div>
+        <div class="form__subject">
+          <input type="text" id="subject" name="subject" required class="form__input" placeholder="Subiect" />
+        </div>
+        <div class="form__message">
+          <textarea id="message" name="message" required placeholder="Mesaj"></textarea>
+        </div>
+        <button type="submit" class="form__button--submit">Send</button>
+      </form>
     </div>
-  </body>
+    <div class="main__right-panel">
+      <h2>Contact RoT Team</h2>
+      <div class="text--inline"><strong>Email:</strong> team@rot.com</div>
+      <div class="text--inline"><strong>Phone:</strong> +1-555-1234</div>
+      <div class="text--inline"><strong>Address:</strong> 123 Iasi, UAIC FII</div>
+    </div>
+  </div>
+</body>
+
 </html>
