@@ -83,13 +83,14 @@ body::-webkit-scrollbar-thumb {
   pointer-events: none;
 }
 
-.profile {
+.fundal {
   z-index: 0;
   min-height: 40vh;
   background: radial-gradient(circle, rgba(0, 139, 255, 0.7), rgba(74, 130, 245, 0.7), rgba(102, 122, 234, 0.7), rgba(122, 113, 222, 0.7), rgba(136, 104, 209, 0.7)), url("../img/road.jpg");
   background-repeat: no-repeat;
   background-size: 100vw;
   background-position: center;
+  border-bottom: 3px solid #00b691;
 }
 
 .main {
@@ -101,7 +102,7 @@ body::-webkit-scrollbar-thumb {
   grid-template-rows: 1fr 1fr;
   gap: 0px 0px;
   grid-auto-flow: row;
-  grid-template-areas: "stats profile-picture Leaderboard" "stats last-quizz Leaderboard";
+  grid-template-areas: "stats profile Leaderboard" "stats last-quizz Leaderboard";
 }
 .main .container .stats {
   grid-area: stats;
@@ -111,22 +112,51 @@ body::-webkit-scrollbar-thumb {
 }
 .main .container .last-quizz {
   grid-area: last-quizz;
-  background-color: coral;
+  background-color: red;
   min-height: 30vh;
   min-width: 30vw;
 }
 .main .container .Leaderboard {
   grid-area: Leaderboard;
-  background-color: green;
+  background-color: blue;
   min-height: 30vh;
   min-width: 30vw;
 }
-.main .container .profile-picture {
-  grid-area: profile-picture;
-  background-color: blue;
+.main .container .profile {
+  grid-area: profile;
   min-height: 30vh;
   min-width: 30vw;
   position: relative;
   z-index: 2;
   margin-top: -6em;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.main .container .profile__picture {
+  position: relative;
+  z-index: 1;
+}
+.main .container .profile__picture .picture__source {
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 200px; /* pare ok */
+  height: 200px; /* or any other desired size */
+  border: 3px solid #00b691;
+  box-sizing: border-box;
+}
+.main .container .profile__name {
+  font-size: 2em;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+.main .container .profile__settings {
+  transition: transform 0.5s ease;
+}
+.main .container .profile__settings:hover {
+  transform: rotate(360deg);
+  cursor: pointer;
+  color: #00b691;
 }/*# sourceMappingURL=dashboard.css.map */

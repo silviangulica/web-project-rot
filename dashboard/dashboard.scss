@@ -93,7 +93,7 @@ body {
   }
 }
 
-.profile {
+.fundal {
   z-index: 0;
   min-height: 40vh;
   background: radial-gradient(
@@ -108,6 +108,7 @@ body {
   background-repeat: no-repeat;
   background-size: 100vw;
   background-position: center;
+  border-bottom: 3px solid $color-quaternary;
 }
 
 .main {
@@ -119,7 +120,7 @@ body {
     gap: 0px 0px;
     grid-auto-flow: row;
     grid-template-areas:
-      "stats profile-picture Leaderboard"
+      "stats profile Leaderboard"
       "stats last-quizz Leaderboard";
 
     .stats {
@@ -131,26 +132,58 @@ body {
 
     .last-quizz {
       grid-area: last-quizz;
-      background-color: coral;
+      background-color: red;
       min-height: 30vh;
       min-width: 30vw;
     }
 
     .Leaderboard {
       grid-area: Leaderboard;
-      background-color: green;
+      background-color: blue;
       min-height: 30vh;
       min-width: 30vw;
     }
 
-    .profile-picture {
-      grid-area: profile-picture;
-      background-color: blue;
+    .profile {
+      grid-area: profile;
       min-height: 30vh;
       min-width: 30vw;
       position: relative;
       z-index: 2;
       margin-top: -6em;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+
+      &__picture {
+        position: relative;
+        z-index: 1;
+
+        .picture__source {
+          border-radius: 50%;
+          object-fit: cover;
+          width: 200px; /* pare ok */
+          height: 200px; /* or any other desired size */
+          border: 3px solid $color-quaternary;
+          box-sizing: border-box;
+        }
+      }
+
+      &__name {
+        font-size: 2em;
+        margin-top: 1em;
+        margin-bottom: 0.5em;
+      }
+
+      &__settings {
+        transition: transform 0.5s ease;
+        &:hover {
+          transform: rotate(360deg);
+          cursor: pointer;
+          color: $color-quaternary;
+        }
+      }
     }
   }
 }
