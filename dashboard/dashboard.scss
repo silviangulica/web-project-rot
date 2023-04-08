@@ -141,17 +141,14 @@ body {
         border-radius: 1em;
         padding: 0.5em;
         color: white;
+        &--red {
+          background-color: rgb(195, 11, 11);
+        }
+        &--primary-color {
+          background-color: $color-primary;
+        }
       }
 
-      &__title-box--red {
-        background-color: rgb(195, 11, 11);
-        color: white;
-      }
-
-      &__title-box--primary-color {
-        background-color: $color-primary;
-        color: white;
-      }
       &__box {
         display: flex;
         flex-direction: column;
@@ -458,7 +455,7 @@ body {
     }
   }
 }
-@media screen and (max-width: 360px) {
+@media screen and (max-width: 500px) {
   .nav {
     font-size: 11px;
     &__logo {

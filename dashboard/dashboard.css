@@ -124,11 +124,9 @@ body::-webkit-scrollbar-thumb {
 }
 .main .container .stats__title-box--red {
   background-color: rgb(195, 11, 11);
-  color: white;
 }
 .main .container .stats__title-box--primary-color {
   background-color: #008bff;
-  color: white;
 }
 .main .container .stats__box {
   display: flex;
@@ -394,7 +392,7 @@ body::-webkit-scrollbar-thumb {
     margin-top: 19em;
   }
 }
-@media screen and (max-width: 360px) {
+@media screen and (max-width: 500px) {
   .nav {
     font-size: 11px;
   }
