@@ -94,10 +94,10 @@ body::-webkit-scrollbar-thumb {
   border-bottom: 3px solid #00b691;
 }
 
-.main {
+main {
   min-height: 85vh;
 }
-.main .container {
+main .container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr;
@@ -105,7 +105,7 @@ body::-webkit-scrollbar-thumb {
   grid-auto-flow: row;
   grid-template-areas: "stats profile leaderboard" "stats last-quizz leaderboard";
 }
-.main .container .stats {
+main .container .stats {
   grid-area: stats;
   min-height: 30vh;
   min-width: 30vw;
@@ -113,22 +113,22 @@ body::-webkit-scrollbar-thumb {
   flex-direction: column;
   align-items: center;
 }
-.main .container .stats__title {
+main .container .stats__title {
   margin-top: 2em;
 }
-.main .container .stats__title-box {
+main .container .stats__title-box {
   background-color: #00b691;
   border-radius: 1em;
   padding: 0.5em;
   color: white;
 }
-.main .container .stats__title-box--red {
+main .container .stats__title-box--red {
   background-color: rgb(195, 11, 11);
 }
-.main .container .stats__title-box--primary-color {
+main .container .stats__title-box--primary-color {
   background-color: #008bff;
 }
-.main .container .stats__box {
+main .container .stats__box {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -141,7 +141,7 @@ body::-webkit-scrollbar-thumb {
   height: 7em;
   width: 50%;
 }
-.main .container .last-quizz {
+main .container .last-quizz {
   grid-area: last-quizz;
   background-color: white;
   min-height: 30vh;
@@ -151,17 +151,17 @@ body::-webkit-scrollbar-thumb {
   top: -5em;
   text-align: center;
 }
-.main .container .last-quizz--border-top {
+main .container .last-quizz--border-top {
   margin-left: 25%;
   border-top: 3px solid #00b691;
   width: 50%;
 }
-.main .container .last-quizz__title {
+main .container .last-quizz__title {
   margin-top: 1vh;
   font-size: 2em;
   font-weight: bold;
 }
-.main .container .last-quizz .card {
+main .container .last-quizz .card {
   border: 2px solid #00b691;
   border-radius: 1em;
   margin: 1em;
@@ -169,27 +169,27 @@ body::-webkit-scrollbar-thumb {
   background-color: white;
   display: block;
 }
-.main .container .last-quizz .card:hover .card__link {
+main .container .last-quizz .card:hover .card__link {
   display: block;
 }
-.main .container .last-quizz .card:hover .card__score {
+main .container .last-quizz .card:hover .card__score {
   display: none;
 }
-.main .container .last-quizz .card:hover .card__title {
+main .container .last-quizz .card:hover .card__title {
   display: none;
 }
-.main .container .last-quizz .card:hover .card__content {
+main .container .last-quizz .card:hover .card__content {
   min-height: 16.9vh;
   background-color: #00b691;
   border-radius: 0.5em;
   transition: background-color 0.5s ease-in-out;
 }
-.main .container .last-quizz .card__link {
+main .container .last-quizz .card__link {
   text-decoration: none;
   color: inherit;
   display: none;
 }
-.main .container .last-quizz .card__content {
+main .container .last-quizz .card__content {
   min-height: 10vh;
   display: flex;
   flex-direction: row;
@@ -199,10 +199,10 @@ body::-webkit-scrollbar-thumb {
   font-size: 1.8em;
   font-weight: bold;
 }
-.main .container .last-quizz .card__content .player_score {
+main .container .last-quizz .card__content .player_score {
   color: #00b691;
 }
-.main .container .last-quizz .card__title {
+main .container .last-quizz .card__title {
   padding-top: 1.6vh;
   padding-bottom: 1.6vh;
   border-radius: 0.4em 0.4em 0 0;
@@ -212,7 +212,7 @@ body::-webkit-scrollbar-thumb {
   width: 100%;
   height: 100%;
 }
-.main .container .leaderboard {
+main .container .leaderboard {
   grid-area: leaderboard;
   min-height: 85vh;
   min-width: 30vw;
@@ -223,11 +223,11 @@ body::-webkit-scrollbar-thumb {
   text-align: center;
   gap: 2em;
 }
-.main .container .leaderboard__buttons {
+main .container .leaderboard__buttons {
   display: flex;
   gap: 1em;
 }
-.main .container .leaderboard__button {
+main .container .leaderboard__button {
   background-color: white;
   border: none;
   color: black;
@@ -241,12 +241,12 @@ body::-webkit-scrollbar-thumb {
   cursor: pointer;
   border: 1px solid #00b691;
 }
-.main .container .leaderboard__button:hover {
+main .container .leaderboard__button:hover {
   background-color: #00b691;
   color: white;
   border: 1px solid #00b691;
 }
-.main .container .leaderboard table {
+main .container .leaderboard table {
   width: 80%;
   margin: 0;
   border-collapse: collapse;
@@ -254,44 +254,44 @@ body::-webkit-scrollbar-thumb {
   border-radius: 10px;
   overflow: hidden;
 }
-.main .container .leaderboard table th,
-.main .container .leaderboard table td {
+main .container .leaderboard table th,
+main .container .leaderboard table td {
   padding: 12px;
   text-align: center;
 }
-.main .container .leaderboard table th {
+main .container .leaderboard table th {
   background-color: #00b691;
   font-weight: bold;
 }
-.main .container .leaderboard table tr:nth-child(even) td {
+main .container .leaderboard table tr:nth-child(even) td {
   background-color: #f2f2f2;
 }
-.main .container .leaderboard table .gold-medal {
+main .container .leaderboard table .gold-medal {
   font-size: 18px;
   font-weight: bold;
   color: gold;
 }
-.main .container .leaderboard table .silver-medal {
+main .container .leaderboard table .silver-medal {
   font-size: 18px;
   font-weight: bold;
   color: silver;
 }
-.main .container .leaderboard table .bronze-medal {
+main .container .leaderboard table .bronze-medal {
   font-size: 18px;
   font-weight: bold;
   color: #cd7f32;
 }
-.main .container .leaderboard table .medal {
+main .container .leaderboard table .medal {
   font-size: 18px;
   font-weight: bold;
 }
-.main .container .leaderboard__user-placement {
+main .container .leaderboard__user-placement {
   font-size: 20px;
 }
-.main .container .leaderboard__title {
+main .container .leaderboard__title {
   margin-top: 2em;
 }
-.main .container .profile {
+main .container .profile {
   grid-area: profile;
   min-height: 30vh;
   min-width: 30vw;
@@ -303,11 +303,11 @@ body::-webkit-scrollbar-thumb {
   justify-content: flex-start;
   align-items: center;
 }
-.main .container .profile__picture {
+main .container .profile__picture {
   position: relative;
   z-index: 1;
 }
-.main .container .profile__picture .picture__source {
+main .container .profile__picture .picture__source {
   border-radius: 50%;
   -o-object-fit: cover;
      object-fit: cover;
@@ -316,18 +316,18 @@ body::-webkit-scrollbar-thumb {
   border: 3px solid #00b691;
   box-sizing: border-box;
 }
-.main .container .profile__name {
+main .container .profile__name {
   font-size: 2em;
   margin-top: 1em;
   margin-bottom: 0.5em;
 }
-.main .container .profile .fa-gear {
+main .container .profile .fa-gear {
   margin: 0;
   padding: 0;
   display: block;
   transition: transform 0.5s ease;
 }
-.main .container .profile .fa-gear:hover {
+main .container .profile .fa-gear:hover {
   transform: rotate(360deg);
   cursor: pointer;
   color: #00b691;
@@ -341,35 +341,35 @@ body::-webkit-scrollbar-thumb {
     font-size: 11px;
     text-align: center;
   }
-  .main .container {
+  main .container {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr;
     grid-template-areas: "profile" "last-quizz" "leaderboard" "stats";
     max-height: 100vh;
   }
-  .main .container .profile {
+  main .container .profile {
     height: 0;
     width: 100vw;
   }
-  .main .container .last-quizz {
+  main .container .last-quizz {
     margin-top: 15em;
     height: 0;
     width: 100vw;
   }
-  .main .container .leaderboard {
+  main .container .leaderboard {
     height: 0;
     width: 100vw;
   }
-  .main .container .leaderboard__title {
+  main .container .leaderboard__title {
     font-size: 2em;
     border-top: 3px solid #00b691;
     padding-top: 8.51px;
   }
-  .main .container .stats {
+  main .container .stats {
     height: 0;
     width: 100vw;
   }
-  .main .container .stats__title {
+  main .container .stats__title {
     margin-top: 5em;
     font-size: 2em;
     border-top: 3px solid #00b691;
@@ -377,18 +377,18 @@ body::-webkit-scrollbar-thumb {
     width: 6em;
     text-align: center;
   }
-  .main .container .stats__box {
+  main .container .stats__box {
     padding-top: 1em;
     padding-bottom: 0.5em;
   }
 }
 @media screen and (max-height: 780px) {
-  .main .container .stats {
+  main .container .stats {
     margin-top: 10em;
   }
 }
 @media screen and (max-height: 680px) {
-  .main .container .stats {
+  main .container .stats {
     margin-top: 19em;
   }
 }
@@ -399,7 +399,7 @@ body::-webkit-scrollbar-thumb {
   .nav__logo {
     padding-left: 1em;
   }
-  .main .container {
+  main .container {
     min-height: 140vh;
   }
   .fundal {

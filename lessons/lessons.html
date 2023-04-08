@@ -5,27 +5,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Lecții</title>
     <link rel="stylesheet" href="lessons.css">
     <script src="lessons.js" defer></script>
-    <!--Pentru buton settings-->
-    <script src="https://kit.fontawesome.com/6666f8a27a.js" crossorigin="anonymous"></script>
-    <!---->
+
 </head>
 
 <body>
-    <section class="hero">
+    <header class="hero">
         <nav class="nav">
             <div class="nav__logo">RoT</div>
             <ul class="nav__list">
                 <li class="nav__list-item">
-                    <a href="" class="anchor--selected">Profil</a>
+                    <a href="/dashboard/dashboard.html" class="anchor--not-selected">Profil</a>
                 </li>
                 <li class="nav__list-item">
-                    <a href="/quiz/quiz.html" class="anchor--not-selected">Teste</a>
+                    <a href="/quizzes/quiz.html" class="anchor--not-selected">Teste</a>
                 </li>
                 <li class="nav__list-item">
-                    <a href="" class="anchor--not-selected">Lecții</a>
+                    <a href="" class="anchor--selected">Lecții</a>
                 </li>
             </ul>
         </nav>
@@ -33,7 +31,21 @@
         <div class="fundal">
         </div>
 
-    </section>
+    </header>
+    <main>
+        <div class="title">
+            Alege un capitol pentru a începe
+        </div>
+
+        <div class="lessons">
+            <a href="" class="lessons__rot lessons__box">
+                <img src="https://e7.pngegg.com/pngimages/907/744/png-clipart-road-signs-in-italy-the-highway-code-road-signs-in-singapore-traffic-sign-traffic-signs-angle-driving-thumbnail.png"
+                    alt="" class="box__imagine">
+                Regulamentul de Circulație
+            </a>
+            <a href="" class="lessons__rot lessons__box">Marcaje si indicatoare rutiere</a>
+        </div>
+    </main>
 </body>
 
 </html>

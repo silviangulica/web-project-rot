@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizzes</title>
+    <link rel="stylesheet" href="quiz.test.css">
+    <script src="" defer></script>
+</head>
+
+<body>
+    <header class="hero">
+        <nav class="nav">
+            <div class="nav__logo">RoT</div>
+            <ul class="nav__list">
+                <li class="nav__list-item">
+                    <a href="/dashboard/dashboard.html" class="anchor--not-selected">Profil</a>
+                </li>
+                <li class="nav__list-item">
+                    <a href="" class="anchor--selected">Teste</a>
+                </li>
+                <li class="nav__list-item">
+                    <a href="/lessons/lessons.html" class="anchor--not-selected">Lecții</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="quiz">
+            <h2 class="quiz__title">Quiz Title</h2>
+            <div class="quiz__stats">
+                <span class="quiz__stat">Remaining Time: <span id="remaining-time">30</span> seconds</span>
+                <span class="quiz__stat">Remaining Questions: <span id="remaining-questions">10</span></span>
+                <span class="quiz__stat">Correct Answers: <span id="correct-answers">0</span></span>
+                <span class="quiz__stat">Wrong Answers: <span id="wrong-answers">0</span></span>
+            </div>
+            <div class="quiz__question">
+                <h3 class="quiz__question-text">Question Text</h3>
+                <div class="quiz__image">
+                    <img src="question-image.jpg" alt="Question Image">
+                </div>
+                <ul class="quiz__answers">
+                    <li><button class="quiz__answer-btn">Answer 1</button></li>
+                    <li><button class="quiz__answer-btn">Answer 2</button></li>
+                    <li><button class="quiz__answer-btn">Answer 3</button></li>
+                </ul>
+            </div>
+            <div class="quiz__controls">
+                <button class="quiz__submit-btn">Submit Answer</button>
+                <button class="quiz__skip-btn">Skip Question</button>
+            </div>
+        </div>
+
+
+
+    </main>
+
+</body>
+
+</html>

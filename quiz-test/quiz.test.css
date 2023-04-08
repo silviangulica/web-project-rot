@@ -22,6 +22,9 @@ html::-webkit-scrollbar-thumb {
 
 body {
   margin: 0;
+  background: radial-gradient(circle, rgba(0, 139, 255, 0.7), rgba(74, 130, 245, 0.7), rgba(102, 122, 234, 0.7), rgba(122, 113, 222, 0.7), rgba(136, 104, 209, 0.7));
+  background-repeat: no-repeat;
+  background-size: 100vw;
 }
 
 .nav {
@@ -87,52 +90,85 @@ body {
   pointer-events: none;
 }
 
-.fundal {
-  z-index: 0;
-  min-height: 40vh;
-  background: radial-gradient(circle, rgba(0, 139, 255, 0.7), rgba(74, 130, 245, 0.7), rgba(102, 122, 234, 0.7), rgba(122, 113, 222, 0.7), rgba(136, 104, 209, 0.7)), url("../img/road.jpg");
-  background-repeat: no-repeat;
-  background-size: 100vw;
-  background-position: center;
-  border-bottom: 3px solid #00b691;
-}
-
-.title {
+main {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 2em;
-  font-size: 1.5em;
+  height: 100vh;
 }
 
-.lessons {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  min-height: 75vh;
+.quiz {
+  background-color: #f2f2f2;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
 }
-.lessons__box {
-  text-decoration: none;
-  color: black;
+
+.quiz__title {
+  font-size: 24px;
+  margin-top: 0;
+}
+
+.quiz__stats {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.quiz__stat {
+  font-size: 18px;
+}
+
+.quiz__question {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
-  width: 50vw;
-  height: 50vh;
-  background-color: white;
-  border-radius: 1em;
-  box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.395);
-  margin: 2em;
-  padding: 2em;
-  transition: all 0.2s ease-in-out;
+  margin-bottom: 20px;
 }
-.lessons__box:hover {
-  transform: scale(1.05);
-  transition: all 0.2s ease-in-out;
-  background-color: #00b691;
+
+.quiz__question-text {
+  font-size: 20px;
+  margin: 10px 0;
+}
+
+.quiz__answers {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.quiz__answer-btn {
+  font-size: 18px;
+  padding: 10px;
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ddd;
+  cursor: pointer;
+}
+
+.quiz__answer-btn:hover {
+  background-color: #ccc;
+}
+
+.quiz__submit-btn,
+.quiz__skip-btn {
+  font-size: 18px;
+  padding: 10px;
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4caf50;
   color: white;
   cursor: pointer;
-}/*# sourceMappingURL=lessons.css.map */
+}
+
+.quiz__skip-btn {
+  background-color: #f44336;
+}
+
+.quiz__submit-btn:hover,
+.quiz__skip-btn:hover {
+  opacity: 0.8;
+}/*# sourceMappingURL=quiz.test.css.map */

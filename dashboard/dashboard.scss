@@ -112,7 +112,7 @@ body {
   border-bottom: 3px solid $color-quaternary;
 }
 
-.main {
+main {
   min-height: 85vh;
   .container {
     display: grid;
@@ -387,7 +387,7 @@ body {
     font-size: 11px;
     text-align: center;
   }
-  .main {
+  main {
     .container {
       grid-template-columns: 1fr;
       grid-template-rows: 1fr 1fr 1fr 1fr;
@@ -438,7 +438,7 @@ body {
 }
 
 @media screen and (max-height: 780px) {
-  .main {
+  main {
     .container {
       .stats {
         margin-top: 10em;
@@ -447,7 +447,7 @@ body {
   }
 }
 @media screen and (max-height: 680px) {
-  .main {
+  main {
     .container {
       .stats {
         margin-top: 19em;
@@ -462,7 +462,7 @@ body {
       padding-left: 1em;
     }
   }
-  .main {
+  main {
     .container {
       min-height: 140vh;
     }
