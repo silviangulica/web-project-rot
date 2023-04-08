@@ -1,0 +1,208 @@
+@import "../global/variables";
+
+* {
+  font-family: $roboto-font;
+  user-select: none;
+}
+
+html {
+  height: 100vh;
+  &::-webkit-scrollbar {
+    width: 0.5em;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $color-quaternary;
+    border-radius: 1em;
+  }
+}
+body {
+  margin: 0;
+}
+.nav {
+  color: white;
+  min-width: 100vw;
+  z-index: 999;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: $min-height-nav;
+  background-color: rgba(255, 255, 255, 0.538);
+  color: black;
+  position: fixed;
+  z-index: 999;
+
+  transition-property: padding-top, color, background-color;
+  transition-duration: 0.5s;
+  transition-timing-function: ease-in-out;
+
+  padding-top: 2.5vh;
+  &--scrolled {
+    background-color: white;
+    transition: all 0.5s ease-in-out;
+    padding-top: 0px;
+    box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.395);
+    color: black;
+  }
+
+  &__logo {
+    text-decoration: none;
+    font-size: 2.5em;
+    padding-left: $margin-padding-1;
+    box-sizing: border-box;
+  }
+
+  &__list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    &-item {
+      margin-right: 2vw;
+
+      &:last-of-type {
+        margin-right: $margin-padding-1;
+      }
+
+      .anchor--not-selected,
+      .anchor--selected {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+
+        font-size: 1.5em;
+        padding: 0.5em;
+        padding-top: 0.1em;
+        padding-bottom: 0.1em;
+      }
+
+      .anchor--not-selected {
+        &:hover {
+          color: $color-quaternary;
+          transform: scale(1.1);
+          transition: transform 0.2s ease-in-out;
+        }
+      }
+      .anchor--selected {
+        color: $color-quaternary;
+        pointer-events: none;
+      }
+    }
+  }
+}
+
+.quizzes {
+  margin-top: $min-height-nav;
+  padding-bottom: $min-height-nav;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  height: 100vh;
+  .quiz {
+    &__title {
+      font-size: 1.5em;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    &__button {
+      background-color: rgba(72, 104, 86, 0.314);
+      box-sizing: border-box;
+      border: none;
+      outline: none;
+      padding: 1em;
+      transition: all 0.5s ease-in-out;
+      cursor: pointer;
+      .anchor--not-selected {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      &:hover {
+        transition: all 0.2s ease-in-out;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        background-color: $color-quaternary;
+        color: white;
+        border-radius: 10px;
+        padding: 1em;
+      }
+    }
+    &__score {
+      border-radius: 1em;
+      padding: 0.5em;
+      color: white;
+      &--passed {
+        background-color: $color-quaternary;
+      }
+      &--failed {
+        background-color: rgb(195, 11, 11);
+      }
+      &--not-completed {
+        background-color: grey;
+      }
+    }
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100%;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.309);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+  }
+}
+
+.fundal {
+  z-index: 0;
+  min-height: 40vh;
+  background: radial-gradient(
+      circle,
+      rgba($color-primary, $gradient-opacity-login),
+      rgba(#4a82f5, $gradient-opacity-login),
+      rgba(#667aea, $gradient-opacity-login),
+      rgba(#7a71de, $gradient-opacity-login),
+      rgba($color-secondary, $gradient-opacity-login)
+    ),
+    url("../img/road.jpg");
+  background-repeat: no-repeat;
+  background-size: 100vw;
+  background-position: center;
+  border-bottom: 3px solid $color-quaternary;
+}
+@media screen and (max-width: 930px) {
+  html {
+    overflow-x: hidden;
+  }
+  .nav {
+    font-size: 11px;
+    text-align: center;
+  }
+}
+@media screen and (max-width: 630px) {
+  .nav {
+    font-size: 11px;
+    &__logo {
+      padding-left: 1em;
+    }
+  }
+  .quizzes {
+    height: 400vw;
+  }
+  .fundal {
+    background-size: 100% 100%;
+  }
+}
+@media screen and (max-width: 320px) {
+  .quizzes {
+    height: 600vw;
+  }
+}
