@@ -1,0 +1,476 @@
+@import "../global/variables";
+html {
+  user-select: none;
+  font-family: $roboto-font;
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+
+  &::-webkit-scrollbar {
+    width: 0.5em;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $color-quaternary;
+    border-radius: 1em;
+  }
+}
+
+.nav {
+  color: white;
+  min-width: 100vw;
+  z-index: 999;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: $min-height-nav;
+  background-color: rgba(255, 255, 255, 0.538);
+  color: black;
+  position: fixed;
+  z-index: 999;
+
+  transition-property: padding-top, color, background-color;
+  transition-duration: 0.5s;
+  transition-timing-function: ease-in-out;
+
+  padding-top: 2.5vh;
+  &--scrolled {
+    background-color: white;
+    transition: all 0.5s ease-in-out;
+    padding-top: 0px;
+    box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.395);
+    color: black;
+  }
+
+  &__logo {
+    text-decoration: none;
+    font-size: 2.5em;
+    padding-left: $margin-padding-1;
+    box-sizing: border-box;
+  }
+
+  &__list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    &-item {
+      margin-right: 2vw;
+
+      &:last-of-type {
+        margin-right: $margin-padding-1;
+      }
+
+      .anchor--not-selected,
+      .anchor--selected {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+
+        font-size: 1.5em;
+        padding: 0.5em;
+        padding-top: 0.1em;
+        padding-bottom: 0.1em;
+      }
+
+      .anchor--not-selected {
+        &:hover {
+          color: $color-quaternary;
+          transform: scale(1.1);
+          transition: transform 0.2s ease-in-out;
+        }
+      }
+      .anchor--selected {
+        color: $color-quaternary;
+        pointer-events: none;
+      }
+    }
+  }
+}
+
+.fundal {
+  z-index: 0;
+  min-height: 40vh;
+  background: radial-gradient(
+      circle,
+      rgba($color-primary, $gradient-opacity-login),
+      rgba(#4a82f5, $gradient-opacity-login),
+      rgba(#667aea, $gradient-opacity-login),
+      rgba(#7a71de, $gradient-opacity-login),
+      rgba($color-secondary, $gradient-opacity-login)
+    ),
+    url("../img/road.jpg");
+  background-repeat: no-repeat;
+  background-size: 100vw;
+  background-position: center;
+  border-bottom: 3px solid $color-quaternary;
+}
+
+.main {
+  min-height: 85vh;
+  .container {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "stats profile leaderboard"
+      "stats last-quizz leaderboard";
+
+    .stats {
+      grid-area: stats;
+      min-height: 30vh;
+      min-width: 30vw;
+      display: flex;
+      flex-direction: column;
+
+      align-items: center;
+      &__title {
+        margin-top: 2em;
+      }
+      &__title-box {
+        background-color: $color-quaternary;
+        border-radius: 1em;
+        padding: 0.5em;
+        color: white;
+      }
+
+      &__title-box--red {
+        background-color: rgb(195, 11, 11);
+        color: white;
+      }
+
+      &__title-box--primary-color {
+        background-color: $color-primary;
+        color: white;
+      }
+      &__box {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        gap: 0.5em;
+        margin: 1em;
+        //border: 2px solid $color-quaternary;
+
+        border-radius: 1em;
+        box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.395);
+        background-color: white;
+
+        height: 7em;
+        width: 50%;
+      }
+    }
+
+    .last-quizz {
+      &--border-top {
+        margin-left: 25%;
+        border-top: 3px solid $color-quaternary;
+        width: 50%;
+      }
+      grid-area: last-quizz;
+      background-color: white;
+      min-height: 30vh;
+      min-width: 30vw;
+      position: relative;
+      z-index: 4;
+      top: -5em;
+      text-align: center;
+      &__title {
+        margin-top: 1vh;
+        font-size: 2em;
+        font-weight: bold;
+      }
+
+      .card {
+        &:hover {
+          .card__link {
+            display: block;
+          }
+          .card__score {
+            display: none;
+          }
+          .card__title {
+            display: none;
+          }
+          .card__content {
+            min-height: 16.9vh;
+            background-color: $color-quaternary;
+            border-radius: 0.5em;
+            transition: background-color 0.5s ease-in-out;
+          }
+        }
+        &__link {
+          text-decoration: none;
+          color: inherit;
+          display: none;
+        }
+
+        border: 2px solid $color-quaternary;
+        border-radius: 1em;
+        margin: 1em;
+        box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.395);
+        background-color: white;
+        display: block;
+
+        &__content {
+          min-height: 10vh;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          gap: 0.5em;
+          font-size: 1.8em;
+          font-weight: bold;
+          .player_score {
+            color: $color-quaternary;
+          }
+        }
+        &__title {
+          padding-top: 1.6vh;
+          padding-bottom: 1.6vh;
+          border-radius: 0.4em 0.4em 0 0;
+          font-size: 1.8em;
+          font-weight: bold;
+          background-color: $color-quaternary;
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+
+    .leaderboard {
+      grid-area: leaderboard;
+      min-height: 85vh;
+      min-width: 30vw;
+      height: 100%;
+
+      display: flex;
+      flex-direction: column;
+
+      align-items: center;
+      text-align: center;
+      gap: 2em;
+
+      &__buttons {
+        display: flex;
+        gap: 1em;
+      }
+      &__button {
+        background-color: white;
+        border: none;
+        color: black;
+        width: 6.5em;
+        height: 3em;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        cursor: pointer;
+        border: 1px solid $color-quaternary;
+      }
+      &__button:hover {
+        background-color: $color-quaternary;
+        color: white;
+
+        border: 1px solid $color-quaternary;
+      }
+      table {
+        width: 80%;
+        margin: 0;
+        border-collapse: collapse;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        overflow: hidden;
+
+        th,
+        td {
+          padding: 12px;
+          text-align: center;
+        }
+        th {
+          background-color: $color-quaternary;
+          font-weight: bold;
+        }
+
+        tr:nth-child(even) td {
+          background-color: #f2f2f2;
+        }
+
+        .gold-medal {
+          font-size: 18px;
+          font-weight: bold;
+          color: gold;
+        }
+        .silver-medal {
+          font-size: 18px;
+          font-weight: bold;
+          color: silver;
+        }
+        .bronze-medal {
+          font-size: 18px;
+          font-weight: bold;
+          color: #cd7f32;
+        }
+        .medal {
+          font-size: 18px;
+          font-weight: bold;
+        }
+      }
+      &__user-placement {
+        font-size: 20px;
+      }
+      &__title {
+        margin-top: 2em;
+      }
+    }
+
+    .profile {
+      grid-area: profile;
+      min-height: 30vh;
+      min-width: 30vw;
+      position: relative;
+      z-index: 2;
+      margin-top: -6em;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+
+      &__picture {
+        position: relative;
+        z-index: 1;
+
+        .picture__source {
+          border-radius: 50%;
+          object-fit: cover;
+          width: 200px; /* pare ok */
+          height: 200px; /* or any other desired size */
+          border: 3px solid $color-quaternary;
+          box-sizing: border-box;
+        }
+      }
+
+      &__name {
+        font-size: 2em;
+        margin-top: 1em;
+        margin-bottom: 0.5em;
+      }
+
+      .fa-gear {
+        margin: 0;
+        padding: 0;
+        display: block;
+        transition: transform 0.5s ease;
+        &:hover {
+          transform: rotate(360deg);
+          cursor: pointer;
+          color: $color-quaternary;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 930px) {
+  html {
+    overflow-x: hidden;
+  }
+  .nav {
+    font-size: 11px;
+    text-align: center;
+  }
+  .main {
+    .container {
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr 1fr 1fr;
+      grid-template-areas:
+        "profile"
+        "last-quizz"
+        "leaderboard"
+        "stats";
+      max-height: 100vh;
+
+      .profile {
+        height: 0;
+        width: 100vw;
+      }
+      .last-quizz {
+        margin-top: 15em;
+        height: 0;
+        width: 100vw;
+      }
+      .leaderboard {
+        height: 0;
+        width: 100vw;
+        &__title {
+          font-size: 2em;
+          border-top: 3px solid $color-quaternary;
+          padding-top: 8.51px;
+        }
+      }
+      .stats {
+        height: 0;
+        width: 100vw;
+        &__title {
+          margin-top: 5em;
+          font-size: 2em;
+          border-top: 3px solid $color-quaternary;
+          padding-top: 8.51px;
+          width: 6em;
+          text-align: center;
+        }
+
+        &__box {
+          padding-top: 1em;
+          padding-bottom: 0.5em;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-height: 780px) {
+  .main {
+    .container {
+      .stats {
+        margin-top: 10em;
+      }
+    }
+  }
+}
+@media screen and (max-height: 680px) {
+  .main {
+    .container {
+      .stats {
+        margin-top: 19em;
+      }
+    }
+  }
+}
+@media screen and (max-width: 360px) {
+  .nav {
+    font-size: 11px;
+    &__logo {
+      padding-left: 1em;
+    }
+  }
+  .main {
+    .container {
+      min-height: 140vh;
+    }
+  }
+  .fundal {
+    background-size: 100% 100%;
+  }
+}
