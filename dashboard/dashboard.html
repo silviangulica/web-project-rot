@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="dashboard.css" />
+    <link rel="stylesheet" href="dashboard.css">
     <script src="dashboard.js" defer></script>
     <!--Pentru buton settings-->
     <script src="https://kit.fontawesome.com/6666f8a27a.js" crossorigin="anonymous"></script>
@@ -39,13 +39,111 @@
     <section class="main">
         <div class="container">
             <div class="stats">
-                <div class="stats__title">Statistici</div>
+                <h1 class="stats__title">Statistici</h1>
+                <div class="stats__box stats__box-answers">
+                    <div class="stats__title-box">Raspunsuri corecte</div>
+                    <div class="stats__text--green">400</div>
+                </div>
+                <div class="stats__box stats__box-wrongs">
+                    <div class="stats__title-box stats__title-box--red">Raspunsuri gresite</div>
+                    <div class="stats__text--red">100</div>
+                </div>
+                <div class="stats__box stats__box-quizzes">
+                    <div class="stats__title-box">Teste completate</div>
+                    <div class="stats__text--red">100</div>
+                </div>
+                <div class="stats__box stats__box-points">
+                    <div class="stats__title-box stats__title-box--primary-color">Numar puncte</div>
+                    <div class="stats__text--red">121412</div>
+                </div>
             </div>
             <div class="last-quizz">
-                <div class="last-quizz__title">Ultimul test</div>
+                <div class="last-quizz--border-top"></div>
+                <div class="last-quizz__title"> Ultimul test</div>
+                <div class="card">
+                    <div class="card__title"> Testul 1 </div>
+                    <div class="card__content">
+                        <div class="card__score">
+                            <span class="player_score"> 100 </span> / 100
+                        </div>
+                        <a href="" class="card__link">Incepeti un nou test</a>
+                    </div>
+                </div>
             </div>
-            <div class="Leaderboard">
-                <div class="leaderboard__title">Clasament</div>
+            <div class="leaderboard">
+
+                <div class="leaderboard__header">
+                    <h1 class="leaderboard__title">Top 10 utilizatori</h1>
+                    <div class="leaderboard__buttons">
+                        <button class="leaderboard__button" id="btn1">Puncte</button>
+                        <button class="leaderboard__button" id="btn2">Chestionare completate</button>
+                        <button class="leaderboard__button" id="btn3">Raspunsuri corecte</button>
+                    </div>
+                </div>
+
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Username</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="gold-medal">
+                            <td>1.</td>
+                            <td>user1</td>
+                            <td>1000</td>
+                        </tr>
+                        <tr class="silver-medal">
+                            <td>2.</td>
+                            <td>user2</td>
+                            <td>900</td>
+                        </tr>
+                        <tr class="bronze-medal">
+                            <td>3.</td>
+                            <td>user3</td>
+                            <td>800</td>
+                        </tr>
+                        <tr>
+                            <td class="medal">4.</td>
+                            <td>user4</td>
+                            <td>700</td>
+                        </tr>
+                        <tr>
+                            <td class="medal">5.</td>
+                            <td>user5</td>
+                            <td>600</td>
+                        </tr>
+                        <tr>
+                            <td class="medal">6.</td>
+                            <td>user6</td>
+                            <td>500</td>
+                        </tr>
+                        <tr>
+                            <td class="medal">7.</td>
+                            <td>user7</td>
+                            <td>400</td>
+                        </tr>
+                        <tr>
+                            <td class="medal">8.</td>
+                            <td>user8</td>
+                            <td>300</td>
+                        </tr>
+                        <tr>
+                            <td class="medal">9.</td>
+                            <td>user9</td>
+                            <td>200</td>
+                        </tr>
+                        <tr>
+                            <td class="medal">10.</td>
+                            <td>user10</td>
+                            <td>100</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="leaderboard__user-placement">Locul dumneavoastra in clasament: X</p>
             </div>
             <div class="profile">
                 <div class="profile__picture">
@@ -53,7 +151,7 @@
                         src="https://www.sketchappsources.com/resources/source-image/nyan-cat-artoctober.png"
                         alt="profile picture">
                 </div>
-                <div class="profile__name">Ionel cu Capul Chel</div>
+                <div class="profile__name">Ion Ghinion</div>
                 <div class="profile__settings">
                     <i class="fa-sharp fa-solid fa-gear"></i>
                 </div>

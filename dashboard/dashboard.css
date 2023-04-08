@@ -4,6 +4,7 @@ html {
      -moz-user-select: none;
           user-select: none;
   font-family: "Roboto", sans-serif;
+  box-sizing: border-box;
 }
 
 body {
@@ -94,7 +95,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .main {
-  min-height: 200vh;
+  min-height: 85vh;
 }
 .main .container {
   display: grid;
@@ -102,25 +103,195 @@ body::-webkit-scrollbar-thumb {
   grid-template-rows: 1fr 1fr;
   gap: 0px 0px;
   grid-auto-flow: row;
-  grid-template-areas: "stats profile Leaderboard" "stats last-quizz Leaderboard";
+  grid-template-areas: "stats profile leaderboard" "stats last-quizz leaderboard";
 }
 .main .container .stats {
   grid-area: stats;
-  background-color: yellow;
   min-height: 30vh;
   min-width: 30vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.main .container .stats__title {
+  margin-top: 2em;
+}
+.main .container .stats__title-box {
+  background-color: #00b691;
+  border-radius: 1em;
+  padding: 0.5em;
+  color: white;
+}
+.main .container .stats__title-box--red {
+  background-color: rgb(195, 11, 11);
+  color: white;
+}
+.main .container .stats__title-box--primary-color {
+  background-color: #008bff;
+  color: white;
+}
+.main .container .stats__box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+  margin: 1em;
+  border-radius: 1em;
+  box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.395);
+  background-color: white;
+  height: 7em;
+  width: 50%;
 }
 .main .container .last-quizz {
   grid-area: last-quizz;
-  background-color: red;
+  background-color: white;
   min-height: 30vh;
   min-width: 30vw;
+  position: relative;
+  z-index: 4;
+  top: -5em;
+  text-align: center;
 }
-.main .container .Leaderboard {
-  grid-area: Leaderboard;
-  background-color: blue;
-  min-height: 30vh;
+.main .container .last-quizz--border-top {
+  margin-left: 25%;
+  border-top: 3px solid #00b691;
+  width: 50%;
+}
+.main .container .last-quizz__title {
+  margin-top: 1vh;
+  font-size: 2em;
+  font-weight: bold;
+}
+.main .container .last-quizz .card {
+  border: 2px solid #00b691;
+  border-radius: 1em;
+  margin: 1em;
+  box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.395);
+  background-color: white;
+  display: block;
+}
+.main .container .last-quizz .card:hover .card__link {
+  display: block;
+}
+.main .container .last-quizz .card:hover .card__score {
+  display: none;
+}
+.main .container .last-quizz .card:hover .card__title {
+  display: none;
+}
+.main .container .last-quizz .card:hover .card__content {
+  min-height: 16.9vh;
+  background-color: #00b691;
+  border-radius: 0.5em;
+  transition: background-color 0.5s ease-in-out;
+}
+.main .container .last-quizz .card__link {
+  text-decoration: none;
+  color: inherit;
+  display: none;
+}
+.main .container .last-quizz .card__content {
+  min-height: 10vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+  font-size: 1.8em;
+  font-weight: bold;
+}
+.main .container .last-quizz .card__content .player_score {
+  color: #00b691;
+}
+.main .container .last-quizz .card__title {
+  padding-top: 1.6vh;
+  padding-bottom: 1.6vh;
+  border-radius: 0.4em 0.4em 0 0;
+  font-size: 1.8em;
+  font-weight: bold;
+  background-color: #00b691;
+  width: 100%;
+  height: 100%;
+}
+.main .container .leaderboard {
+  grid-area: leaderboard;
+  min-height: 85vh;
   min-width: 30vw;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 2em;
+}
+.main .container .leaderboard__buttons {
+  display: flex;
+  gap: 1em;
+}
+.main .container .leaderboard__button {
+  background-color: white;
+  border: none;
+  color: black;
+  width: 6.5em;
+  height: 3em;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid #00b691;
+}
+.main .container .leaderboard__button:hover {
+  background-color: #00b691;
+  color: white;
+  border: 1px solid #00b691;
+}
+.main .container .leaderboard table {
+  width: 80%;
+  margin: 0;
+  border-collapse: collapse;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.main .container .leaderboard table th,
+.main .container .leaderboard table td {
+  padding: 12px;
+  text-align: center;
+}
+.main .container .leaderboard table th {
+  background-color: #00b691;
+  font-weight: bold;
+}
+.main .container .leaderboard table tr:nth-child(even) td {
+  background-color: #f2f2f2;
+}
+.main .container .leaderboard table .gold-medal {
+  font-size: 18px;
+  font-weight: bold;
+  color: gold;
+}
+.main .container .leaderboard table .silver-medal {
+  font-size: 18px;
+  font-weight: bold;
+  color: silver;
+}
+.main .container .leaderboard table .bronze-medal {
+  font-size: 18px;
+  font-weight: bold;
+  color: #cd7f32;
+}
+.main .container .leaderboard table .medal {
+  font-size: 18px;
+  font-weight: bold;
+}
+.main .container .leaderboard__user-placement {
+  font-size: 20px;
+}
+.main .container .leaderboard__title {
+  margin-top: 2em;
 }
 .main .container .profile {
   grid-area: profile;
@@ -152,11 +323,85 @@ body::-webkit-scrollbar-thumb {
   margin-top: 1em;
   margin-bottom: 0.5em;
 }
-.main .container .profile__settings {
+.main .container .profile .fa-gear {
+  margin: 0;
+  padding: 0;
+  display: block;
   transition: transform 0.5s ease;
 }
-.main .container .profile__settings:hover {
+.main .container .profile .fa-gear:hover {
   transform: rotate(360deg);
   cursor: pointer;
   color: #00b691;
+}
+
+@media screen and (max-width: 930px) {
+  html {
+    overflow-x: hidden;
+  }
+  .nav {
+    font-size: 11px;
+    text-align: center;
+  }
+  .main .container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-areas: "profile" "last-quizz" "leaderboard" "stats";
+    max-height: 100vh;
+  }
+  .main .container .profile {
+    height: 0;
+    width: 100vw;
+  }
+  .main .container .last-quizz {
+    margin-top: 15em;
+    height: 0;
+    width: 100vw;
+  }
+  .main .container .leaderboard {
+    height: 0;
+    width: 100vw;
+  }
+  .main .container .leaderboard__title {
+    font-size: 2em;
+    border-top: 3px solid #00b691;
+    padding-top: 8.51px;
+  }
+  .main .container .stats {
+    height: 0;
+    width: 100vw;
+  }
+  .main .container .stats__title {
+    margin-top: 5em;
+    font-size: 2em;
+    border-top: 3px solid #00b691;
+    padding-top: 8.51px;
+    width: 6em;
+    text-align: center;
+  }
+  .main .container .stats__box {
+    padding-top: 1em;
+    padding-bottom: 0.5em;
+  }
+}
+@media screen and (max-height: 780px) {
+  .main .container .stats {
+    margin-top: 10em;
+  }
+}
+@media screen and (max-height: 680px) {
+  .main .container .stats {
+    margin-top: 19em;
+  }
+}
+@media screen and (max-width: 360px) {
+  .nav {
+    font-size: 11px;
+  }
+  .nav__logo {
+    padding-left: 1em;
+  }
+  .main .container {
+    min-height: 140vh;
+  }
 }/*# sourceMappingURL=dashboard.css.map */
