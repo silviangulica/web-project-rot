@@ -404,4 +404,7 @@ body::-webkit-scrollbar-thumb {
   .main .container {
     min-height: 140vh;
   }
+  .fundal {
+    background-size: 100% 100%;
+  }
 }/*# sourceMappingURL=dashboard.css.map */
