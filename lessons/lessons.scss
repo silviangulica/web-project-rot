@@ -153,3 +153,19 @@ body {
     }
   }
 }
+
+@media screen and (max-width: 500px) {
+  .nav {
+    font-size: 11px;
+    &__logo {
+      padding-left: 1em;
+    }
+  }
+  .fundal {
+    background-size: 100% 100%;
+  }
+  .lessons {
+    display: flex;
+    flex-direction: column;
+  }
+}

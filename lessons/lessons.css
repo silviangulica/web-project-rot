@@ -135,4 +135,20 @@ body {
   background-color: #00b691;
   color: white;
   cursor: pointer;
+}
+
+@media screen and (max-width: 500px) {
+  .nav {
+    font-size: 11px;
+  }
+  .nav__logo {
+    padding-left: 1em;
+  }
+  .fundal {
+    background-size: 100% 100%;
+  }
+  .lessons {
+    display: flex;
+    flex-direction: column;
+  }
 }/*# sourceMappingURL=lessons.css.map */
