@@ -1,54 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="login.css" />
+    <script src="/login-page/login.js" defer></script>
+    <title>Pagina Login</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="login.css" />
-  <script src="/login-page/login.js" defer></script>
-  <title>Pagina Login</title>
-</head>
+  <body>
+    <main class="main">
+      <div class="background"></div>
+      <div class="panel" id="panel">
+        <div class="login-panel" id="login-panel">
+          <h1 class="login-panel__title">Login</h1>
+          <form action="../dashboard/dashboard.html" class="login-panel__form">
+            <input
+              type="text"
+              name="username"
+              class="login-panel__input"
+              placeholder="Utilizator"
+              required="required"
+            />
+            <input
+              type="password"
+              name="password"
+              class="login-panel__input"
+              placeholder="Parola"
+              required="required"
+            />
+            <button type="submit" class="login-panel__submit-btn">LOGIN</button>
+          </form>
+          <p class="login-panel__footer">
+            Nu ai cont?
+            <a class="login-panel__footer-anchor">Sign up</a>
+          </p>
+        </div>
 
-<body>
-  <main class="main">
-    <div class="background"></div>
-    <div class="panel" id="panel">
-      <div class="login-panel" id="login-panel">
-        <h1 class="login-panel__title">Login</h1>
-        <form action="http://localhost:3000/login" method="POST" class="login-panel__form">
-          <input type="text" name="username" class="login-panel__input" placeholder="Utilizator" required="required" />
-          <input type="password" name="password" class="login-panel__input" placeholder="Parola" required="required" />
-          <button type="submit" class="login-panel__submit-btn"><a href="../dashboard/dashboard.html">LOGIN</a></button>
-        </form>
-        <p class="login-panel__footer">
-          Nu ai cont?
-          <a class="login-panel__footer-anchor">Sign up</a>
-        </p>
+        <div class="sign-up-panel" id="sign-up-panel">
+          <h1 class="sign-up-panel__title">Sign up</h1>
+          <form
+            action="../dashboard/dashboard.html"
+            method="GET"
+            class="sign-up-panel__form"
+          >
+            <input
+              type="text"
+              name="username"
+              class="sign-up-panel__input"
+              placeholder="Utilizator"
+              required="required"
+            />
+            <input
+              type="email"
+              name="email"
+              class="sign-up-panel__input"
+              placeholder="Email"
+              required="required"
+            />
+            <input
+              type="password"
+              name="password"
+              class="sign-up-panel__input"
+              placeholder="Parola"
+              required="required"
+            />
+            <input
+              type="password"
+              name="password"
+              class="sign-up-panel__input"
+              placeholder="Confirmare parola"
+              required="required"
+            />
+
+            <button type="submit" class="sign-up-panel__submit-btn">
+              SIGN UP
+            </button>
+          </form>
+          <p class="sign-up-panel__footer">
+            Ai deja un cont?
+            <a class="sign-up-panel__footer-anchor">Login</a>
+          </p>
+        </div>
       </div>
-
-      <div class="sign-up-panel" id="sign-up-panel">
-        <h1 class="sign-up-panel__title">Sign up</h1>
-        <form action="http://localhost:3000/login" method="POST" class="sign-up-panel__form">
-          <input type="text" name="username" class="sign-up-panel__input" placeholder="Utilizator"
-            required="required" />
-          <input type="email" name="email" class="sign-up-panel__input" placeholder="Email" required="required" />
-          <input type="password" name="password" class="sign-up-panel__input" placeholder="Parola"
-            required="required" />
-          <input type="password" name="password" class="sign-up-panel__input" placeholder="Confirmare parola"
-            required="required" />
-
-          <button type="submit" class="sign-up-panel__submit-btn">
-            <a href="../dashboard/dashboard.html">SIGN UP</a>
-          </button>
-        </form>
-        <p class="sign-up-panel__footer">
-          Ai deja un cont?
-          <a class="sign-up-panel__footer-anchor">Login</a>
-        </p>
-      </div>
-    </div>
-  </main>
-</body>
-
+    </main>
+  </body>
 </html>
