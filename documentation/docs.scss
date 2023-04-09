@@ -1,0 +1,59 @@
+@import "../global/variables";
+
+* {
+  box-sizing: border-box;
+  font-family: $roboto-font;
+  text-decoration: none;
+}
+
+body {
+  text-align: center;
+  padding-top: 1em;
+  max-width: 50vw;
+  margin: 0 auto;
+  background-color: #e1ddd9;
+
+  text-align: justify;
+  .document__title {
+    margin-bottom: 20px;
+  }
+
+  .document__description {
+    margin-bottom: 20px;
+  }
+
+  .document__subtitle {
+    margin-bottom: 10px;
+  }
+
+  .document__list {
+    ol {
+      counter-reset: item;
+    }
+    li {
+      display: block;
+    }
+    li:before {
+      content: counters(item, ".") ".";
+      counter-increment: item;
+    }
+  }
+
+  .color__box {
+    color: white;
+    border-radius: 5px;
+    padding: 2px;
+    &--1 {
+      background-color: $color-primary;
+    }
+    &--2 {
+      background-color: $color-secondary;
+    }
+    &--3 {
+      background-color: $color-tertiary;
+    }
+    &--4 {
+      background-color: $color-quaternary;
+    }
+  }
+}
