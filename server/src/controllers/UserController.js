@@ -1,4 +1,4 @@
-const Router = require("./router");
+const Router = require("../routers/router");
 
 const router = new Router();
 

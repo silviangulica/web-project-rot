@@ -1,5 +1,5 @@
 const http = require("http");
-const usersController = require("./usercontroller");
+const usersController = require("./controllers/UserController");
 
 const router = usersController;
 
