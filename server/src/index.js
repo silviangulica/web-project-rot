@@ -1,12 +1,11 @@
-const userController = require('./controllers/UserController')
+require("dotenv").config({ path: "./process.env" });
+const userController = require("./controllers/UserController");
 const mongoose = require("mongoose");
 
-const http = require('http')
-
+const http = require("http");
 
 // Connect to database
-const uri =
-  "mongodb+srv://webrootpj:GxzYuigHkkmslB7v@mongo-webproject.gqoqzuw.mongodb.net/test?retryWrites=true&w=majority";
+const uri = process.env.MONGO_URI;
 
 async function connect() {
   try {
@@ -25,6 +24,6 @@ connect();
 // -- Server
 const server = http.createServer((req, res) => {
   console.log("Un nou response!");
-})
+});
 
 server.listen(8081);
