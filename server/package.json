@@ -11,8 +11,10 @@
   "author": "Gulica Silvian | Popoiu Claudiu",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "dotenv": "^16.1.4",
     "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.3.0"
   },
   "devDependencies": {

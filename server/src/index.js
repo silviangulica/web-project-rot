@@ -1,5 +1,5 @@
-require("dotenv").config({ path: "./process.env" });
-const loginController = require("./controllers/LoginController");
+require("dotenv").config();
+const loginController = require("./controllers/AuthController");
 const userController = require("./controllers/UserController");
 let router = require("./routers/router");
 

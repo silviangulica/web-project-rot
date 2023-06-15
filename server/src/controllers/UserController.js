@@ -1,8 +1,8 @@
 const router = require("../routers/router");
+const userService = require("../services/UserService");
 
-router.add("get", "/users", (req, res) => {
-  res.setHeader("Content-Type", "application/json");
-  res.end(JSON.stringify({ message: "Lista utilizatorilor" })); // serializare la JSON
-});
+// router.add("get", "/users", (req, res) => {
+
+// });
 
 module.exports = router;
