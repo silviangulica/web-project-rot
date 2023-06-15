@@ -11,7 +11,8 @@
   "author": "Gulica Silvian | Popoiu Claudiu",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "mongoose": "^7.3.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.22"

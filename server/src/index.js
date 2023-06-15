@@ -1,12 +1,28 @@
-const http = require("http");
-const usersController = require("./usercontroller");
+const express = require("express");
+const mongoose = require("mongoose");
+const User = require("./user")
 
-const router = usersController;
+const app = express();
 
-const server = http.createServer((req, res) => {
-  router.handle(req, res);
+const uri =
+  "mongodb+srv://webrootpj:GxzYuigHkkmslB7v@mongo-webproject.gqoqzuw.mongodb.net/test?retryWrites=true&w=majority";
+
+async function connect() {
+  try {
+    await mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("Connect successfully!!!");
+  } catch (error) {
+    console.log("Connect failure!!!");
+  }
+}
+
+connect();
+app.listen(3000, () => {
+  console.log("Server running on port 3000");
 });
 
-server.listen(3000, () => {
-  console.log("Serverul a pornit la portul 3000");
-});
+
+// new User object
