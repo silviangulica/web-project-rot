@@ -1,6 +1,4 @@
-const Router = require("../routers/router");
-
-const router = new Router();
+const router = require("../routers/router");
 
 router.add("get", "/users", (req, res) => {
   res.setHeader("Content-Type", "application/json");
