@@ -23,4 +23,6 @@ class Router {
   }
 }
 
-module.exports = Router;
+const router = new Router();
+
+module.exports = router;

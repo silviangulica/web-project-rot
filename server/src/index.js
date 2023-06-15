@@ -1,6 +1,12 @@
+const loginController = require('./controllers/LoginController')
 const userController = require('./controllers/UserController')
-const mongoose = require("mongoose");
+let router = require('./routers/router')
 
+
+
+
+
+const mongoose = require("mongoose");
 const http = require('http')
 
 
@@ -22,9 +28,11 @@ async function connect() {
 
 connect();
 
+
+
 // -- Server
 const server = http.createServer((req, res) => {
-  console.log("Un nou response!");
+    router.handle(req, res)
 })
 
 server.listen(8081);
