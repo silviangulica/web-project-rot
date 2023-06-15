@@ -1,9 +1,10 @@
-const express = require("express");
+const userController = require('./controllers/UserController')
 const mongoose = require("mongoose");
-const User = require("./user")
 
-const app = express();
+const http = require('http')
 
+
+// Connect to database
 const uri =
   "mongodb+srv://webrootpj:GxzYuigHkkmslB7v@mongo-webproject.gqoqzuw.mongodb.net/test?retryWrites=true&w=majority";
 
@@ -20,9 +21,10 @@ async function connect() {
 }
 
 connect();
-app.listen(3000, () => {
-  console.log("Server running on port 3000");
-});
 
+// -- Server
+const server = http.createServer((req, res) => {
+  console.log("Un nou response!");
+})
 
-// new User object
+server.listen(8081);
