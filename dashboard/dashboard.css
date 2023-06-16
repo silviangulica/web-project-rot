@@ -337,9 +337,14 @@ main .container .profile .fa-gear:hover {
   html {
     overflow-x: hidden;
   }
-  .nav {
-    font-size: 11px;
-    text-align: center;
+  .hero {
+    background-position: center 0;
+  }
+  .hero .nav__logo {
+    padding-left: 2.5vw;
+  }
+  .hero .nav__list-item:last-of-type {
+    margin-right: 0;
   }
   main .container {
     grid-template-columns: 1fr;
@@ -348,16 +353,13 @@ main .container .profile .fa-gear:hover {
     max-height: 100vh;
   }
   main .container .profile {
-    height: 0;
     width: 100vw;
   }
   main .container .last-quizz {
     margin-top: 15em;
-    height: 0;
     width: 100vw;
   }
   main .container .leaderboard {
-    height: 0;
     width: 100vw;
   }
   main .container .leaderboard__title {
@@ -366,7 +368,6 @@ main .container .profile .fa-gear:hover {
     padding-top: 8.51px;
   }
   main .container .stats {
-    height: 0;
     width: 100vw;
   }
   main .container .stats__title {
@@ -382,22 +383,28 @@ main .container .profile .fa-gear:hover {
     padding-bottom: 0.5em;
   }
 }
-@media screen and (max-height: 780px) {
+@media screen and (max-height: 780px) and (max-width: 930px) {
   main .container .stats {
     margin-top: 10em;
   }
 }
-@media screen and (max-height: 680px) {
+@media screen and (max-height: 680px) and (orientation: portrait) {
   main .container .stats {
-    margin-top: 19em;
+    margin-top: 20vh;
   }
 }
 @media screen and (max-width: 500px) {
-  .nav {
+  html {
     font-size: 11px;
   }
-  .nav__logo {
-    padding-left: 1em;
+  .hero {
+    background-position: center 0;
+  }
+  .hero .nav__logo {
+    padding-left: 2.5vw;
+  }
+  .hero .nav__list-item:last-of-type {
+    margin-right: 0;
   }
   main .container {
     min-height: 140vh;

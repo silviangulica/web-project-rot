@@ -155,10 +155,22 @@ body {
 }
 
 @media screen and (max-width: 500px) {
-  .nav {
+  html {
     font-size: 11px;
-    &__logo {
-      padding-left: 1em;
+  }
+  .hero {
+    background-position: center 0;
+    .nav {
+      &__logo {
+        padding-left: $margin-padding-2;
+      }
+      &__list {
+        &-item {
+          &:last-of-type {
+            margin-right: 0;
+          }
+        }
+      }
     }
   }
   .fundal {

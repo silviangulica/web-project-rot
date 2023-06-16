@@ -383,9 +383,20 @@ main {
   html {
     overflow-x: hidden;
   }
-  .nav {
-    font-size: 11px;
-    text-align: center;
+  .hero {
+    background-position: center 0;
+    .nav {
+      &__logo {
+        padding-left: $margin-padding-2;
+      }
+      &__list {
+        &-item {
+          &:last-of-type {
+            margin-right: 0;
+          }
+        }
+      }
+    }
   }
   main {
     .container {
@@ -399,16 +410,16 @@ main {
       max-height: 100vh;
 
       .profile {
-        height: 0;
+        //height: 0;
         width: 100vw;
       }
       .last-quizz {
         margin-top: 15em;
-        height: 0;
+        // height: 0;
         width: 100vw;
       }
       .leaderboard {
-        height: 0;
+        // height: 0;
         width: 100vw;
         &__title {
           font-size: 2em;
@@ -417,7 +428,7 @@ main {
         }
       }
       .stats {
-        height: 0;
+        //S height: 0;
         width: 100vw;
         &__title {
           margin-top: 5em;
@@ -437,7 +448,7 @@ main {
   }
 }
 
-@media screen and (max-height: 780px) {
+@media screen and (max-height: 780px) and (max-width: 930px) {
   main {
     .container {
       .stats {
@@ -446,20 +457,32 @@ main {
     }
   }
 }
-@media screen and (max-height: 680px) {
+@media screen and (max-height: 680px) and (orientation: portrait) {
   main {
     .container {
       .stats {
-        margin-top: 19em;
+        margin-top: 20vh;
       }
     }
   }
 }
 @media screen and (max-width: 500px) {
-  .nav {
+  html {
     font-size: 11px;
-    &__logo {
-      padding-left: 1em;
+  }
+  .hero {
+    background-position: center 0;
+    .nav {
+      &__logo {
+        padding-left: $margin-padding-2;
+      }
+      &__list {
+        &-item {
+          &:last-of-type {
+            margin-right: 0;
+          }
+        }
+      }
     }
   }
   main {
