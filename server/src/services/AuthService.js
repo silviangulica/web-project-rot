@@ -5,6 +5,7 @@ const {
   PasswordTooShortError,
   UsernameDuplicateError,
   EmailDuplicateError,
+  TokenInvalidError,
 } = require("../utils/CustomErrors");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -48,7 +49,21 @@ const login = async (email, password) => {
   return { user, token };
 };
 
+const verifyToken = async (token) => {
+  try {
+    const decoded = jwt.verify(token, secretKey);
+
+    if (decoded.exp < Date.now() / 1000) {
+      throw new TokenInvalidError("Token expired");
+    }
+  } catch (err) {
+    console.log(err);
+    throw new TokenInvalidError("Token invalid");
+  }
+};
+
 module.exports = {
   register,
   login,
+  verifyToken,
 };

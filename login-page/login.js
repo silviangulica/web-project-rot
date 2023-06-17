@@ -1,3 +1,11 @@
+(async () => {
+  const response = await checkIfUserAuthDidNotExpire(
+    "../dashboard/dashboard.html"
+  );
+
+  console.log(response);
+})();
+
 const loginPanelFooterAnchor = document.querySelector(
   ".login-panel__footer-anchor"
 );
@@ -53,6 +61,7 @@ loginForm.addEventListener("submit", async (e) => {
 });
 
 const signupForm = document.querySelector(".sign-up-panel__form");
+
 signupForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const username = document.querySelector(

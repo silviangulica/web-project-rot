@@ -40,6 +40,13 @@ class UsernameDuplicateError extends Error {
   }
 }
 
+class TokenInvalidError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "TokenInvalidError";
+  }
+}
+
 module.exports = {
   UserNotFoundError,
   InvalidCredentialsError,
@@ -47,4 +54,5 @@ module.exports = {
   PasswordTooShortError,
   EmailDuplicateError,
   UsernameDuplicateError,
+  TokenInvalidError,
 };

@@ -10,6 +10,12 @@ function changeNavBarColor() {
 
 window.addEventListener("scroll", changeNavBarColor);
 
+const user = JSON.parse(localStorage.getItem("user"));
+
+let username = document.querySelector(".profile__name");
+
+username.textContent = user.username;
+
 // delete method , just gotta change the .card__link to an actual logout button
 //
 // const card_links = document.querySelector(".card__link");
