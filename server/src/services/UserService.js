@@ -21,8 +21,14 @@ const findUserByUsername = async (usernameToSearch) => {
   const user = await User.findOne({ username: usernameToSearch });
   return user;
 };
+
+const findByEmail = async (emailToSearch) => {
+  const user = await User.findOne({ email: emailToSearch });
+  return user;
+};
 module.exports = {
   createUser,
   getUsers,
   findUserByUsername,
+  findByEmail,
 };

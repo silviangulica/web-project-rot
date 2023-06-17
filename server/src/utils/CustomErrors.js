@@ -19,10 +19,24 @@ class PasswordTooShortError extends Error {
   }
 }
 
+class EmailDuplicateError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "EmailDuplicateError";
+  }
+}
+
 class InvalidTokenError extends Error {
   constructor(message) {
     super(message);
     this.name = "InvalidTokenError";
+  }
+}
+
+class UsernameDuplicateError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "UsernameDuplicateError";
   }
 }
 
@@ -31,4 +45,6 @@ module.exports = {
   InvalidCredentialsError,
   InvalidTokenError,
   PasswordTooShortError,
+  EmailDuplicateError,
+  UsernameDuplicateError,
 };
