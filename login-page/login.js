@@ -1,8 +1,5 @@
 (async () => {
-  const response = await checkIfUserAuthDidNotExpire(
-    "../dashboard/dashboard.html"
-  );
-
+  const response = await checkIfUserAuthDidNotExpire();
   console.log(response);
 })();
 

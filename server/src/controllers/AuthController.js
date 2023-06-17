@@ -49,7 +49,7 @@ router.add("post", "/login", async (req, res) => {
     res.setHeader(
       "Set-Cookie",
       `token=${token};Path:/; Expires=${new Date(
-        Date.now() + 24 * 60 * 60 * 1000
+        Date.now() + 1000 * 60 * 60 * 24
       ).toUTCString()}; HttpOnly;`
     );
     res.end(JSON.stringify({ user: userToUserDtoMapper(user) }));
@@ -76,9 +76,12 @@ router.add("post", "/logout", (req, res) => {
 
 router.add("get", "/verifyToken", async (req, res) => {
   try {
-    const token = req.cookies.token;
-    const user = await authService.verifyToken(token);
-    res.end(JSON.stringify({ user: userToUserDtoMapper(user) }));
+    const token = req.headers.cookie;
+    if (token === undefined) {
+      throw new Error("Token is not present");
+    }
+    await authService.verifyToken(token.substring("token=".length));
+    res.end(JSON.stringify({ message: "Token is valid" }));
   } catch (err) {
     res.statusCode = 401;
     res.end(JSON.stringify({ message: err.message }));
