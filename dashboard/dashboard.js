@@ -9,3 +9,19 @@ function changeNavBarColor() {
 }
 
 window.addEventListener("scroll", changeNavBarColor);
+
+// delete method , just gotta change the .card__link to an actual logout button
+//
+// const card_links = document.querySelector(".card__link");
+// card_links.addEventListener("click", async (e) => {
+//   e.preventDefault();
+//   const response = await fetch("http://localhost:8081/logout", {
+//     method: "POST",
+//     credentials: "include",
+//   });
+//   const data = await response.json();
+//   if (response.ok) {
+//     localStorage.removeItem("user");
+//     window.location.href = "../login-page/login.html";
+//   }
+// });

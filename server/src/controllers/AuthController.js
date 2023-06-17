@@ -50,7 +50,7 @@ router.add("post", "/login", async (req, res) => {
       "Set-Cookie",
       `token=${token};Path:/; Expires=${new Date(
         Date.now() + 24 * 60 * 60 * 1000
-      ).toUTCString()}; SameSite=None; domain=localhost; Secure`
+      ).toUTCString()}; HttpOnly;`
     );
     res.end(JSON.stringify({ user: userToUserDtoMapper(user) }));
   } catch (err) {
@@ -63,4 +63,13 @@ router.add("post", "/login", async (req, res) => {
     }
     res.end(JSON.stringify({ message: err.message }));
   }
+});
+
+router.add("post", "/logout", (req, res) => {
+  res.setHeader(
+    "Set-Cookie",
+    `token=;Path=/; Expires=${new Date(0).toUTCString()};`
+  );
+  res.setHeader("Content-Type", "application/json");
+  res.end(JSON.stringify({ message: "Logged out" }));
 });
