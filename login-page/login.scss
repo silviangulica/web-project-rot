@@ -16,9 +16,9 @@ body {
     ),
     url("../img/nighttraffic.jpg");
 
-  background-size: 100vw 100vh;
+  background-size: 100vw 140vh;
   background-repeat: no-repeat;
-
+  overflow-x: hidden;
   display: flex;
   align-items: center;
   justify-content: center;

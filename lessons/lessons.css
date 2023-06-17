@@ -138,11 +138,17 @@ body {
 }
 
 @media screen and (max-width: 500px) {
-  .nav {
+  html {
     font-size: 11px;
   }
-  .nav__logo {
-    padding-left: 1em;
+  .hero {
+    background-position: center 0;
+  }
+  .hero .nav__logo {
+    padding-left: 2.5vw;
+  }
+  .hero .nav__list-item:last-of-type {
+    margin-right: 0;
   }
   .fundal {
     background-size: 100% 100%;
