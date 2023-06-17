@@ -64,7 +64,6 @@ router.add("post", "/login", async (req, res) => {
     res.end(JSON.stringify({ message: err.message }));
   }
 });
-
 router.add("post", "/logout", (req, res) => {
   res.setHeader(
     "Set-Cookie",
