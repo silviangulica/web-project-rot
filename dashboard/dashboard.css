@@ -169,9 +169,6 @@ main .container .last-quizz .card {
   background-color: white;
   display: block;
 }
-main .container .last-quizz .card:hover .card__link {
-  display: block;
-}
 main .container .last-quizz .card:hover .card__score {
   display: none;
 }
@@ -180,11 +177,21 @@ main .container .last-quizz .card:hover .card__title {
 }
 main .container .last-quizz .card:hover .card__content {
   min-height: 16.9vh;
+  min-width: 100%;
   background-color: #00b691;
   border-radius: 0.5em;
   transition: background-color 0.5s ease-in-out;
+  cursor: pointer;
 }
-main .container .last-quizz .card__link {
+main .container .last-quizz .card:hover .card__start {
+  width: 100%;
+  min-height: 16.9vh;
+  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+main .container .last-quizz .card__start {
   text-decoration: none;
   color: inherit;
   display: none;
@@ -239,6 +246,11 @@ main .container .leaderboard__button {
   align-items: center;
   text-decoration: none;
   cursor: pointer;
+  border: 1px solid #00b691;
+}
+main .container .leaderboard__button--selected {
+  background-color: #00b691;
+  color: white;
   border: 1px solid #00b691;
 }
 main .container .leaderboard__button:hover {
@@ -371,7 +383,7 @@ main .container .profile .fa-gear:hover {
     width: 100vw;
   }
   main .container .stats__title {
-    margin-top: 5em;
+    margin-top: 2em;
     font-size: 2em;
     border-top: 3px solid #00b691;
     padding-top: 8.51px;
@@ -390,7 +402,12 @@ main .container .profile .fa-gear:hover {
 }
 @media screen and (max-height: 680px) and (orientation: portrait) {
   main .container .stats {
-    margin-top: 20vh;
+    margin-top: 10em;
+  }
+}
+@media screen and (max-height: 600px) and (orientation: portrait) {
+  main .container .stats {
+    margin-top: 20em;
   }
 }
 @media screen and (max-width: 500px) {

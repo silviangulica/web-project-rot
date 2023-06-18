@@ -8,11 +8,11 @@ const {
   TokenInvalidError,
 } = require("../utils/CustomErrors");
 const { getRequestBody } = require("../utils/RequestUtils");
-const { userToUserDtoMapper } = require("../dto/UserDto");
 const authService = require("../services/AuthService");
 const User = require("../models/User");
 const Question = require("../models/Question");
 const QuizSchema = require("../models/Quiz");
+const { userToUserDtoMapper } = require("../../dto/UserDto");
 router.add("post", "/register", async (req, res) => {
   try {
     let body = await getRequestBody(req);
@@ -53,8 +53,9 @@ router.add("post", "/login", async (req, res) => {
         Date.now() + 1000 * 60 * 60 * 24
       ).toUTCString()}; HttpOnly;`
     );
-    res.end(JSON.stringify({ user: userToUserDtoMapper(user) }));
+    res.end(JSON.stringify(userToUserDtoMapper(user)));
   } catch (err) {
+    console.log(err);
     if (err instanceof InvalidCredentialsError) {
       res.statusCode = 401;
     } else if (err instanceof UserNotFoundError) {

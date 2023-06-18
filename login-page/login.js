@@ -41,8 +41,7 @@ loginForm.addEventListener("submit", async (e) => {
   });
   const data = await response.json();
   if (response.ok) {
-    localStorage.setItem("user", JSON.stringify(data.user));
-    console.log(document.cookie);
+    localStorage.setItem("user", JSON.stringify(data));
     window.location.href = "../dashboard/dashboard.html";
   } else if (response.status === 401) {
     password.style.borderColor = "red";

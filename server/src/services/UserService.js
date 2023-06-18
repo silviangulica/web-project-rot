@@ -26,9 +26,36 @@ const findByEmail = async (emailToSearch) => {
   const user = await User.findOne({ email: emailToSearch });
   return user;
 };
+
+const getTop10UsersByScore = async () => {
+  const users = await User.find({}, { username: 1, totalScore: 1, _id: 0 })
+    .sort({ totalScore: -1 })
+    .limit(10);
+
+  return users;
+};
+
+const getTop10UsersByQuizzes = async () => {
+  const users = await User.find({}, { username: 1, quizzesPassed: 1, _id: 0 })
+    .sort({ quizzesPassed: -1 })
+    .limit(10);
+
+  return users;
+};
+
+const getTop10UsersByCorrectAnswers = async () => {
+  const users = await User.find({}, { username: 1, correctAnswers: 1, _id: 0 })
+    .sort({ correctAnswers: -1 })
+    .limit(10);
+  return users;
+};
+
 module.exports = {
   createUser,
   getUsers,
   findUserByUsername,
   findByEmail,
+  getTop10UsersByScore,
+  getTop10UsersByQuizzes,
+  getTop10UsersByCorrectAnswers,
 };
