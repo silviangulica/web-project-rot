@@ -1,6 +1,7 @@
 require("dotenv").config();
 const loginController = require("./controllers/AuthController");
 const userController = require("./controllers/UserController");
+const quizController = require("./controllers/QuizController");
 let router = require("./routers/router");
 
 const mongoose = require("mongoose");

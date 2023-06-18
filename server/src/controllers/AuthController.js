@@ -5,11 +5,14 @@ const {
   UsernameDuplicateError,
   EmailDuplicateError,
   PasswordTooShortError,
+  TokenInvalidError,
 } = require("../utils/CustomErrors");
 const { getRequestBody } = require("../utils/RequestUtils");
 const { userToUserDtoMapper } = require("../dto/UserDto");
 const authService = require("../services/AuthService");
 const User = require("../models/User");
+const Question = require("../models/Question");
+const QuizSchema = require("../models/Quiz");
 router.add("post", "/register", async (req, res) => {
   try {
     let body = await getRequestBody(req);
@@ -41,9 +44,7 @@ router.add("post", "/register", async (req, res) => {
 router.add("post", "/login", async (req, res) => {
   try {
     let body = await getRequestBody(req);
-    console.log(body);
     const { email, password } = JSON.parse(body);
-    console.log(email, password);
     const { user, token } = await authService.login(email, password);
     res.setHeader("Content-Type", "application/json");
     res.setHeader(
@@ -75,11 +76,15 @@ router.add("post", "/logout", (req, res) => {
 
 router.add("get", "/verifyToken", async (req, res) => {
   try {
-    const token = req.headers.cookie;
-    if (token === undefined) {
-      throw new Error("Token is not present");
-    }
-    await authService.verifyToken(token.substring("token=".length));
+    let token = authService.verifyToken(
+      authService.checkThatTokenIsPresent(req)
+    );
+    res.setHeader(
+      "Set-Cookie",
+      `token=${token};Path:/; Expires=${new Date(
+        Date.now() + 1000 * 60 * 60 * 24
+      ).toUTCString()}; HttpOnly;`
+    );
     res.end(JSON.stringify({ message: "Token is valid" }));
   } catch (err) {
     res.statusCode = 401;

@@ -3,6 +3,12 @@ class UserDto {
     this.id = user.id;
     this.username = user.username;
     this.email = user.email;
+    this.profilePicture = user.profilePicture;
+    this.quizzesPassed = user.quizzesPassed;
+    this.correctAnswers = user.correctAnswers;
+    this.wrongAnswers = user.wrongAnswers;
+    this.totalScore = user.totalScore;
+    this.quizList = user.quizList;
   }
 }
 

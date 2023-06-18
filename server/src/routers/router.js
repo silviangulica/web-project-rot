@@ -15,10 +15,6 @@ class Router {
     const path = req.url;
 
     if (method === "options") {
-      res.setHeader("Access-Control-Allow-Origin", "http://localhost:5500");
-      res.setHeader("Access-Control-Allow-Methods", "*");
-      res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-      res.setHeader("Access-Control-Allow-Credentials", "true");
       res.statusCode = 204;
       res.end();
       return;
@@ -26,8 +22,6 @@ class Router {
 
     const handler = this.routes[method][path];
     if (handler) {
-      res.setHeader("Access-Control-Allow-Origin", "http://localhost:5500");
-      res.setHeader("Access-Control-Allow-Credentials", "true");
       handler(req, res);
     } else {
       res.statusCode = 404;
