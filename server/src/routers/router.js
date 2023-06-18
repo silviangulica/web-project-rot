@@ -1,13 +1,14 @@
 class Router {
   constructor() {
-    this.routes = {};
+    this.routes = [];
   }
 
-  add(method, path, handler) {
-    if (!this.routes[method]) {
-      this.routes[method] = {};
-    }
-    this.routes[method][path] = handler;
+  add(method, pathPattern, handler) {
+    this.routes.push({
+      method,
+      pathPattern,
+      handler
+    });
   }
 
   handle(req, res) {
@@ -24,15 +25,22 @@ class Router {
       return;
     }
 
-    const handler = this.routes[method][path];
-    if (handler) {
-      res.setHeader("Access-Control-Allow-Origin", "http://localhost:5500");
-      res.setHeader("Access-Control-Allow-Credentials", "true");
-      handler(req, res);
-    } else {
-      res.statusCode = 404;
-      res.end("Not Found");
+    for (const route of this.routes) {
+      if (route.method.toLowerCase() === method) {
+        const match = path.match(route.pathPattern);
+        if (match) {
+          const params = match.slice(1);
+          req.params = params;
+          res.setHeader("Access-Control-Allow-Origin", "http://localhost:5500");
+          res.setHeader("Access-Control-Allow-Credentials", "true");
+          route.handler(req, res);
+          return;
+        }
+      }
     }
+
+    res.statusCode = 404;
+    res.end("Not Found");
   }
 }
 

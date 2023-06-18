@@ -1,6 +1,7 @@
 require("dotenv").config();
 const loginController = require("./controllers/AuthController");
 const userController = require("./controllers/UserController");
+const lessonController = require("./controllers/LessonController");
 let router = require("./routers/router");
 
 const mongoose = require("mongoose");
@@ -17,6 +18,7 @@ async function connect() {
     });
     console.log("Connect successfully!!!");
   } catch (error) {
+    console.log(error);
     console.log("Connect failure!!!");
   }
 }
@@ -25,7 +27,15 @@ connect();
 
 // -- Server
 const server = http.createServer((req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:5500");
+  const allowedOrigins = [
+    "http://localhost:5500",
+    "http://127.0.0.1:5500",
+  ];
+  
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
   res.setHeader("Access-Control-Allow-Methods", "*");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   res.setHeader("Access-Control-Allow-Credentials", "true");
