@@ -3,7 +3,7 @@ const Question = require("../models/Question");
 
 const generateRandomQuiz = async () => {
   let questions = await Question.aggregate([{ $sample: { size: 26 } }]);
-  let quizToBeAdded = new Quiz({ questions: questions });
+  let quizToBeAdded = new Quiz({ questions });
   await quizToBeAdded.save();
   quizToBeAdded = await quizToBeAdded.populate("questions");
 

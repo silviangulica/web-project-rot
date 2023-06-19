@@ -26,13 +26,6 @@ class EmailDuplicateError extends Error {
   }
 }
 
-class InvalidTokenError extends Error {
-  constructor(message) {
-    super(message);
-    this.name = "InvalidTokenError";
-  }
-}
-
 class UsernameDuplicateError extends Error {
   constructor(message) {
     super(message);
@@ -47,12 +40,19 @@ class TokenInvalidError extends Error {
   }
 }
 
+class UserHasNoPermissionError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "UserHasNoPermissionError";
+  }
+}
+
 module.exports = {
   UserNotFoundError,
   InvalidCredentialsError,
-  InvalidTokenError,
   PasswordTooShortError,
   EmailDuplicateError,
   UsernameDuplicateError,
   TokenInvalidError,
+  UserHasNoPermissionError,
 };

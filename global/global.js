@@ -9,7 +9,7 @@ async function checkIfUserAuthDidNotExpire() {
   const data = await response.json();
   console.log(data);
   if (!response.ok) {
-    logUserOut();
+    authStatusCodesCheck(response);
   } else {
     if (window.location.pathname.includes("login-page/login.html"))
       window.location.href = "../dashboard/dashboard.html";
@@ -28,6 +28,8 @@ async function updateUserData(id) {
   const data = await response.json();
   if (response.ok) {
     localStorage.setItem("user", JSON.stringify(data));
+  } else {
+    authStatusCodesCheck(response);
   }
 }
 
@@ -35,4 +37,10 @@ function logUserOut() {
   localStorage.removeItem("user");
   if (!window.location.pathname.includes("login-page/login.html"))
     window.location.href = "../login-page/login.html";
+}
+
+function authStatusCodesCheck(response) {
+  if (response.status == 401) logUserOut();
+  else if (response.status == 403)
+    alert("You are not authorized to perform this action");
 }

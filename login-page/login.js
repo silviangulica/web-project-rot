@@ -1,6 +1,5 @@
 (async () => {
   const response = await checkIfUserAuthDidNotExpire();
-  console.log(response);
 })();
 
 const loginPanelFooterAnchor = document.querySelector(

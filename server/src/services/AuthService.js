@@ -5,6 +5,7 @@ const {
   PasswordTooShortError,
   UsernameDuplicateError,
   EmailDuplicateError,
+  UserHasNoPermissionError,
   TokenInvalidError,
 } = require("../utils/CustomErrors");
 const bcrypt = require("bcryptjs");
@@ -51,29 +52,30 @@ const login = async (email, password) => {
   return { user, token };
 };
 
-const verifyToken = (token) => {
-  try {
-    const decoded = jwt.verify(token, secretKey);
+const verifyToken = (token, res, requiredRole) => {
+  const decoded = jwt.verify(token, secretKey);
 
-    if (decoded.exp < Date.now() / 1000) {
-      console.log("Token expired");
-      throw new TokenInvalidError("Token expired");
-    }
+  if (decoded.exp < Date.now() / 1000) {
+    console.log("Token expired");
+    throw new TokenInvalidError("Token expired");
+  }
 
-    if (decoded.exp - Date.now() / 1000 < 60 * 30) {
-      const newToken = jwt.sign(
-        { id: decoded.id, role: decoded.role },
-        secretKey,
-        {
-          expiresIn: "12h",
-        }
-      );
-      return newToken;
-    }
-    return token;
-  } catch (err) {
-    console.log(err);
-    throw new TokenInvalidError("Token invalid");
+  verifyRole(decoded.role, requiredRole);
+
+  if (decoded.exp - Date.now() / 1000 < 60 * 30) {
+    const newToken = jwt.sign(
+      { id: decoded.id, role: decoded.role },
+      secretKey,
+      {
+        expiresIn: "12h",
+      }
+    );
+    res.setHeader(
+      "Set-Cookie",
+      `token=${newToken};Path:/; Expires=${new Date(
+        Date.now() + 1000 * 60 * 60 * 24
+      ).toUTCString()}; HttpOnly;`
+    );
   }
 };
 
@@ -92,10 +94,22 @@ const verifyIfRequestCameFromUser = (req, userId) => {
     throw new TokenInvalidError("Request came from another user");
   }
 };
+
+const verifyAuthorization = (req, res, requiredRole) => {
+  verifyToken(checkThatTokenIsPresent(req), res, requiredRole);
+};
+
+const verifyRole = (role, requiredRole) => {
+  if (role === "admin" || role === requiredRole) {
+    return;
+  }
+  throw new UserHasNoPermissionError("User has no permission");
+};
 module.exports = {
   register,
   login,
   verifyToken,
   checkThatTokenIsPresent,
   verifyIfRequestCameFromUser,
+  verifyAuthorization,
 };

@@ -9,7 +9,6 @@ window.addEventListener("scroll", changeNavBarColor);
   //await updateUserData(localStorage.getItem("user").id);
   topButtons[0].dispatchEvent(new Event("click"));
   username.textContent = user.username;
-  console.log(response);
 })();
 
 function changeNavBarColor() {
@@ -48,7 +47,7 @@ topButtons.forEach((button) => {
           data[i][button.getAttribute("data-score-type")];
       }
     } else {
-      alert("Something went wrong");
+      authStatusCodesCheck(response);
     }
   });
 });

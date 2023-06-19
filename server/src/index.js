@@ -26,6 +26,7 @@ connect();
 
 // -- Server
 const server = http.createServer((req, res) => {
+  res.setHeader("Content-Type", "application/json");
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:5500");
   res.setHeader("Access-Control-Allow-Methods", "*");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");

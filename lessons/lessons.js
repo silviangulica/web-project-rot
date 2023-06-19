@@ -1,7 +1,5 @@
 (async () => {
   const response = await checkIfUserAuthDidNotExpire();
-
-  console.log(response);
 })();
 
 function changeNavBarColor() {
