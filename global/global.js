@@ -16,9 +16,8 @@ async function checkIfUserAuthDidNotExpire() {
   }
 }
 
-async function updateUserData(id) {
-  if (id === undefined) logUserOut();
-  const response = await fetch(`http://localhost:8081/user`, {
+async function updateUserData(user) {
+  const response = await fetch(`http://localhost:8081/users?id=${user.id}`, {
     method: "GET",
     credentials: "include",
     headers: {
@@ -26,7 +25,9 @@ async function updateUserData(id) {
     },
   });
   const data = await response.json();
+
   if (response.ok) {
+    localStorage.removeItem("user");
     localStorage.setItem("user", JSON.stringify(data));
   } else {
     authStatusCodesCheck(response);

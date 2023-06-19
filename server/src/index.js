@@ -16,9 +16,9 @@ async function connect() {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    console.log("Connect successfully!!!");
+    console.log("Connected successfully!!!");
   } catch (error) {
-    console.log("Connect failure!!!");
+    console.log("Connection failed!!!");
   }
 }
 

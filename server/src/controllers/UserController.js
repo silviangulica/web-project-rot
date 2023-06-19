@@ -5,16 +5,20 @@ const { handleErrors } = require("../utils/RequestUtils");
 
 router.add("get", "/users", async (req, res) => {
   try {
-    console.log("BAD");
-    authService.verifyAuthorization(req, res, "admin");
-    const users = await userService.getUsers();
-    res.end(JSON.stringify(users));
+    let result;
+    if (req.params.id) {
+      authService.verifyAuthorization(req, res, "user");
+      result = await userService.findUserById(req.params.id);
+    } else {
+      authService.verifyAuthorization(req, res, "admin");
+      result = await userService.getUsers();
+    }
+    console.log(result);
+    res.end(JSON.stringify(result));
   } catch (err) {
     handleErrors(err, res);
   }
 });
-
-router.add("get", "/user");
 
 router.add("get", "/users/top-points", async (req, res) => {
   try {

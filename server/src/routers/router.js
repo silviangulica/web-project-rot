@@ -1,44 +1,39 @@
+const url = require("url");
+
 class Router {
   constructor() {
-    this.routes = [];
+    this.routes = {};
   }
 
-  add(method, pathPattern, handler) {
-    this.routes.push({
-      method,
-      pathPattern,
-      handler,
-    });
-    this.routes.sort((a, b) => b.pathPattern.length - a.pathPattern.length);
+  add(method, path, handler) {
+    if (!this.routes[method]) {
+      this.routes[method] = {};
+    }
+    //extract the named parameters from path stuff like ?id=1
+    const paramNames = [];
+
+    this.routes[method][path] = handler;
   }
 
   handle(req, res) {
     const method = req.method.toLowerCase();
-    const path = req.url;
+    const parsedPath = url.parse(req.url, true);
+    const path = parsedPath.pathname;
+    req.params = parsedPath.query;
 
     if (method === "options") {
       res.statusCode = 204;
       res.end();
       return;
     }
-    for (const route of this.routes) {
-      if (route.method.toLowerCase() === method) {
-        const match = path.match(route.pathPattern);
-        if (match) console.log(match);
-        if (match) {
-          console.log(match);
-          const params = match.slice(1);
 
-          req.params = params;
-          route.handler(req, res);
-
-          return;
-        }
-      }
+    const handler = this.routes[method][path];
+    if (handler) {
+      handler(req, res);
+    } else {
+      res.statusCode = 404;
+      res.end("Not Found");
     }
-
-    res.statusCode = 404;
-    res.end("Not Found");
   }
 }
 

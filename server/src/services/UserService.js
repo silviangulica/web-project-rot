@@ -1,3 +1,4 @@
+const { userToUserDtoMapper } = require("../../dto/UserDto");
 const User = require("../models/User");
 
 const createUser = async (username, email, password) => {
@@ -13,8 +14,13 @@ const createUser = async (username, email, password) => {
 };
 
 const getUsers = async () => {
-  const users = await User.find();
+  const users = await User.find({}, { password: 0 });
   return users;
+};
+
+const findUserById = async (idToSearch) => {
+  const user = await User.findById(idToSearch);
+  return userToUserDtoMapper(user);
 };
 
 const findUserByUsername = async (usernameToSearch) => {
@@ -58,4 +64,5 @@ module.exports = {
   getTop10UsersByScore,
   getTop10UsersByQuizzes,
   getTop10UsersByCorrectAnswers,
+  findUserById,
 };

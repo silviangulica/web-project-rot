@@ -5,10 +5,11 @@ let tableRows = document.querySelectorAll("tbody tr");
 
 window.addEventListener("scroll", changeNavBarColor);
 (async () => {
-  let response = await checkIfUserAuthDidNotExpire();
-  //await updateUserData(localStorage.getItem("user").id);
+  await checkIfUserAuthDidNotExpire();
+  await updateUserData(JSON.parse(localStorage.getItem("user")));
   topButtons[0].dispatchEvent(new Event("click"));
   username.textContent = user.username;
+  setStats();
 })();
 
 function changeNavBarColor() {
@@ -71,8 +72,6 @@ const setStats = async () => {
   );
   quizzesPassed.textContent = user.quizzesPassed;
 };
-
-setStats();
 
 // delete method , just gotta change the .card__link to an actual logout button
 //

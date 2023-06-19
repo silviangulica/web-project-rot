@@ -1,11 +1,16 @@
 const Quiz = require("../models/Quiz");
 const Question = require("../models/Question");
+const User = require("../models/User");
 
-const generateRandomQuiz = async () => {
+const generateRandomQuiz = async (id) => {
   let questions = await Question.aggregate([{ $sample: { size: 26 } }]);
   let quizToBeAdded = new Quiz({ questions });
   await quizToBeAdded.save();
   quizToBeAdded = await quizToBeAdded.populate("questions");
+
+  await User.findByIdAndUpdate(id, {
+    $push: { quizList: { quiz: quizToBeAdded._id, score: 0 } },
+  });
 
   return getQuizWithAnswers(quizToBeAdded, questions);
 };

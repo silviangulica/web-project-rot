@@ -7,10 +7,9 @@ const { handleErrors } = require("../utils/RequestUtils");
 
 router.add("post", "/quiz", async (req, res) => {
   try {
-    let body = await getRequestBody(req);
-    let { id } = JSON.parse(body);
+    let id = req.params.id;
     verifyIfRequestCameFromUser(req, id);
-    let quiz = await generateRandomQuiz();
+    let quiz = await generateRandomQuiz(id);
     res.end(JSON.stringify(quiz));
   } catch (err) {
     handleErrors(err, res);
