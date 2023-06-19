@@ -56,6 +56,46 @@ const getTop10UsersByCorrectAnswers = async () => {
   return users;
 };
 
+const getUserQuiz = async (quizToGet, userId) => {
+  // let us = await User.find({ _id: userId }, { quizList: 1, _id: 0 });
+  // console.log(us);
+
+  let userQuizArray = await User.find(
+    { _id: userId, "quizList.quiz": quizToGet._id },
+    { quizList: 1, _id: 0 }
+  );
+
+  return userQuizArray.at(0).quizList.find((q) => q.quiz.equals(quizToGet._id));
+
+  // //THIS IS TO FREAKING UPDATE THE SCORE SMH
+  // us = await User.updateOne(
+  //   { _id: userId, "quizList.quiz": "64909b8c1b01e9d0c9600d0d" },
+  //   { $set: { "quizList.$.score": 6 } }
+  // );
+
+  // THIS IS FOR DELETING
+  // us = await User.updateOne(
+  //   { _id: userId },
+  //   {
+  //     $pull: {
+  //       "quizzList.quiz": "64909b8c1b01e9d0c9600d0d",
+  //     },
+  //   }
+  // );
+};
+
+const removeUserQuiz = async (quizId, userId) => {
+  await User.updateOne(
+    { _id: userId },
+    { $pull: { quizList: { quiz: quizId } } }
+  );
+};
+
+const updateUserQuiz = async (quizId, userId) => {
+  await User.findByIdAndUpdate(userId, {
+    $push: { quizList: { quiz: quizId, score: 0 } },
+  });
+};
 module.exports = {
   createUser,
   getUsers,
@@ -65,4 +105,7 @@ module.exports = {
   getTop10UsersByQuizzes,
   getTop10UsersByCorrectAnswers,
   findUserById,
+  getUserQuiz,
+  removeUserQuiz,
+  updateUserQuiz,
 };

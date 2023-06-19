@@ -26,7 +26,11 @@ function handleErrors(err, res) {
   )
     res.statusCode = 401;
   else if (err instanceof errors.UserHasNoPermissionError) res.statusCode = 403;
-  else if (err instanceof errors.UserNotFoundError) res.statusCode = 404;
+  else if (
+    err instanceof errors.UserNotFoundError ||
+    err instanceof errors.QuizDoesNotExistError
+  )
+    res.statusCode = 404;
   else {
     res.statusCode = 400;
     if (err instanceof errors.UsernameDuplicateError)

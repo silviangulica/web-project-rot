@@ -90,6 +90,9 @@ const checkThatTokenIsPresent = (req) => {
 const verifyIfRequestCameFromUser = (req, userId) => {
   let token = checkThatTokenIsPresent(req);
   token = jwt.verify(token, secretKey);
+  if (token.role === "admin") {
+    return;
+  }
   if (token.id !== userId) {
     throw new TokenInvalidError("Request came from another user");
   }

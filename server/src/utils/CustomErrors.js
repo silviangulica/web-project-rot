@@ -47,6 +47,13 @@ class UserHasNoPermissionError extends Error {
   }
 }
 
+class QuizDoesNotExistError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "QuizDoesNotExistError";
+  }
+}
+
 module.exports = {
   UserNotFoundError,
   InvalidCredentialsError,
@@ -55,4 +62,5 @@ module.exports = {
   UsernameDuplicateError,
   TokenInvalidError,
   UserHasNoPermissionError,
+  QuizDoesNotExistError,
 };

@@ -1,18 +1,19 @@
 const Quiz = require("../models/Quiz");
 const Question = require("../models/Question");
 const User = require("../models/User");
+const { default: mongoose } = require("mongoose");
+const userService = require("./UserService");
+const { QuizDoesNotExistError } = require("../utils/CustomErrors");
 
 const generateRandomQuiz = async (id) => {
   let questions = await Question.aggregate([{ $sample: { size: 26 } }]);
   let quizToBeAdded = new Quiz({ questions });
   await quizToBeAdded.save();
-  quizToBeAdded = await quizToBeAdded.populate("questions");
+  // quizToBeAdded = await quizToBeAdded.populate("questions");
+  await userService.updateUserQuiz(quizToBeAdded._id, id);
 
-  await User.findByIdAndUpdate(id, {
-    $push: { quizList: { quiz: quizToBeAdded._id, score: 0 } },
-  });
-
-  return getQuizWithAnswers(quizToBeAdded, questions);
+  //return getQuizWithAnswers(quizToBeAdded, questions);
+  return quizToBeAdded;
 };
 
 function getQuizWithAnswers(quiz, questions) {
@@ -39,6 +40,19 @@ function getMixedAnswers(question) {
 
   return mixedAnswers;
 }
+
+const removeQuiz = async (userId, quizId) => {
+  if (!verifyIfQuizExists(quizId))
+    throw new QuizDoesNotExistError(`Quiz with id ${quizId} does not exist`);
+  await Quiz.findByIdAndDelete(quizId);
+  await userService.removeUserQuiz(quizId, userId);
+};
+
+const verifyIfQuizExists = async (quizId) => {
+  let quiz = await Quiz.findById(quizId);
+  return quiz ? true : false;
+};
 module.exports = {
   generateRandomQuiz,
+  removeQuiz,
 };

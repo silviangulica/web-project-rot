@@ -28,7 +28,7 @@ connect();
 const server = http.createServer((req, res) => {
   res.setHeader("Content-Type", "application/json");
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:5500");
-  res.setHeader("Access-Control-Allow-Methods", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   res.setHeader("Access-Control-Allow-Credentials", "true");
   router.handle(req, res);
