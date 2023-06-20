@@ -1,12 +1,12 @@
-const user = JSON.parse(localStorage.getItem("user"));
+let user;
 const username = document.querySelector(".profile__name");
 let topButtons = document.querySelectorAll(".leaderboard__button");
 let tableRows = document.querySelectorAll("tbody tr");
 
 window.addEventListener("scroll", changeNavBarColor);
 (async () => {
-  await checkIfUserAuthDidNotExpire();
   await updateUserData(JSON.parse(localStorage.getItem("user")));
+  user = JSON.parse(localStorage.getItem("user"));
   topButtons[0].dispatchEvent(new Event("click"));
   username.textContent = user.username;
   setStats();
@@ -71,6 +71,8 @@ const setStats = async () => {
     ".stats__box-quizzes .number__text"
   );
   quizzesPassed.textContent = user.quizzesPassed;
+
+  setLastCompletedQuizScore();
 };
 
 // delete method , just gotta change the .card__link to an actual logout button
@@ -79,7 +81,7 @@ const setStats = async () => {
 // card_links.addEventListener("click", async (e) => {
 //   e.preventDefault();
 //   const response = await fetch("http://localhost:8081/logout", {
-//     method: "POST",
+//     method: "GET",
 //     credentials: "include",
 //   });
 //   const data = await response.json();
@@ -88,3 +90,34 @@ const setStats = async () => {
 //     window.location.href = "../login-page/login.html";
 //   }
 // });
+
+function setLastCompletedQuizScore() {
+  const lastCompletedQuizCard = document.querySelector(".card");
+  console.log(lastCompletedQuizCard);
+  let title = "Utilizatorul nu are chestionare generate";
+  let score = "0/26";
+  if (JSON.parse(localStorage.getItem("user")).quizList.length > 0) {
+    let quizList = JSON.parse(localStorage.getItem("user")).quizList;
+    let lastQuizCompleted = null;
+
+    for (let i = 0; i < quizList.length; i++) {
+      if (quizList[i].endTime !== undefined) {
+        if (lastQuizCompleted === null) {
+          lastQuizCompleted = quizList[i];
+          title = "Testul " + (i + 1);
+          score = `${lastQuizCompleted.score}/26`;
+        } else if (
+          new Date(quizList[i].endTime).getTime() >
+          new Date(lastQuizCompleted.endTime).getTime()
+        ) {
+          lastQuizCompleted = quizList[i];
+          title = "Testul " + (i + 1);
+          score = `${lastQuizCompleted.score}/26`;
+        }
+      }
+    }
+  }
+
+  lastCompletedQuizCard.querySelector(".card__title").textContent = title;
+  lastCompletedQuizCard.querySelector(".card__score").textContent = score;
+}

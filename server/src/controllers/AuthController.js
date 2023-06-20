@@ -32,7 +32,7 @@ router.add("post", "/login", async (req, res) => {
     handleErrors(err, res);
   }
 });
-router.add("post", "/logout", (req, res) => {
+router.add("get", "/logout", (req, res) => {
   res.setHeader(
     "Set-Cookie",
     `token=;Path=/; Expires=${new Date(0).toUTCString()};`

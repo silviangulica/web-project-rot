@@ -91,9 +91,16 @@ const removeUserQuiz = async (quizId, userId) => {
   );
 };
 
-const updateUserQuiz = async (quizId, userId) => {
+const updateUserQuiz = async (quizz, userId) => {
   await User.findByIdAndUpdate(userId, {
-    $push: { quizList: { quiz: quizId, score: 0 } },
+    $push: {
+      quizList: {
+        quiz: quizz._id,
+        score: quizz.score,
+        startTime: quizz.startTime,
+        endTime: quizz.endTime,
+      },
+    },
   });
 };
 module.exports = {

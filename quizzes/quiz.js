@@ -1,5 +1,5 @@
 (async () => {
-  const response = await checkIfUserAuthDidNotExpire();
+  await checkIfUserAuthDidNotExpire();
   for (
     let i = 0;
     i < JSON.parse(localStorage.getItem("user")).quizList.length;
@@ -7,8 +7,6 @@
   ) {
     generateQuizCard(JSON.parse(localStorage.getItem("user")).quizList[i], i);
   }
-
-  console.log(response);
 })();
 
 function changeNavBarColor() {
@@ -30,7 +28,7 @@ const generateRandomQuizButton = document.querySelector(
 generateRandomQuizButton.addEventListener("click", async (e) => {
   e.preventDefault();
   const response = await fetch(
-    `http://localhost:8081/quiz?id=${
+    `http://localhost:8081/quiz/create?id=${
       JSON.parse(localStorage.getItem("user")).id
     }`,
     {
@@ -71,7 +69,13 @@ function generateQuizCard(userQuiz, index) {
   quizButtons.classList.add("quiz__buttons");
 
   const quizScore = document.createElement("div");
-  quizScore.classList.add("quiz__score", "quiz__score--not-completed");
+  if (userQuiz.score == 0) {
+    quizScore.classList.add("quiz__score", "quiz__score--not-completed");
+  } else if (userQuiz.score < 22) {
+    quizScore.classList.add("quiz__score", "quiz__score--failed");
+  } else {
+    quizScore.classList.add("quiz__score", "quiz__score--passed");
+  }
   quizScore.textContent = `Scorul tău: ${userQuiz.score}/26`;
   const quizStartButton = document.createElement("button");
   quizStartButton.classList.add("quiz__button--start");

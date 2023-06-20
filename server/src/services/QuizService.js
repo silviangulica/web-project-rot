@@ -10,7 +10,7 @@ const generateRandomQuiz = async (id) => {
   let quizToBeAdded = new Quiz({ questions });
   await quizToBeAdded.save();
   // quizToBeAdded = await quizToBeAdded.populate("questions");
-  await userService.updateUserQuiz(quizToBeAdded._id, id);
+  await userService.updateUserQuiz(quizToBeAdded, id);
 
   //return getQuizWithAnswers(quizToBeAdded, questions);
   return quizToBeAdded;

@@ -9,6 +9,15 @@ const UserQuizSchema = new mongoose.Schema({
   score: {
     type: Number,
     required: true,
+    default: 0,
+  },
+
+  startTime: {
+    type: Date,
+  },
+  endTime: {
+    type: Date,
+    default: Date.now,
   },
 });
 

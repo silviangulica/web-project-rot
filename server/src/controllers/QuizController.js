@@ -9,7 +9,7 @@ const {
 const { handleErrors } = require("../utils/RequestUtils");
 const { getUserQuiz } = require("../services/UserService");
 
-router.add("post", "/quiz", async (req, res) => {
+router.add("post", "/quiz/create", async (req, res) => {
   try {
     let id = req.params.id;
     verifyAuthorization(req, res, "user");
@@ -28,7 +28,7 @@ router.add("delete", "/quiz", async (req, res) => {
     let quizId = req.params.quizId;
     verifyAuthorization(req, res, "user");
     verifyIfRequestCameFromUser(req, userId);
-    quiz = await removeQuiz(userId, quizId);
+    await removeQuiz(userId, quizId);
     res.end(JSON.stringify({ message: "Quiz removed successfully" }));
   } catch (err) {
     console.log(err);
