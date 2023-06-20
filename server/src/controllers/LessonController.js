@@ -1,8 +1,13 @@
 const router = require('../routers/router');
 const lessonService = require('../services/LessonService');
 
-router.add('get', /^\/lessons\/(\d+)$/, async (req, res) => {
-  const lessonId = req.params[0];
+router.add('post', '/lessons/', async (req, res) => {
+  let lessonType = req.params.type;
+  
+});
+
+router.add('get', "/lessons/", async (req, res) => {
+  const lessonId = req.params.id;
   const lesson = await lessonService.getLessonById(lessonId);
   res.end(JSON.stringify(lesson));
 });

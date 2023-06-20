@@ -10,6 +10,13 @@ const getLessonById = async (id) => {
   return lesson;
 }
 
+const updateLessonType = async (id, type) => {
+  const lesson = await Lesson.findOne({ id });
+  lesson.type = type;
+  await lesson.save();
+  return lesson;
+}
+
 module.exports = { 
   getLessons,
   getLessonById
