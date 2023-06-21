@@ -16,6 +16,10 @@ const LessonSchema = new mongoose.Schema({
   id: {
     type: Number,
     require: true,
+  },
+  type: {
+    type: String,
+    require: true,
   }
 });
 

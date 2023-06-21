@@ -24,4 +24,8 @@ def generate_lesson_from_url(url):
     lesson_title = dom.xpath('/html/body/div[1]/div/div/div/div[2]/div/div[1]/h3/span/strong')
     print(lesson_title[0].text)
 
+    # Descriere lectie
+    
+
+
 generate_lesson_from_url("https://www.scoalarutiera.ro/indicatoare-si-marcaje/indicatoare-de-avertizare/curba-la-stanga/5")

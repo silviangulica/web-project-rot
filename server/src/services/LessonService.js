@@ -17,7 +17,14 @@ const updateLessonType = async (id, type) => {
   return lesson;
 }
 
+const getLessonsByType = async (type) => {
+  const lessons = await Lesson.find({ type });
+  return lessons;
+}
+
 module.exports = { 
   getLessons,
-  getLessonById
+  getLessonById,
+  updateLessonType,
+  getLessonsByType
 };
