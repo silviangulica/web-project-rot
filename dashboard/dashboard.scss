@@ -190,9 +190,6 @@ main {
 
       .card {
         &:hover {
-          .card__link {
-            display: block;
-          }
           .card__score {
             display: none;
           }
@@ -201,12 +198,22 @@ main {
           }
           .card__content {
             min-height: 16.9vh;
+            min-width: 100%;
             background-color: $color-quaternary;
             border-radius: 0.5em;
             transition: background-color 0.5s ease-in-out;
+            cursor: pointer;
+          }
+          .card__start {
+            width: 100%;
+            min-height: 16.9vh;
+            display: block;
+            display: flex;
+            justify-content: center;
+            align-items: center;
           }
         }
-        &__link {
+        &__start {
           text-decoration: none;
           color: inherit;
           display: none;
@@ -236,7 +243,7 @@ main {
           padding-top: 1.6vh;
           padding-bottom: 1.6vh;
           border-radius: 0.4em 0.4em 0 0;
-          font-size: 1.8em;
+          font-size: 1.5em;
           font-weight: bold;
           background-color: $color-quaternary;
           width: 100%;
@@ -275,6 +282,11 @@ main {
         text-decoration: none;
         cursor: pointer;
         border: 1px solid $color-quaternary;
+        &--selected {
+          background-color: $color-quaternary;
+          color: white;
+          border: 1px solid $color-quaternary;
+        }
       }
       &__button:hover {
         background-color: $color-quaternary;
@@ -431,7 +443,7 @@ main {
         //S height: 0;
         width: 100vw;
         &__title {
-          margin-top: 5em;
+          margin-top: 2em;
           font-size: 2em;
           border-top: 3px solid $color-quaternary;
           padding-top: 8.51px;
@@ -461,7 +473,16 @@ main {
   main {
     .container {
       .stats {
-        margin-top: 20vh;
+        margin-top: 10em;
+      }
+    }
+  }
+}
+@media screen and (max-height: 600px) and (orientation: portrait) {
+  main {
+    .container {
+      .stats {
+        margin-top: 20em;
       }
     }
   }

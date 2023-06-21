@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const UserQuizSchema = require("./UserQuiz");
 
 const UserSchema = new mongoose.Schema({
   username: {
@@ -15,7 +16,34 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  // Todo: Got to add score information, can be done by either embedding or referencing (we'll see which one is better for our use case)
+  role: {
+    type: String,
+    required: true,
+    default: "user",
+  },
+  quizzesPassed: {
+    type: Number,
+    default: 0,
+  },
+  correctAnswers: {
+    type: Number,
+    default: 0,
+  },
+  wrongAnswers: {
+    type: Number,
+    default: 0,
+  },
+  totalScore: {
+    type: Number,
+    default: 0,
+  },
+  profilePicture: {
+    type: String,
+    default:
+      "https://th.bing.com/th/id/OIP.ilvIUpk5eCS26XBmYT9lUwHaE9?pid=ImgDet&rs=1",
+  },
+
+  quizList: [UserQuizSchema],
 });
 
-module.exports = mongoose.model("users", UserSchema);
+module.exports = mongoose.model("User", UserSchema);
