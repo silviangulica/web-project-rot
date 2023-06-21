@@ -1,3 +1,7 @@
+(async () => {
+  const response = await checkIfUserAuthDidNotExpire();
+})();
+
 function changeNavBarColor() {
   const navbar = document.querySelector(".nav");
 

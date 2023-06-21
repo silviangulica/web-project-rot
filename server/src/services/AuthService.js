@@ -5,6 +5,7 @@ const {
   PasswordTooShortError,
   UsernameDuplicateError,
   EmailDuplicateError,
+  UserHasNoPermissionError,
   TokenInvalidError,
 } = require("../utils/CustomErrors");
 const bcrypt = require("bcryptjs");
@@ -45,25 +46,65 @@ const login = async (email, password) => {
     throw new InvalidCredentialsError(`Password is not correct!`);
   }
 
-  const token = jwt.sign({ id: user.id }, secretKey, { expiresIn: "24h" });
+  const token = jwt.sign({ id: user.id, role: user.role }, secretKey, {
+    expiresIn: "12h",
+  });
   return { user, token };
 };
 
-const verifyToken = async (token) => {
-  try {
-    const decoded = jwt.verify(token, secretKey);
+const verifyAuthorization = (req, res, requiredRole) => {
+  let token = checkThatTokenIsPresent(req);
+  const decoded = jwt.verify(token, secretKey);
+  verifyRole(decoded.role, requiredRole);
 
-    if (decoded.exp < Date.now() / 1000) {
-      throw new TokenInvalidError("Token expired");
-    }
-  } catch (err) {
-    console.log(err);
-    throw new TokenInvalidError("Token invalid");
+  if (decoded.exp - Date.now() / 1000 < 60 * 30) {
+    const newToken = jwt.sign(
+      { id: decoded.id, role: decoded.role },
+      secretKey,
+      {
+        expiresIn: "12h",
+      }
+    );
+    res.setHeader(
+      "Set-Cookie",
+      `token=${newToken};Path:/; Expires=${new Date(
+        Date.now() + 1000 * 60 * 60 * 24
+      ).toUTCString()}; HttpOnly;`
+    );
+  }
+
+  return decoded.id;
+};
+
+const checkThatTokenIsPresent = (req) => {
+  let token = req.headers.cookie;
+  if (token === undefined) {
+    throw new TokenInvalidError("Token is not present");
+  }
+  token = token.substring("token=".length);
+  return token;
+};
+const verifyIfRequestCameFromUser = (req, userId) => {
+  let token = checkThatTokenIsPresent(req);
+  token = jwt.verify(token, secretKey);
+  if (token.role === "admin") {
+    return;
+  }
+  if (token.id !== userId) {
+    throw new TokenInvalidError("Request came from another user");
   }
 };
 
+const verifyRole = (role, requiredRole) => {
+  if (role === "admin" || role === requiredRole) {
+    return;
+  }
+  throw new UserHasNoPermissionError("User has no permission");
+};
 module.exports = {
   register,
   login,
-  verifyToken,
+  checkThatTokenIsPresent,
+  verifyIfRequestCameFromUser,
+  verifyAuthorization,
 };

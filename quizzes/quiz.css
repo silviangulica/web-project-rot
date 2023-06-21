@@ -90,12 +90,15 @@ body {
 .quizzes {
   margin-top: 5em;
   padding-bottom: 5em;
-  display: grid;
+  display: flex;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
-  height: 100vh;
+  height: 50vh;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 .quizzes .quiz {
+  flex-basis: 300px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -115,7 +118,12 @@ body {
   margin: 0;
   padding: 0;
 }
-.quizzes .quiz__button {
+.quizzes .quiz__buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.quizzes .quiz__button--start, .quizzes .quiz__button--delete, .quizzes .quiz__button--generate {
   background-color: rgba(72, 104, 86, 0.314);
   box-sizing: border-box;
   border: none;
@@ -124,17 +132,20 @@ body {
   transition: all 0.5s ease-in-out;
   cursor: pointer;
 }
-.quizzes .quiz__button .anchor--not-selected {
+.quizzes .quiz__button--start .anchor--not-selected, .quizzes .quiz__button--delete .anchor--not-selected, .quizzes .quiz__button--generate .anchor--not-selected {
   text-decoration: none;
   color: inherit;
 }
-.quizzes .quiz__button:hover {
+.quizzes .quiz__button--start:hover, .quizzes .quiz__button--delete:hover, .quizzes .quiz__button--generate:hover {
   transition: all 0.2s ease-in-out;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   background-color: #00b691;
   color: white;
   border-radius: 10px;
   padding: 1em;
+}
+.quizzes .quiz__button--start:active, .quizzes .quiz__button--delete:active, .quizzes .quiz__button--generate:active {
+  transform: scale(0.9);
 }
 .quizzes .quiz__score {
   border-radius: 1em;
@@ -176,15 +187,7 @@ body {
   .nav__logo {
     padding-left: 1em;
   }
-  .quizzes {
-    height: 400vw;
-  }
   .fundal {
     background-size: 100% 100%;
-  }
-}
-@media screen and (max-width: 320px) {
-  .quizzes {
-    height: 600vw;
   }
 }/*# sourceMappingURL=quiz.css.map */
