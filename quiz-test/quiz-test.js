@@ -1,4 +1,4 @@
-const currentQuiz = JSON.parse(localStorage.getItem("currentQuiz"));
+let currentQuiz = JSON.parse(localStorage.getItem("currentQuiz"));
 const unansweredQuestionsText = document.querySelector(
   ".quiz__stat-remaining #remaining-questions"
 );
@@ -20,13 +20,13 @@ let countDownDate;
 let currentQuestionIndex = 0;
 let correctAnswersCount = 0;
 let wrongAnswersCount = 0;
+const currentState = JSON.parse(localStorage.getItem("currentState"));
 (async () => {
   await checkIfUserAuthDidNotExpire();
   if (currentQuiz == null) {
     window.location.href = "../quizzes/quiz.html";
   }
-
-  beginQuiz();
+  if (currentState === null) beginQuiz();
 
   setInterval(() => {
     let now = new Date().getTime();
@@ -55,13 +55,13 @@ function changeNavBarColor() {
 window.addEventListener("scroll", changeNavBarColor);
 
 answers.forEach((answer) => {
-  answer.addEventListener("click", (btn) => {
-    if (btn.target.classList.contains("quiz__answer-btn--not-chosen")) {
-      btn.target.classList.remove("quiz__answer-btn--not-chosen");
-      btn.target.classList.add("quiz__answer-btn--chosen");
-    } else if (btn.target.classList.contains("quiz__answer-btn--chosen")) {
-      btn.target.classList.remove("quiz__answer-btn--chosen");
-      btn.target.classList.add("quiz__answer-btn--not-chosen");
+  answer.addEventListener("click", (e) => {
+    if (e.currentTarget.classList.contains("quiz__answer-btn--not-chosen")) {
+      e.currentTarget.classList.remove("quiz__answer-btn--not-chosen");
+      e.currentTarget.classList.add("quiz__answer-btn--chosen");
+    } else if (e.currentTarget.classList.contains("quiz__answer-btn--chosen")) {
+      e.currentTarget.classList.remove("quiz__answer-btn--chosen");
+      e.currentTarget.classList.add("quiz__answer-btn--not-chosen");
     }
   });
 });
@@ -85,6 +85,21 @@ async function beginQuiz() {
 const submitQuiz = async () => {
   console.log("OK");
 };
+
+submitButton.addEventListener("click", async () => {
+  let chosenAnswers = [];
+  answers.forEach((answer) => {
+    if (answer.classList.contains("quiz__answer-btn--chosen")) {
+      chosenAnswers.push(
+        answer.querySelector(".quiz__answer-text").textContent
+      );
+    }
+  });
+
+  await sendCurrentQuestionAnswers(chosenAnswers);
+  if (chosenAnswers.length === 0) return;
+  skipButton.dispatchEvent(new Event("click"));
+});
 
 const sendStartQuizRequest = async () => {
   const response = await fetch(
@@ -131,4 +146,38 @@ function loadQuestion(index) {
     answer.querySelector(".quiz__answer-text").textContent =
       currentQuiz.questions[index].answers[i];
   });
+}
+
+async function sendCurrentQuestionAnswers(chosenAnswers) {
+  console.log(currentQuiz.questions[currentQuestionIndex]._id);
+  const response = await fetch(
+    `http://localhost:8081/quiz/answer?quizId=${currentQuiz._id}&questionId=${currentQuiz.questions[currentQuestionIndex]._id}`,
+    {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(chosenAnswers),
+    }
+  );
+  const data = await response.json();
+  console.log(data);
+
+  if (response.ok) {
+    if (data.correct === true) {
+      correctAnswersCount++;
+    } else {
+      wrongAnswersCount++;
+    }
+    removeQuestion(currentQuestionIndex);
+  } else {
+    authStatusCodesCheck(response);
+    console.log(response);
+    alert("Something went wrong");
+  }
+}
+
+function removeQuestion(currentQuestionIndex) {
+  currentQuiz.questions.splice(currentQuestionIndex, 1);
 }

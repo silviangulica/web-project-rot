@@ -6,6 +6,7 @@ const {
   getQuizById,
   getQuizWithAnswers,
   startQuizForUser,
+  verifyAnswers,
 } = require("../services/QuizService");
 const { getRequestBody } = require("../utils/RequestUtils");
 const { verifyAuthorization } = require("../services/AuthService");
@@ -54,6 +55,20 @@ router.add("post", "/quiz/start", async (req, res) => {
     let startTime = await startQuizForUser(id, quizId);
     res.end(JSON.stringify({ message: startTime }));
   } catch (err) {
+    handleErrors(err, res);
+  }
+});
+
+router.add("post", "/quiz/answer", async (req, res) => {
+  try {
+    let id = verifyAuthorization(req, res, "user");
+    let quizId = req.params.quizId;
+    let questionId = req.params.questionId;
+    let answers = JSON.parse(await getRequestBody(req));
+    let correct = await verifyAnswers(id, quizId, questionId, answers);
+    res.end(JSON.stringify({ correct }));
+  } catch (err) {
+    console.log(err);
     handleErrors(err, res);
   }
 });

@@ -1,9 +1,8 @@
 const Quiz = require("../models/Quiz");
 const Question = require("../models/Question");
-const User = require("../models/User");
-const { default: mongoose } = require("mongoose");
 const userService = require("./UserService");
 const { QuizDoesNotExistError } = require("../utils/CustomErrors");
+const { verifyAnswersForQuestion } = require("./QuestionService");
 
 const generateRandomQuiz = async (id) => {
   let questions = await Question.aggregate([{ $sample: { size: 26 } }]);
@@ -69,6 +68,14 @@ const endQuizForUser = async (userId, quizId) => {
   await getQuizById(quizId);
   await userService.updateEndTimeForUserQuiz(quizId, userId, Date.now());
 };
+
+const verifyAnswers = async (userId, quizId, questionId, answers) => {
+  let quiz = await getQuizById(quizId);
+  quiz = await quiz.populate("questions");
+  let correct = await verifyAnswersForQuestion(questionId, answers);
+  return correct;
+};
+
 module.exports = {
   generateRandomQuiz,
   removeQuiz,
@@ -76,4 +83,5 @@ module.exports = {
   getQuizWithAnswers,
   startQuizForUser,
   endQuizForUser,
+  verifyAnswers,
 };
