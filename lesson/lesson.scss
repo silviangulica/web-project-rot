@@ -120,16 +120,17 @@ main {
   height: auto;
 }
 
-.lessons__categories {
+.lessons__categories, .lessons {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: flex-start;
   width: 100%;
+  &__back{
+    display: none;
+  }
 }
-
-
-.card {
+.card, .card-lesson {
   border: 1px solid #ccc;
   border-radius: 10px;
   padding: 0.5em;
@@ -164,7 +165,7 @@ main {
 }
 
 .lesson {
-  display: none !important;
+  display: none;
   &__content {
     display: flex;
     flex-direction: row;
