@@ -1,6 +1,8 @@
 require("dotenv").config();
 const loginController = require("./controllers/AuthController");
 const userController = require("./controllers/UserController");
+const lessonController = require("./controllers/LessonController");
+const supportController = require("./controllers/SupportController");
 const quizController = require("./controllers/QuizController");
 let router = require("./routers/router");
 
@@ -18,11 +20,22 @@ async function connect() {
     });
     console.log("Connected successfully!!!");
   } catch (error) {
-    console.log("Connection failed!!!");
+    console.log(error);
+    console.log("Connect failure!!!");
   }
 }
 
 connect();
+
+// -- Mail settings
+const mailOptions = {
+  from: 'webrot7@gmail.com',
+  to: 'gulica.sv@gmail.com',
+  subject: 'Sending Email using Node.js',
+  text: 'That was easy!'
+};
+
+
 
 // -- Server
 const server = http.createServer((req, res) => {

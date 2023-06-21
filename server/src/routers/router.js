@@ -29,6 +29,7 @@ class Router {
 
     const handler = this.routes[method][path];
     if (handler) {
+      res.setHeader("Content-Type", "application/json");
       handler(req, res);
     } else {
       res.statusCode = 404;
