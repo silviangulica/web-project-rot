@@ -25,6 +25,40 @@ async function connect() {
 
 connect();
 
+// -- Mail settings
+const mailOptions = {
+  from: 'gulica.sv@gmail.com',
+  to: 'mamaischimadalina@gmail.com',
+  subject: 'Sending Email using Node.js',
+  text: 'That was easy!'
+};
+
+const nodemailer = require('nodemailer');
+
+const transporter = nodemailer.createTransport({
+  host: 'smtp-relay.sendinblue.com',
+  port: 587,
+  secure: false,
+  auth: {
+    user: 'gulica.sv@gmail.com',
+    pass: '1TDkrgJVcHQPS34I'
+  }
+});
+
+const sendMail = (mailObj) => {
+  transporter.sendMail(mailObj, function (error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent successfully: ' + info.response);
+    }
+  });
+}
+
+sendMail(mailOptions);
+
+
+
 // -- Server
 const server = http.createServer((req, res) => {
   const allowedOrigins = [
