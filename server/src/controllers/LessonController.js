@@ -1,4 +1,3 @@
-const { parse } = require('dotenv');
 const router = require('../routers/router');
 const lessonService = require('../services/LessonService');
 

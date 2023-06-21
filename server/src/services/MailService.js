@@ -1,10 +1,11 @@
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  host: 'smtp-relay.sendinblue.com',
+  port: 587,
   auth: {
-    user: 'gulica.sv@gmail.com',
-    pass: 'SilvianCelMaiFain2023'
+    user: 'webrot7@gmail.com',
+    pass: 'KGShHFWwTfUaMz6N'
   }
 });
 

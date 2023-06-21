@@ -2,6 +2,7 @@ require("dotenv").config();
 const loginController = require("./controllers/AuthController");
 const userController = require("./controllers/UserController");
 const lessonController = require("./controllers/LessonController");
+const supportController = require("./controllers/SupportController");
 let router = require("./routers/router");
 
 const mongoose = require("mongoose");
@@ -27,35 +28,11 @@ connect();
 
 // -- Mail settings
 const mailOptions = {
-  from: 'gulica.sv@gmail.com',
-  to: 'mamaischimadalina@gmail.com',
+  from: 'webrot7@gmail.com',
+  to: 'gulica.sv@gmail.com',
   subject: 'Sending Email using Node.js',
   text: 'That was easy!'
 };
-
-const nodemailer = require('nodemailer');
-
-const transporter = nodemailer.createTransport({
-  host: 'smtp-relay.sendinblue.com',
-  port: 587,
-  secure: false,
-  auth: {
-    user: 'gulica.sv@gmail.com',
-    pass: '1TDkrgJVcHQPS34I'
-  }
-});
-
-const sendMail = (mailObj) => {
-  transporter.sendMail(mailObj, function (error, info) {
-    if (error) {
-      console.log(error);
-    } else {
-      console.log('Email sent successfully: ' + info.response);
-    }
-  });
-}
-
-sendMail(mailOptions);
 
 
 
