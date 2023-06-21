@@ -1,5 +1,5 @@
-const querystring = require("querystring");
 const errors = require("./CustomErrors");
+const { TokenExpiredError } = require("jsonwebtoken");
 function getRequestBody(req) {
   return new Promise((resolve, reject) => {
     let body = "";
@@ -22,10 +22,16 @@ function handleErrors(err, res) {
   code = undefined;
   if (
     err instanceof errors.TokenInvalidError ||
-    err instanceof errors.InvalidCredentialsError
-  )
+    err instanceof errors.InvalidCredentialsError ||
+    err instanceof TokenExpiredError
+  ) {
+    res.setHeader(
+      "Set-Cookie",
+      `token=;Path=/; Expires=${new Date(0).toUTCString()};`
+    );
     res.statusCode = 401;
-  else if (err instanceof errors.UserHasNoPermissionError) res.statusCode = 403;
+  } else if (err instanceof errors.UserHasNoPermissionError)
+    res.statusCode = 403;
   else if (
     err instanceof errors.UserNotFoundError ||
     err instanceof errors.QuizDoesNotExistError

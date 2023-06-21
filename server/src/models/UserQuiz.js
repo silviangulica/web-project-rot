@@ -17,7 +17,6 @@ const UserQuizSchema = new mongoose.Schema({
   },
   endTime: {
     type: Date,
-    default: Date.now,
   },
 });
 

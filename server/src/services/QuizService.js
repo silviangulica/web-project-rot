@@ -10,13 +10,14 @@ const generateRandomQuiz = async (id) => {
   let quizToBeAdded = new Quiz({ questions });
   await quizToBeAdded.save();
   // quizToBeAdded = await quizToBeAdded.populate("questions");
-  await userService.updateUserQuiz(quizToBeAdded, id);
+  await userService.addQuizToUserQuizArray(quizToBeAdded, id);
 
   //return getQuizWithAnswers(quizToBeAdded, questions);
   return quizToBeAdded;
 };
 
-function getQuizWithAnswers(quiz, questions) {
+function getQuizWithAnswers(quiz) {
+  let questions = quiz.questions;
   questions = questions.map((questionToChange) => {
     return {
       _id: questionToChange._id,
@@ -42,17 +43,37 @@ function getMixedAnswers(question) {
 }
 
 const removeQuiz = async (userId, quizId) => {
-  if (!verifyIfQuizExists(quizId))
+  let removedQuiz = await Quiz.findByIdAndDelete(quizId);
+  if (removedQuiz === null)
     throw new QuizDoesNotExistError(`Quiz with id ${quizId} does not exist`);
-  await Quiz.findByIdAndDelete(quizId);
   await userService.removeUserQuiz(quizId, userId);
 };
 
-const verifyIfQuizExists = async (quizId) => {
-  let quiz = await Quiz.findById(quizId);
-  return quiz ? true : false;
+const getQuizById = async (quizId) => {
+  let foundQuiz = await Quiz.findById(quizId);
+  if (foundQuiz === null)
+    throw new QuizDoesNotExistError(`Quiz with id ${quizId} does not exist`);
+  return foundQuiz;
+};
+
+const startQuizForUser = async (userId, quizId) => {
+  await getQuizById(quizId);
+  return await userService.updateStartTimeForUserQuiz(
+    quizId,
+    userId,
+    Date.now()
+  );
+};
+
+const endQuizForUser = async (userId, quizId) => {
+  await getQuizById(quizId);
+  await userService.updateEndTimeForUserQuiz(quizId, userId, Date.now());
 };
 module.exports = {
   generateRandomQuiz,
   removeQuiz,
+  getQuizById,
+  getQuizWithAnswers,
+  startQuizForUser,
+  endQuizForUser,
 };

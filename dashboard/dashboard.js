@@ -94,7 +94,7 @@ const setStats = async () => {
 function setLastCompletedQuizScore() {
   const lastCompletedQuizCard = document.querySelector(".card");
   console.log(lastCompletedQuizCard);
-  let title = "Utilizatorul nu are chestionare generate";
+  let title = "Nu se pot gasi chestionare completate recent";
   let score = "0/26";
   if (JSON.parse(localStorage.getItem("user")).quizList.length > 0) {
     let quizList = JSON.parse(localStorage.getItem("user")).quizList;

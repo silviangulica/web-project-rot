@@ -60,6 +60,7 @@ function generateQuizCard(userQuiz, index) {
   console.log(userQuiz);
   const quizCard = document.createElement("div");
   quizCard.classList.add("quiz");
+  quizCard.setAttribute("data-quiz-id", userQuiz.quiz);
 
   const quizTitle = document.createElement("div");
   quizTitle.classList.add("quiz__title");
@@ -81,6 +82,8 @@ function generateQuizCard(userQuiz, index) {
   quizStartButton.classList.add("quiz__button--start");
   quizStartButton.textContent = "Începe testul";
 
+  quizStartButton.addEventListener("click", beginQuiz);
+
   const quizDeleteButton = document.createElement("button");
   quizDeleteButton.classList.add("quiz__button--delete");
   quizDeleteButton.textContent = "Șterge testul";
@@ -94,7 +97,6 @@ function generateQuizCard(userQuiz, index) {
   quizCard.appendChild(quizScore);
   quizCard.appendChild(quizButtons);
 
-  quizCard.setAttribute("data-quiz-id", userQuiz.quiz);
   quizzes.insertBefore(quizCard, lastQuizCard);
 }
 
@@ -144,3 +146,23 @@ const renameQuizzesAfterDelete = () => {
     quizList[i].querySelector(".quiz__title").textContent = `Testul ${i + 1}`;
   }
 };
+
+async function beginQuiz(e) {
+  localStorage.removeItem("currentQuiz");
+  const response = await fetch(
+    `http://localhost:8081/quiz?quizId=${e.target.parentElement.parentElement.getAttribute(
+      "data-quiz-id"
+    )}`,
+    {
+      method: "GET",
+      credentials: "include",
+    }
+  );
+  const data = await response.json();
+  if (response.ok) {
+    localStorage.setItem("currentQuiz", JSON.stringify(data));
+    window.location.href = "../quiz-test/quiz-test.html";
+  } else {
+    authStatusCodesCheck(response);
+  }
+}

@@ -45,6 +45,7 @@ router.add("get", "/verifyToken", async (req, res) => {
     authService.verifyAuthorization(req, res, "user");
     res.end(JSON.stringify({ message: "Token is valid" }));
   } catch (err) {
+    console.log(err);
     handleErrors(err, res);
   }
 });

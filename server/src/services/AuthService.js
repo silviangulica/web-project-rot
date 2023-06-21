@@ -52,14 +52,9 @@ const login = async (email, password) => {
   return { user, token };
 };
 
-const verifyToken = (token, res, requiredRole) => {
+const verifyAuthorization = (req, res, requiredRole) => {
+  let token = checkThatTokenIsPresent(req);
   const decoded = jwt.verify(token, secretKey);
-
-  if (decoded.exp < Date.now() / 1000) {
-    console.log("Token expired");
-    throw new TokenInvalidError("Token expired");
-  }
-
   verifyRole(decoded.role, requiredRole);
 
   if (decoded.exp - Date.now() / 1000 < 60 * 30) {
@@ -77,6 +72,8 @@ const verifyToken = (token, res, requiredRole) => {
       ).toUTCString()}; HttpOnly;`
     );
   }
+
+  return decoded.id;
 };
 
 const checkThatTokenIsPresent = (req) => {
@@ -98,10 +95,6 @@ const verifyIfRequestCameFromUser = (req, userId) => {
   }
 };
 
-const verifyAuthorization = (req, res, requiredRole) => {
-  verifyToken(checkThatTokenIsPresent(req), res, requiredRole);
-};
-
 const verifyRole = (role, requiredRole) => {
   if (role === "admin" || role === requiredRole) {
     return;
@@ -111,7 +104,6 @@ const verifyRole = (role, requiredRole) => {
 module.exports = {
   register,
   login,
-  verifyToken,
   checkThatTokenIsPresent,
   verifyIfRequestCameFromUser,
   verifyAuthorization,

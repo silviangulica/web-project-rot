@@ -6,15 +6,24 @@ const { handleErrors } = require("../utils/RequestUtils");
 router.add("get", "/users", async (req, res) => {
   try {
     let result;
+    authService.verifyAuthorization(req, res, "admin");
     if (req.params.id) {
-      authService.verifyAuthorization(req, res, "user");
       result = await userService.findUserById(req.params.id);
     } else {
-      authService.verifyAuthorization(req, res, "admin");
       result = await userService.getUsers();
     }
     console.log(result);
     res.end(JSON.stringify(result));
+  } catch (err) {
+    handleErrors(err, res);
+  }
+});
+
+router.add("get", "/users/me", async (req, res) => {
+  try {
+    let id = authService.verifyAuthorization(req, res, "user");
+    let user = await userService.findUserById(id);
+    res.end(JSON.stringify(user));
   } catch (err) {
     handleErrors(err, res);
   }
@@ -49,5 +58,3 @@ router.add("get", "/users/top-answers", async (req, res) => {
     handleErrors(err, res);
   }
 });
-
-// module.exports = router;

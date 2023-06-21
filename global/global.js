@@ -16,7 +16,7 @@ async function checkIfUserAuthDidNotExpire() {
 }
 
 async function updateUserData(user) {
-  const response = await fetch(`http://localhost:8081/users?id=${user.id}`, {
+  const response = await fetch(`http://localhost:8081/users/me`, {
     method: "GET",
     credentials: "include",
     headers: {
