@@ -11,7 +11,11 @@ const {
 const { getRequestBody } = require("../utils/RequestUtils");
 const { verifyAuthorization } = require("../services/AuthService");
 const { handleErrors } = require("../utils/RequestUtils");
-const { getUserQuiz } = require("../services/UserService");
+const {
+  getUserQuiz,
+  increaseCorrectAnswerStats,
+  increaseWrongAnswerStats,
+} = require("../services/UserService");
 
 router.add("post", "/quiz/create", async (req, res) => {
   try {
@@ -66,6 +70,11 @@ router.add("post", "/quiz/answer", async (req, res) => {
     let questionId = req.params.questionId;
     let answers = JSON.parse(await getRequestBody(req));
     let correct = await verifyAnswers(id, quizId, questionId, answers);
+    if (correct == true) {
+      await increaseCorrectAnswerStats(id);
+    } else {
+      await increaseWrongAnswerStats(id);
+    }
     res.end(JSON.stringify({ correct }));
   } catch (err) {
     console.log(err);

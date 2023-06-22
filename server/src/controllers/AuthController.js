@@ -4,7 +4,7 @@ const authService = require("../services/AuthService");
 const User = require("../models/User");
 const Question = require("../models/Question");
 const QuizSchema = require("../models/Quiz");
-const { userToUserDtoMapper } = require("../../dto/UserDto");
+const { userToUserDtoMapper } = require("../dto/UserDto");
 router.add("post", "/register", async (req, res) => {
   try {
     let body = await getRequestBody(req);

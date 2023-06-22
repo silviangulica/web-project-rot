@@ -120,13 +120,14 @@ main {
   height: auto;
 }
 
-.lessons__categories, .lessons {
+.lessons__categories,
+.lessons {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: flex-start;
   width: 100%;
-  &__back{
+  &__back {
     display: none;
   }
 }
@@ -140,8 +141,8 @@ main {
   border: 1px solid #ccc;
   border-radius: 10px;
   padding: 0.5em;
-  background: #FFFFFF;
-  background: linear-gradient(135deg, #FFFFFF, #ADB0B6);
+  background: #ffffff;
+  background: linear-gradient(135deg, #ffffff, #adb0b6);
   box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.395);
   margin: 1em;
   display: flex;
@@ -198,7 +199,8 @@ main {
     justify-content: space-around;
     width: 100%;
     margin-top: 1em;
-    &-prev-lesson, &-next-lesson {
+    &-prev-lesson,
+    &-next-lesson {
       background-color: #4a82f5;
       color: white;
       padding: 0.5em;
