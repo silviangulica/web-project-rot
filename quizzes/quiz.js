@@ -11,7 +11,7 @@ removeCurrentState();
     generate quiz cards for each quiz in the user's quiz list, otherwise log user out
 */
 (async () => {
-  await checkIfUserAuthDidNotExpire();
+  await updateUserData();
   for (
     let i = 0;
     i < JSON.parse(localStorage.getItem("user")).quizList.length;

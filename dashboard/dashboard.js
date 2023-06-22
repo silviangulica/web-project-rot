@@ -2,7 +2,7 @@ let user;
 const username = document.querySelector(".profile__name");
 let topButtons = document.querySelectorAll(".leaderboard__button");
 let tableRows = document.querySelectorAll("tbody tr");
-
+const card = document.querySelector(".card");
 window.addEventListener("scroll", changeNavBarColor);
 
 (async () => {
@@ -124,8 +124,12 @@ function setLastCompletedQuizScore() {
   lastCompletedQuizCard.querySelector(".card__score").textContent = score;
 }
 
+card.addEventListener("click", (e) => {
+  e.preventDefault();
+  window.location.href = "../quizzes/quiz.html";
+});
 
-// Take the settings 
+// Take the settings
 const settings = document.querySelector(".settings__btn");
 
 settings.addEventListener("click", async (e) => {
