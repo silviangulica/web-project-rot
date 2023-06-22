@@ -1,4 +1,5 @@
 const Lesson = require("../models/Lesson");
+const LawLesson = require("../models/LawLesson");
 
 const getLessons = async () => {
   const lessons = await Lesson.find();
@@ -7,6 +8,11 @@ const getLessons = async () => {
 
 const getLessonById = async (id) => {
   const lesson = await Lesson.findOne({ id }, { _id: 0 });
+  return lesson;
+}
+
+const getLawLessonById = async (id) => {
+  const lesson = await LawLesson.findOne({ id }, { _id: 0 });
   return lesson;
 }
 
@@ -26,5 +32,6 @@ module.exports = {
   getLessons,
   getLessonById,
   updateLessonType,
-  getLessonsByType
+  getLessonsByType,
+  getLawLessonById
 };

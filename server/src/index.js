@@ -18,10 +18,10 @@ async function connect() {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    console.log("Connected successfully!!!");
+    console.log("[" + '\x1b[32m' + 'Info'+  '\x1b[0m' + "]: Connected to database!");
   } catch (error) {
     console.log(error);
-    console.log("Connect failure!!!");
+    console.log("[" + '\x1b[31m' + 'Error'+  '\x1b[0m' + "]: Could not connect to database!");
   }
 }
 

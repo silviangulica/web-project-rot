@@ -9,6 +9,7 @@ router.add('post', '/lessons/', async (req, res) => {
   for (let i = idStart; i <= idEnd; i++) {
     let result = await lessonService.updateLessonType(i, lessonType);
   }
+  console.log("[POST]: \"" + req.url+ "\" responded with = {" + res.statusCode + "}");
   res.end();
 });
 
@@ -17,17 +18,27 @@ router.add('get', "/lessons/type/", async (req, res) => {
   const lessonType = req.params.type;
   const lessons = await lessonService.getLessonsByType(lessonType);
   console.log(lessons, lessonType);
+  console.log("[GET]: \"" + req.url+ "\" responded with = {" + lessons + "}");
   res.end(JSON.stringify(lessons));
 });
 
+// GET: /law-lessons/?id=1
+router.add('get', "/law-lessons/", async (req, res) => {
+  const lessonId = req.params.id;
+  const lesson = await lessonService.getLawLessonById(lessonId);
+  console.log("[GET]: \"" + req.url+ "\" responded with = {" + lesson + "}");
+  res.end(JSON.stringify(lesson));
+});
 
 router.add('get', "/lessons/", async (req, res) => {
   const lessonId = req.params.id;
   const lesson = await lessonService.getLessonById(lessonId);
+  console.log("[GET]: \"" + req.url+ "\" responded with = {" + lesson + "}");
   res.end(JSON.stringify(lesson));
 });
 
 router.add('get', '/lessons', async (req, res) => {
   const lessons = await lessonService.getLessons();
+  console.log("[GET]: \"" + req.url+ "\" responded with = {" + lessons + "}");
   res.end(JSON.stringify(lessons));
 });

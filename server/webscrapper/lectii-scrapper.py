@@ -25,7 +25,10 @@ def generate_lesson_from_url(url):
     print(lesson_title[0].text)
 
     # Descriere lectie
+    lesson_description = dom.xpath('/html/body/div[1]/div/div/div/div[2]/div/div[2]')
+
+    print(lesson_description[0])
     
 
 
-generate_lesson_from_url("https://www.scoalarutiera.ro/indicatoare-si-marcaje/indicatoare-de-avertizare/curba-la-stanga/5")
+generate_lesson_from_url("https://www.scoalarutiera.ro/curs-legislatie/codul-rutier/drumul-public")
