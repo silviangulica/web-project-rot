@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap%27");
 * {
+  text-align: center;
   font-family: "Roboto", sans-serif;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -122,7 +123,8 @@ main {
   width: 10em !important;
 }
 
-.card, .card-lesson {
+.card,
+.card-lesson {
   border: 1px solid #ccc;
   border-radius: 10px;
   padding: 0.5em;
@@ -147,7 +149,8 @@ main {
   border-radius: 10px;
   margin-bottom: 1em;
 }
-.card__title, .card-lesson__title {
+.card__title,
+.card-lesson__title {
   font-size: 1.05em;
   margin-bottom: 0.5em;
 }
