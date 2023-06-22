@@ -49,12 +49,12 @@ cards.forEach((card) => {
   lessons = [];
   let categorie = card.dataset.categorie;
   card.addEventListener("click", () => {
-    fetch(`http://localhost:8081/lessons/type/?type=${categorie}`)
+    fetch(`http://localhost:8081/lessons?type=${categorie}`)
       .then((response) => response.json())
       .then((data) => {
         lessons = data;
         if (lessons.length > 0) {
-          handelLessons(lessons);
+          handleLessons(lessons);
         }
       });
   });
@@ -80,7 +80,7 @@ function revertToCategories() {
   });
 }
 
-function handelLessons(lessons) {
+function handleLessons(lessons) {
   // toata clasa lessons__categories trebuie sa dispara, display none
   let lessons_categories = document.querySelectorAll(".card");
   lessons_categories.forEach((categorie) => {

@@ -55,20 +55,6 @@ const getQuizById = async (quizId) => {
   return foundQuiz;
 };
 
-const startQuizForUser = async (userId, quizId) => {
-  await getQuizById(quizId);
-  return await userService.updateStartTimeForUserQuiz(
-    quizId,
-    userId,
-    Date.now()
-  );
-};
-
-const endQuizForUser = async (userId, quizId) => {
-  await getQuizById(quizId);
-  await userService.updateEndTimeForUserQuiz(quizId, userId, Date.now());
-};
-
 const verifyAnswers = async (userId, quizId, questionId, answers) => {
   let quiz = await getQuizById(quizId);
   quiz = await quiz.populate("questions");
@@ -76,21 +62,10 @@ const verifyAnswers = async (userId, quizId, questionId, answers) => {
   return correct;
 };
 
-const checkIfQuizIsFinished = async (userId, quizId) => {
-  let time = await userService.getQuizTime(userId, quizId);
-  let now = Date.now();
-  console.log((now - time) / (1000 * 60));
-  if ((now - time) / (1000 * 60) > 1) console.log("GATA");
-  else console.log("NU GATA");
-};
-
 module.exports = {
   generateRandomQuiz,
   removeQuiz,
   getQuizById,
   getQuizWithAnswers,
-  startQuizForUser,
-  endQuizForUser,
   verifyAnswers,
-  checkIfQuizIsFinished,
 };

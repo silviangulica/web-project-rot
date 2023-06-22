@@ -40,7 +40,7 @@ The response is the UserQuiz obj which is added to the user's quiz list in local
 */
 generateRandomQuizButton.addEventListener("click", async (e) => {
   e.preventDefault();
-  const response = await fetch(`http://localhost:8081/quiz/create`, {
+  const response = await fetch(`http://localhost:8081/quizzes`, {
     method: "POST",
     credentials: "include",
   });
@@ -114,9 +114,7 @@ async function removeQuiz(e) {
   e.target.parentElement.parentElement.getAttribute("data-quiz-id");
 
   const response = await fetch(
-    `http://localhost:8081/quiz?id=${
-      JSON.parse(localStorage.getItem("user")).id
-    }&quizId=${e.target.parentElement.parentElement.getAttribute(
+    `http://localhost:8081/quizzes?quizId=${e.target.parentElement.parentElement.getAttribute(
       "data-quiz-id"
     )}`,
     {
@@ -156,7 +154,7 @@ const renameQuizzesAfterDelete = () => {
 async function beginQuiz(e) {
   localStorage.removeItem("currentQuiz");
   const response = await fetch(
-    `http://localhost:8081/quiz?quizId=${e.target.parentElement.parentElement.getAttribute(
+    `http://localhost:8081/quizzes?quizId=${e.target.parentElement.parentElement.getAttribute(
       "data-quiz-id"
     )}`,
     {

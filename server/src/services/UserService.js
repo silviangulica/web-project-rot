@@ -66,22 +66,6 @@ const getUserQuiz = async (quizId, userId) => {
   );
 
   return userQuizArray.at(0).quizList.find((q) => q.quiz.equals(quizId));
-
-  // //THIS IS TO FREAKING UPDATE THE SCORE SMH
-  // us = await User.updateOne(
-  //   { _id: userId, "quizList.quiz": "64909b8c1b01e9d0c9600d0d" },
-  //   { $set: { "quizList.$.score": 6 } }
-  // );
-
-  // THIS IS FOR DELETING
-  // us = await User.updateOne(
-  //   { _id: userId },
-  //   {
-  //     $pull: {
-  //       "quizzList.quiz": "64909b8c1b01e9d0c9600d0d",
-  //     },
-  //   }
-  // );
 };
 
 const removeUserQuiz = async (quizId, userId) => {
@@ -125,7 +109,7 @@ const updateScoreForUserQuiz = async (quizId, userId, score) => {
     { $set: { "quizList.$.score": score } }
   );
 };
-const updateTotalScore = async (userId, scoreToAdd) => {
+const increaseTotalScore = async (userId, scoreToAdd) => {
   const user = await User.findById(userId);
   let newScore = user.totalScore + scoreToAdd;
 
@@ -143,15 +127,21 @@ const increaseScoreForUserQuiz = async (quizId, userId, score) => {
 
 const increaseCorrectAnswerStats = async (userId, quizId) => {
   await User.updateOne({ _id: userId }, { $inc: { correctAnswers: 1 } });
-  await updateTotalScore(userId, 1);
+  await increaseTotalScore(userId, 1);
   await increaseScoreForUserQuiz(quizId, userId, 1);
 };
 
 const increaseWrongAnswerStats = async (userId) => {
   await User.updateOne({ _id: userId }, { $inc: { wrongAnswers: 1 } });
-  await updateTotalScore(userId, -1);
+  await increaseTotalScore(userId, -1);
 };
-
+const increasePassedQuizStats = async (userId, quizId) => {
+  let currentScore = (await getUserQuiz(quizId, userId)).score;
+  if (currentScore >= 22) {
+    await User.updateOne({ _id: userId }, { $inc: { quizzesPassed: 1 } });
+    await increaseTotalScore(userId, 30);
+  }
+};
 const getQuizTime = async (userId, quizId) => {
   let document = await User.findOne(
     { _id: userId, "quizList.quiz": quizId },
@@ -159,6 +149,24 @@ const getQuizTime = async (userId, quizId) => {
   );
   return document.quizList[0].startTime;
 };
+
+const startQuizForUser = async (userId, quizId) => {
+  await updateScoreForUserQuiz(quizId, userId, 0);
+  return await updateStartTimeForUserQuiz(quizId, userId, Date.now());
+};
+
+const endQuizForUser = async (userId, quizId) => {
+  await updateEndTimeForUserQuiz(quizId, userId, Date.now());
+  await increasePassedQuizStats(userId, quizId);
+};
+
+const checkIfQuizIsFinished = async (userId, quizId, res) => {
+  let time = await getQuizTime(userId, quizId);
+  let now = Date.now();
+  console.log((now - time) / (1000 * 60));
+  if ((now - time) / (1000 * 60) > 30) res.finished = true;
+};
+
 module.exports = {
   createUser,
   getUsers,
@@ -177,4 +185,8 @@ module.exports = {
   increaseWrongAnswerStats,
   increaseCorrectAnswerStats,
   getQuizTime,
+  startQuizForUser,
+  endQuizForUser,
+  checkIfQuizIsFinished,
+  increasePassedQuizStats,
 };

@@ -36,7 +36,7 @@ let currentState = JSON.parse(localStorage.getItem("currentState"));
     let minutes = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
     let seconds = Math.floor((time % (1000 * 60)) / 1000);
     timer.textContent = `${minutes}:${seconds > 9 ? seconds : "0" + seconds}`;
-    saveState();
+
     if (time < 0) {
       timer.textContent = "0:00";
       submitQuiz();
@@ -68,6 +68,29 @@ answers.forEach((answer) => {
   });
 });
 
+const submitQuiz = async () => {
+  const response = await fetch(
+    `http://localhost:8081/users/quizzes?quizId=${currentQuiz._id}`,
+    {
+      method: "PATCH",
+      credentials: "include",
+      body: JSON.stringify({ action: "end" }),
+    }
+  );
+  const data = await response.json();
+  console.log(data);
+  if (response.ok) {
+    console.log("Quiz submitted");
+    localStorage.removeItem("currentQuiz");
+    localStorage.removeItem("currentState");
+    window.location.href = "../quizzes/quiz.html";
+  } else {
+    authStatusCodesCheck(response);
+    console.log(response);
+    alert("Something went wrong");
+  }
+};
+
 skipButton.addEventListener("click", () => {
   if (currentQuiz.questions.length === 0) {
     submitQuiz();
@@ -79,33 +102,13 @@ skipButton.addEventListener("click", () => {
     currentQuestionIndex = 0;
     updateQuizPage();
   }
+  saveState();
 });
 async function beginQuiz() {
   if (currentState === null) await sendStartQuizRequest();
   else loadState();
   updateQuizPage();
 }
-
-const submitQuiz = async () => {
-  const response = await fetch(
-    `http://localhost:8081/quiz/submit?quizId=${currentQuiz._id}`,
-    {
-      method: "POST",
-      credentials: "include",
-    }
-  );
-  const data = await response.json();
-  console.log(data);
-  if (response.ok) {
-    localStorage.removeItem("currentQuiz");
-    localStorage.removeItem("currentState");
-    window.location.href = "../quizzes/quiz.html";
-  } else {
-    authStatusCodesCheck(response);
-    console.log(response);
-    alert("Something went wrong");
-  }
-};
 
 submitButton.addEventListener("click", async () => {
   let chosenAnswers = [];
@@ -123,10 +126,11 @@ submitButton.addEventListener("click", async () => {
 
 const sendStartQuizRequest = async () => {
   const response = await fetch(
-    `http://localhost:8081/quiz/start?quizId=${currentQuiz._id}`,
+    `http://localhost:8081/users/quizzes?quizId=${currentQuiz._id}`,
     {
-      method: "POST",
+      method: "PATCH",
       credentials: "include",
+      body: JSON.stringify({ action: "start" }),
     }
   );
   const data = await response.json();
@@ -134,6 +138,7 @@ const sendStartQuizRequest = async () => {
   if (response.ok) {
     countDownDate = data.message + 1000 * 60 * 30;
     console.log(countDownDate);
+    saveState();
   } else {
     authStatusCodesCheck(response);
     console.log(response);
@@ -174,9 +179,9 @@ async function sendCurrentQuestionAnswers(chosenAnswers) {
   console.log(currentQuiz._id);
   console.log(currentQuiz.questions[currentQuestionIndex]._id);
   const response = await fetch(
-    `http://localhost:8081/quiz/answer?quizId=${currentQuiz._id}&questionId=${currentQuiz.questions[currentQuestionIndex]._id}`,
+    `http://localhost:8081/users/quizzes/questions?quizId=${currentQuiz._id}&questionId=${currentQuiz.questions[currentQuestionIndex]._id}`,
     {
-      method: "POST",
+      method: "PATCH",
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
@@ -188,12 +193,16 @@ async function sendCurrentQuestionAnswers(chosenAnswers) {
   console.log(data);
 
   if (response.ok) {
+    if (data.finished === true) {
+      submitQuiz();
+    }
     if (data.correct === true) {
       correctAnswersCount++;
     } else {
       wrongAnswersCount++;
     }
     removeQuestion(currentQuestionIndex);
+    saveState();
   } else {
     authStatusCodesCheck(response);
     console.log(response);

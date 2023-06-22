@@ -1,12 +1,13 @@
-const nodemailer = require('nodemailer');
+const nodemailer = require("nodemailer");
+require("dotenv").config();
 
 const transporter = nodemailer.createTransport({
-  host: 'smtp-relay.sendinblue.com',
+  host: "smtp-relay.sendinblue.com",
   port: 587,
   auth: {
-    user: 'webrot7@gmail.com',
-    pass: 'KGShHFWwTfUaMz6N'
-  }
+    user: "webrot7@gmail.com",
+    pass: process.env.SENDINBLUE_PASSWORD,
+  },
 });
 
 const sendMail = (mailObj) => {
@@ -14,9 +15,9 @@ const sendMail = (mailObj) => {
     if (error) {
       console.log(error);
     } else {
-      console.log('Email sent successfully: ' + info.response);
+      console.log("Email sent successfully: " + info.response);
     }
   });
-}
+};
 
 module.exports = sendMail;
