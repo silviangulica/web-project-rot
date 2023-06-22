@@ -39,8 +39,19 @@ const mailOptions = {
 
 // -- Server
 const server = http.createServer((req, res) => {
+  // pentru allow origin
+
+  let origins = [
+    "http://localhost:5500",
+    "http://127.0.0.1:5500",
+  ];
+  let origin = req.headers.origin;
+  if (origins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
+  
   res.setHeader("Content-Type", "application/json");
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:5500");
+  //res.setHeader("Access-Control-Allow-Origin", "http://localhost:5500");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   res.setHeader("Access-Control-Allow-Credentials", "true");

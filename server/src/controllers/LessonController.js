@@ -7,9 +7,7 @@ router.add('post', '/lessons/', async (req, res) => {
   let idEnd = parseInt(req.params.id_end);
   console.log(lessonType, idStart, idEnd);
   for (let i = idStart; i <= idEnd; i++) {
-    console.log(i);
     let result = await lessonService.updateLessonType(i, lessonType);
-    console.log(result);
   }
   res.end();
 });
