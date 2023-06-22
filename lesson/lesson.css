@@ -262,11 +262,14 @@ main {
   }
 }
 @media screen and (max-width: 500px) {
-  .nav {
-    font-size: 11px;
+  .hero {
+    background-position: center 0;
   }
-  .nav__logo {
-    padding-left: 1em;
+  .hero .nav__logo {
+    padding-left: 2.5vw;
+  }
+  .hero .nav__list-item:last-of-type {
+    margin-right: 0;
   }
   .lesson__panel {
     flex-direction: column;

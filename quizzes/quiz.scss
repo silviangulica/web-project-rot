@@ -212,3 +212,20 @@ body {
     background-size: 100% 100%;
   }
 }
+@media screen and (max-width: 500px) {
+  .hero {
+    background-position: center 0;
+    .nav {
+      &__logo {
+        padding-left: $margin-padding-2;
+      }
+      &__list {
+        &-item {
+          &:last-of-type {
+            margin-right: 0;
+          }
+        }
+      }
+    }
+  }
+}

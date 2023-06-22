@@ -190,4 +190,15 @@ body {
   .fundal {
     background-size: 100% 100%;
   }
+}
+@media screen and (max-width: 500px) {
+  .hero {
+    background-position: center 0;
+  }
+  .hero .nav__logo {
+    padding-left: 2.5vw;
+  }
+  .hero .nav__list-item:last-of-type {
+    margin-right: 0;
+  }
 }/*# sourceMappingURL=quiz.css.map */
