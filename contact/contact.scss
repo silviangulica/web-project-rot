@@ -210,3 +210,32 @@ input[type="number"] {
     }
   }
 }
+
+
+#message {
+  resize: none;
+
+  -webkit-appearance: none; // fix for box shadows on iPhones
+
+  height: 5em;
+  border-radius: 1em;
+  border: 1px solid transparent;
+  padding: 10px 1em;
+
+  font-size: 1.1em;
+  font-family: $roboto-font;
+  font-weight: 400;
+  width: 80%;
+
+  outline: none;
+  transition: border-bottom 0.3s;
+
+  margin: 0;
+  transition: border 0.5s ease-in-out;
+  &:focus {
+    border: 1px solid $color-tertiary;
+    transition: border 0.5s ease-in-out;
+    outline: none;
+  }
+  box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.395);
+}
