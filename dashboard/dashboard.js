@@ -4,6 +4,7 @@ let topButtons = document.querySelectorAll(".leaderboard__button");
 let tableRows = document.querySelectorAll("tbody tr");
 
 window.addEventListener("scroll", changeNavBarColor);
+
 (async () => {
   removeCurrentState();
   await updateUserData(JSON.parse(localStorage.getItem("user")));
@@ -122,3 +123,12 @@ function setLastCompletedQuizScore() {
   lastCompletedQuizCard.querySelector(".card__title").textContent = title;
   lastCompletedQuizCard.querySelector(".card__score").textContent = score;
 }
+
+
+// Take the settings 
+const settings = document.querySelector(".settings__btn");
+
+settings.addEventListener("click", async (e) => {
+  e.preventDefault();
+  window.location.href = "../settings/settings.html";
+});

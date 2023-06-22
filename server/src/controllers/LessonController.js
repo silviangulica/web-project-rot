@@ -29,16 +29,3 @@ router.add('get', "/law-lessons/", async (req, res) => {
   console.log("[GET]: \"" + req.url+ "\" responded with = {" + lesson + "}");
   res.end(JSON.stringify(lesson));
 });
-
-router.add('get', "/lessons/", async (req, res) => {
-  const lessonId = req.params.id;
-  const lesson = await lessonService.getLessonById(lessonId);
-  console.log("[GET]: \"" + req.url+ "\" responded with = {" + lesson + "}");
-  res.end(JSON.stringify(lesson));
-});
-
-router.add('get', '/lessons', async (req, res) => {
-  const lessons = await lessonService.getLessons();
-  console.log("[GET]: \"" + req.url+ "\" responded with = {" + lessons + "}");
-  res.end(JSON.stringify(lessons));
-});

@@ -41,8 +41,10 @@ function logUserOut() {
 
 function authStatusCodesCheck(response) {
   if (response.status == 401) logUserOut();
-  else if (response.status == 403)
+  else if (response.status == 403){
     alert("You are not authorized to perform this action");
+    window.location.href = "../dashboard/dashboard.html";
+  }
 }
 
 function removeCurrentState() {
