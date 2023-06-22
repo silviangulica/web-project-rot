@@ -1,3 +1,5 @@
+// Remove current state from local storage if it exists
+removeCurrentState();
 (async () => {
   const response = await checkIfUserAuthDidNotExpire();
 })();

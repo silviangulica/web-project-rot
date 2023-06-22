@@ -76,6 +76,14 @@ const verifyAnswers = async (userId, quizId, questionId, answers) => {
   return correct;
 };
 
+const checkIfQuizIsFinished = async (userId, quizId) => {
+  let time = await userService.getQuizTime(userId, quizId);
+  let now = Date.now();
+  console.log((now - time) / (1000 * 60));
+  if ((now - time) / (1000 * 60) > 1) console.log("GATA");
+  else console.log("NU GATA");
+};
+
 module.exports = {
   generateRandomQuiz,
   removeQuiz,
@@ -84,4 +92,5 @@ module.exports = {
   startQuizForUser,
   endQuizForUser,
   verifyAnswers,
+  checkIfQuizIsFinished,
 };

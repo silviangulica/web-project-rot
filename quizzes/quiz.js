@@ -1,3 +1,15 @@
+const quizzes = document.querySelector(".quizzes");
+const lastQuizCard = document.querySelector(".quiz:last-child");
+const generateRandomQuizButton = document.querySelector(
+  ".quizzes .quiz__button--generate"
+);
+
+// Remove current state from local storage if it exists
+removeCurrentState();
+
+/* On page load, check if user JWT token is still valid and if it is,
+    generate quiz cards for each quiz in the user's quiz list, otherwise log user out
+*/
 (async () => {
   await checkIfUserAuthDidNotExpire();
   for (
@@ -9,6 +21,7 @@
   }
 })();
 
+// Used to change the navbar style when user scrolls down
 function changeNavBarColor() {
   const navbar = document.querySelector(".nav");
 
@@ -21,23 +34,17 @@ function changeNavBarColor() {
 
 window.addEventListener("scroll", changeNavBarColor);
 
-const generateRandomQuizButton = document.querySelector(
-  ".quizzes .quiz__button--generate"
-);
-
+/**  On btn click, a post request is sent to the server
+to generate a random Quiz for this particular user. 
+The response is the UserQuiz obj which is added to the user's quiz list in local storage
+*/
 generateRandomQuizButton.addEventListener("click", async (e) => {
   e.preventDefault();
-  const response = await fetch(
-    `http://localhost:8081/quiz/create?id=${
-      JSON.parse(localStorage.getItem("user")).id
-    }`,
-    {
-      method: "POST",
-      credentials: "include",
-    }
-  );
+  const response = await fetch(`http://localhost:8081/quiz/create`, {
+    method: "POST",
+    credentials: "include",
+  });
   const data = await response.json();
-  console.log(data);
   if (response.ok) {
     generateQuizCard(
       data,
@@ -48,14 +55,14 @@ generateRandomQuizButton.addEventListener("click", async (e) => {
     localStorage.removeItem("user");
     localStorage.setItem("user", JSON.stringify(user));
   } else {
+    authStatusCodesCheck(response);
     console.log(response);
     alert("Something went wrong");
   }
 });
 
-const quizzes = document.querySelector(".quizzes");
-const lastQuizCard = document.querySelector(".quiz:last-child");
-
+/* Generates a quiz card for an user quiz and appends it to the DOM
+ */
 function generateQuizCard(userQuiz, index) {
   console.log(userQuiz);
   const quizCard = document.createElement("div");
@@ -70,6 +77,7 @@ function generateQuizCard(userQuiz, index) {
   quizButtons.classList.add("quiz__buttons");
 
   const quizScore = document.createElement("div");
+
   if (userQuiz.score == 0) {
     quizScore.classList.add("quiz__score", "quiz__score--not-completed");
   } else if (userQuiz.score < 22) {
@@ -78,16 +86,15 @@ function generateQuizCard(userQuiz, index) {
     quizScore.classList.add("quiz__score", "quiz__score--passed");
   }
   quizScore.textContent = `Scorul tău: ${userQuiz.score}/26`;
+
   const quizStartButton = document.createElement("button");
   quizStartButton.classList.add("quiz__button--start");
   quizStartButton.textContent = "Începe testul";
-
   quizStartButton.addEventListener("click", beginQuiz);
 
   const quizDeleteButton = document.createElement("button");
   quizDeleteButton.classList.add("quiz__button--delete");
   quizDeleteButton.textContent = "Șterge testul";
-
   quizDeleteButton.addEventListener("click", removeQuiz);
 
   quizButtons.appendChild(quizStartButton);
@@ -100,8 +107,10 @@ function generateQuizCard(userQuiz, index) {
   quizzes.insertBefore(quizCard, lastQuizCard);
 }
 
+/* Sends a delete request to the server to delete the quiz from the user's quiz list
+  and removes the quiz card from the DOM and localStorage.
+ */
 async function removeQuiz(e) {
-  console.log(e.target.parentElement.parentElement);
   e.target.parentElement.parentElement.getAttribute("data-quiz-id");
 
   const response = await fetch(
@@ -117,25 +126,19 @@ async function removeQuiz(e) {
   );
   const data = await response.json();
   if (response.ok) {
-    e.target.parentElement.parentElement.remove();
     let user = JSON.parse(localStorage.getItem("user"));
-    console.log(user.quizList);
-    console.log(
-      e.target.parentElement.parentElement.getAttribute("data-quiz-id")
-    );
-    // console.log(user.quizList);
     user.quizList = user.quizList.filter((quizEntry) => {
       return (
         quizEntry.quiz !==
         e.target.parentElement.parentElement.getAttribute("data-quiz-id")
       );
     });
-
+    e.target.parentElement.parentElement.remove();
     renameQuizzesAfterDelete();
     localStorage.removeItem("user");
     localStorage.setItem("user", JSON.stringify(user));
-    console.log(data);
   } else {
+    authStatusCodesCheck(response);
     console.log(response);
   }
 }
@@ -147,6 +150,9 @@ const renameQuizzesAfterDelete = () => {
   }
 };
 
+/* Sends a get request to the server to get the quiz data and stores it in local storage.
+ User is redirected to the quiz test page.
+ */
 async function beginQuiz(e) {
   localStorage.removeItem("currentQuiz");
   const response = await fetch(
@@ -158,8 +164,12 @@ async function beginQuiz(e) {
       credentials: "include",
     }
   );
-  const data = await response.json();
+  let data = await response.json();
   if (response.ok) {
+    data.quizTitle =
+      e.target.parentElement.parentElement.querySelector(
+        ".quiz__title"
+      ).textContent;
     localStorage.setItem("currentQuiz", JSON.stringify(data));
     window.location.href = "../quiz-test/quiz-test.html";
   } else {

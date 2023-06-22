@@ -139,13 +139,21 @@ body {
 .quizzes .quiz__button--start:hover, .quizzes .quiz__button--delete:hover, .quizzes .quiz__button--generate:hover {
   transition: all 0.2s ease-in-out;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  background-color: #00b691;
   color: white;
   border-radius: 10px;
   padding: 1em;
 }
 .quizzes .quiz__button--start:active, .quizzes .quiz__button--delete:active, .quizzes .quiz__button--generate:active {
   transform: scale(0.9);
+}
+.quizzes .quiz__button--delete:hover {
+  background-color: rgb(195, 11, 11);
+}
+.quizzes .quiz__button--start:hover {
+  background-color: #00b691;
+}
+.quizzes .quiz__button--generate:hover {
+  background-color: #a53c7d;
 }
 .quizzes .quiz__score {
   border-radius: 1em;

@@ -1,358 +1,298 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lectie</title>
-    <link rel="stylesheet" href="lesson.css" />
-    <script src="lesson.js" defer></script>
-    <link rel="icon" href="../img/nobg-icon.png" />
-  </head>
 
-  <body>
-    <header class="hero">
-      <nav class="nav">
-        <div class="nav__logo">RoT</div>
-        <ul class="nav__list">
-          <li class="nav__list-item">
-            <a href="../dashboard/dashboard.html" class="anchor--not-selected"
-              >Profil</a
-            >
-          </li>
-          <li class="nav__list-item">
-            <a href="../quizzes/quiz.html" class="anchor--not-selected"
-              >Teste</a
-            >
-          </li>
-          <li class="nav__list-item">
-            <a href="../lessons/lessons.html" class="anchor--not-selected"
-              >Lecții</a
-            >
-          </li>
-        </ul>
-      </nav>
-      <div class="hero__display"></div>
-    </header>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lectie</title>
+  <link rel="stylesheet" href="lesson.css" />
+  <script src="/global/global.js" defer></script>
+  <script src="lesson.js" defer></script>
+  <link rel="icon" href="../img/nobg-icon.png" />
+</head>
 
-    <main>
-      <div class="lessons__categories">
-        <div class="card card__avertizare" data-categorie="avertizare">
-          <img
-            src="https://www.scoalarutiera.ro/upload/img/categories/img/indicatoare-de-avertizare.jpg"
-            alt="Semnalizatoare Avertizare"
-            class="card__img"
-          />
-          <div class="card__title">Indicatoarele de avertizare</div>
-          <div class="card__content">
-            Indicatoarele de avertizare au rolul de a atrage atenția
-            conducătorilor de vehicule asupra unor pericole existente pe drum,
-            precum și asupra unor restricții sau interdicții de circulație.
-          </div>
-        </div>
-        <div class="card card__prioritate" data-categorie="prioritate">
-          <img
-            src="https://www.scoalarutiera.ro/upload/img/categories/img/indicatoare-de-prioritate.jpg"
-            alt="Semnalizatoare Prioritate"
-            class="card__img"
-          />
-          <div class="card__title">Indicatoarele de prioritate</div>
-          <div class="card__content">
-            Indicatoarele de prioritate rutiere sunt semne sau simboluri
-            utilizate pe drumurile publice pentru a indica nivelul de prioritate
-            acordat vehiculelor sau pietonilor în intersecții sau alte situații
-            de circulație.
-          </div>
-        </div>
+<body>
+  <header class="hero">
+    <nav class="nav">
+      <div class="nav__logo">RoT</div>
+      <ul class="nav__list">
+        <li class="nav__list-item">
+          <a href="../dashboard/dashboard.html" class="anchor--not-selected">Profil</a>
+        </li>
+        <li class="nav__list-item">
+          <a href="../quizzes/quiz.html" class="anchor--not-selected">Teste</a>
+        </li>
+        <li class="nav__list-item">
+          <a href="../lessons/lessons.html" class="anchor--not-selected">Lecții</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="hero__display"></div>
+  </header>
 
-        <div class="card card__interzicere" data-categorie="interzicere">
-          <img
-            src="https://www.scoalarutiera.ro/upload/img/categories/img/indicatoare-de-interzicere-sau-restrictie.jpg"
-            alt="Semnalizatoare Prioritate"
-            class="card__img"
-          />
-          <div class="card__title">
-            Indicatoare de interzicere sau restrictie
-          </div>
-          <div class="card__content">
-            Indicatoarele de interzicere sau restricție au rolul de a interzice
-            sau restricționa anumite manevre sau anumite categorii de
-            participanți la trafic.
-          </div>
+  <main>
+    <div class="lessons__categories">
+      <div class="card card__avertizare" data-categorie="avertizare">
+        <img src="https://www.scoalarutiera.ro/upload/img/categories/img/indicatoare-de-avertizare.jpg"
+          alt="Semnalizatoare Avertizare" class="card__img" />
+        <div class="card__title">Indicatoarele de avertizare</div>
+        <div class="card__content">
+          Indicatoarele de avertizare au rolul de a atrage atenția
+          conducătorilor de vehicule asupra unor pericole existente pe drum,
+          precum și asupra unor restricții sau interdicții de circulație.
         </div>
-
-        <div class="card card__obligare" data-categorie="obligare">
-          <img
-            src="https://www.scoalarutiera.ro/upload/img/categories/img/indicatoare-de-obligare.jpg"
-            alt="Indicatoare obligare"
-            class="card__img"
-          />
-          <div class="card__title">Indicatoare de obligare</div>
-          <div class="card__content">
-            Indicatoarele de obligare au rolul de a obliga conducătorii de
-            vehicule să respecte anumite reguli de circulație. Acestea pot fi
-            semne sau simboluri. <br />
-            <br />
-            <br />
-          </div>
-        </div>
-
-        <div class="card card__orientare" data-categorie="orientare">
-          <img
-            src="https://www.scoalarutiera.ro/upload/img/categories/img/indicatoare-de-orientare.jpg"
-            alt="Indicatoare orientare"
-            class="card__img"
-          />
-          <div class="card__title">Indicatoare de orientare</div>
-          <div class="card__content">
-            Indicatoarele de orientare au rolul de a informa conducătorii de
-            vehicule asupra direcției de deplasare. Acestea pot fi semne sau
-            simboluri.
-          </div>
-        </div>
-        <div class="card card__informare" data-categorie="informare">
-          <img
-            src="https://www.scoalarutiera.ro/upload/img/categories/img/indicatoare-de-informare.jpg"
-            alt="Indicatoare informare"
-            class="card__img"
-          />
-          <div class="card__title">Indicatoare de informare</div>
-          <div class="card__content">
-            Indicatoarele de informare au rolul de a informa conducătorii de
-            vehicule asupra unor obiective de interes public.
-          </div>
-        </div>
-
-        <div class="card card__turistica" data-categorie="informare_turistica">
-          <img
-            src="https://www.scoalarutiera.ro/upload/img/categories/img/indicatoare-de-informare-turistica.jpg"
-            alt="Indicatoare informare"
-            class="card__img"
-          />
-          <div class="card__title">Indicatoare de informare turistica</div>
-          <div class="card__content">
-            Indicatoarele de informare turistica au rolul de a informa
-            conducătorii de vehicule asupra unor obiective turistice.
-          </div>
-        </div>
-        <div class="card card__aditionale" data-categorie="panouri">
-          <img
-            src="https://www.scoalarutiera.ro/upload/img/categories/img/panouri-aditionale.jpg"
-            alt="Panouri aditionale"
-            class="card__img"
-          />
-          <div class="card__title">Panouri aditionale</div>
-          <div class="card__content">
-            Panourile aditionale au rolul de a completa indicatoarele rutiere.
-          </div>
-        </div>
-
-        <div class="card card__semafoare-dirijare" data-categorie="semafoare">
-          <img
-            src="https://www.scoalarutiera.ro/upload/img/categories/img/semafoare-pentru-dirijarea-circulatiei.jpg"
-            alt="Panouri aditionale"
-            class="card__img"
-          />
-          <div class="card__title">Semafoare pentru dirijarea circulației</div>
-          <div class="card__content">
-            Semafoarele pentru dirijarea circulației au rolul de a dirija
-            circulația rutieră în intersecții sau în alte situații de
-            circulație.
-          </div>
-        </div>
-        <div class="card card__trecere-ferata" data-categorie="calea_ferata">
-          <img
-            src="https://www.scoalarutiera.ro/upload/img/categories/img/semnale-luminoase-la-trecerile-la-nivel-cu-calea-ferata.jpg"
-            alt="Panouri aditionale"
-            class="card__img"
-          />
-          <div class="card__title">
-            Semnale luminoase la trecerile la nivel de cale ferată
-          </div>
-          <div class="card__content">
-            Semnale luminoase la trecerile la nivel de cale ferată au rolul de a
-            dirija circulația rutieră în intersecții sau în alte situații de
-            circulație.
-          </div>
-        </div>
-
-        <div class="card card__luminoase-dirijare" data-categorie="dispozitive_luminoase">
-          <img
-            src="https://www.scoalarutiera.ro/upload/img/categories/img/dispozitive-luminoase-pentru-dirijarea-circulatiei-pe-benzi.jpg"
-            alt="Panouri aditionale"
-            class="card__img"
-          />
-          <div class="card__title">
-            Dispozitive luminoase pentru dirijarea circulației pe benzi
-          </div>
-          <div class="card__content">
-            Dispozitivele luminoase pentru dirijarea circulației pe benzi au
-            rolul de a dirija circulația rutieră în intersecții sau în alte
-            situații de circulație.
-          </div>
-        </div>
-        <div class="card card__longitudinale" data-categorie="marcaje_longitudinale">
-          <img
-            src="https://www.scoalarutiera.ro/upload/img/categories/img/longitudinale.jpg"
-            alt="Panouri aditionale"
-            class="card__img"
-          />
-          <div class="card__title">
-            Marcaje longitudinale
-          </div>
-          <div class="card__content">
-            Marcajele longitudinale au rolul de a dirija circulația rutieră în
-            intersecții sau în alte situații de circulație.
-          </div>
-        </div>
-
-        <div class="card card__transversale" data-categorie="marcaje_transversale">
-          <img
-            src="https://www.scoalarutiera.ro/upload/img/categories/img/transversale.jpg"
-            alt="Panouri aditionale"
-            class="card__img"
-          />
-          <div class="card__title">
-            Marcaje transversale
-          </div>
-          <div class="card__content">
-            Marcajele transversale au rolul de a dirija circulația rutieră în
-            intersecții sau în alte situații de circulație.
-          </div>
-        </div>
-        <div class="card card__diverse" data-categorie="marcaje_diverse">
-          <img
-            src="https://www.scoalarutiera.ro/upload/img/categories/img/diverse.jpg"
-            alt="Panouri aditionale"
-            class="card__img"
-          />
-          <div class="card__title">
-            Marcaje diverse
-          </div>
-          <div class="card__content">
-            Marcajele diverse au rolul de a dirija circulația rutieră în
-            intersecții sau în alte situații de circulație.
-          </div>
-        </div>
-
-        <div class="card card__marcaje-temporare" data-categorie="temporare">
-          <img
-            src="https://www.scoalarutiera.ro/upload/img/categories/img/marcaje-temporare-pentru-semnalizarea-lucrarilor-in-zona-drumului-public.jpg"
-            alt="Panouri aditionale"
-            class="card__img"
-          />
-          <div class="card__title">
-            Marcaje temporare pentru semnalizarea lucrărilor în zona drumului
-          </div>
-          <div class="card__content">
-            Marcajele temporare pentru semnalizarea lucrărilor în zona drumului
-            au rolul de a dirija circulația rutieră în intersecții sau în alte
-            situații de circulație.
-          </div>
-        </div>
-        <div class="card card__marcaje-laterale" data-categorie="marcaje_laterale">
-          <img
-            src="https://www.scoalarutiera.ro/upload/img/categories/img/laterale.jpg"
-            alt="Panouri aditionale"
-            class="card__img"
-          />
-          <div class="card__title">
-            Marcaje laterale
-          </div>
-          <div class="card__content">
-            Marcajele laterale au rolul de a dirija circulația rutieră în
-            intersecții sau în alte situații de circulație.
-          </div>
-        </div>
-
-        <div class="card card__indicatoare-temporare" data-categorie="rutiere_temporare">
-          <img
-            src="https://www.scoalarutiera.ro/upload/img/categories/img/indicatoare-rutiere-temporare.jpg"
-            alt="Panouri aditionale"
-            class="card__img"
-          />
-          <div class="card__title">
-            Indicatoare rutiere temporare
-          </div>
-          <div class="card__content">
-            Indicatoarele rutiere temporare au rolul de a dirija circulația
-            rutieră în intersecții sau în alte situații de circulație.
-          </div>
-        </div>
-        <div class="card card__semnalizare-lucrari" data-categorie="lucrari_drumuri">
-          <img
-            src="https://www.scoalarutiera.ro/upload/img/categories/img/mijloace-de-semnalizare-a-lucrarilor.jpg"
-            alt="Panouri aditionale"
-            class="card__img"
-          />
-          <div class="card__title">
-            Mijloace de semnalizare a lucrărilor
-          </div>
-          <div class="card__content">
-            Mijloacele de semnalizare a lucrărilor au rolul de a dirija
-            circulația rutieră în intersecții sau în alte situații de
-            circulație.
-          </div>
-        </div>
-
-        <div class="card card__indicator-kilometri" data-categorie="kilometric">
-          <img
-            src="https://www.scoalarutiera.ro/upload/img/categories/img/indicator-kilometric.jpg"
-            alt="Panouri aditionale"
-            class="card__img"
-          />
-          <div class="card__title">
-            Indicator kilometric
-          </div>
-          <div class="card__content">
-            Indicatorul kilometric are rolul de a indica distanța față de
-            punctul de reper al drumului.
-          </div>
-        </div>
-        <div class="card card__indicator-hectometric" data-categorie="hectometric">
-          <img
-            src="https://www.scoalarutiera.ro/upload/img/categories/img/indicator-hectometric.jpg"
-            alt="Panouri aditionale"
-            class="card__img"
-          />
-          <div class="card__title">
-            Indicator hectometric
-          </div>
-          <div class="card__content">
-            Indicatorul hectometric are rolul de a indica distanța față de
-            punctul de reper al drumului.
-          </div>
+      </div>
+      <div class="card card__prioritate" data-categorie="prioritate">
+        <img src="https://www.scoalarutiera.ro/upload/img/categories/img/indicatoare-de-prioritate.jpg"
+          alt="Semnalizatoare Prioritate" class="card__img" />
+        <div class="card__title">Indicatoarele de prioritate</div>
+        <div class="card__content">
+          Indicatoarele de prioritate rutiere sunt semne sau simboluri
+          utilizate pe drumurile publice pentru a indica nivelul de prioritate
+          acordat vehiculelor sau pietonilor în intersecții sau alte situații
+          de circulație.
         </div>
       </div>
 
-      <button class="lessons__back">Înapoi la categorii</button> <br /> <br />
-      <div class="lessons"></div>
-
-      <div class="lesson">
-        <div class="lesson__title">Curba la stanga</div>
-        <div class="lesson__content">
-          <div class="lesson__content-text">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab,
-            consequuntur ex. Culpa aspernatur quod ab dignissimos eveniet?
-            Quaerat obcaecati sequi corporis repellat sapiente quam sint.
-            Dolorem tenetur ex labore corporis! Lorem ipsum dolor sit amet
-            consectetur adipisicing elit. Voluptatibus consequuntur maiores, hic
-            numquam eum dolor dolorem sed fuga magnam. Sint doloremque fuga vel.
-            Aut veniam quo voluptatem eaque quas commodi? Lorem ipsum dolor sit
-            amet consectetur adipisicing elit. Ad eum distinctio cum eligendi
-            consectetur. Ab, molestiae vero sint repellat aliquam provident
-            atque quisquam? Fugiat cumque exercitationem quisquam recusandae cum
-            repudiandae.
-          </div>
-          <div class="lesson__image">
-            <img src="" alt="doesn exist" class="lesson__image--visible" />
-          </div>
+      <div class="card card__interzicere" data-categorie="interzicere">
+        <img src="https://www.scoalarutiera.ro/upload/img/categories/img/indicatoare-de-interzicere-sau-restrictie.jpg"
+          alt="Semnalizatoare Prioritate" class="card__img" />
+        <div class="card__title">
+          Indicatoare de interzicere sau restrictie
         </div>
-        <div class="lesson__panel">
-          <div class="lesson__panel-prev-lesson">Previous Lesson</div>
-          <div class="lesson__panel-next-lesson">Next Lesson</div>
+        <div class="card__content">
+          Indicatoarele de interzicere sau restricție au rolul de a interzice
+          sau restricționa anumite manevre sau anumite categorii de
+          participanți la trafic.
         </div>
       </div>
-    </main>
-  </body>
+
+      <div class="card card__obligare" data-categorie="obligare">
+        <img src="https://www.scoalarutiera.ro/upload/img/categories/img/indicatoare-de-obligare.jpg"
+          alt="Indicatoare obligare" class="card__img" />
+        <div class="card__title">Indicatoare de obligare</div>
+        <div class="card__content">
+          Indicatoarele de obligare au rolul de a obliga conducătorii de
+          vehicule să respecte anumite reguli de circulație. Acestea pot fi
+          semne sau simboluri. <br />
+          <br />
+          <br />
+        </div>
+      </div>
+
+      <div class="card card__orientare" data-categorie="orientare">
+        <img src="https://www.scoalarutiera.ro/upload/img/categories/img/indicatoare-de-orientare.jpg"
+          alt="Indicatoare orientare" class="card__img" />
+        <div class="card__title">Indicatoare de orientare</div>
+        <div class="card__content">
+          Indicatoarele de orientare au rolul de a informa conducătorii de
+          vehicule asupra direcției de deplasare. Acestea pot fi semne sau
+          simboluri.
+        </div>
+      </div>
+      <div class="card card__informare" data-categorie="informare">
+        <img src="https://www.scoalarutiera.ro/upload/img/categories/img/indicatoare-de-informare.jpg"
+          alt="Indicatoare informare" class="card__img" />
+        <div class="card__title">Indicatoare de informare</div>
+        <div class="card__content">
+          Indicatoarele de informare au rolul de a informa conducătorii de
+          vehicule asupra unor obiective de interes public.
+        </div>
+      </div>
+
+      <div class="card card__turistica" data-categorie="informare_turistica">
+        <img src="https://www.scoalarutiera.ro/upload/img/categories/img/indicatoare-de-informare-turistica.jpg"
+          alt="Indicatoare informare" class="card__img" />
+        <div class="card__title">Indicatoare de informare turistica</div>
+        <div class="card__content">
+          Indicatoarele de informare turistica au rolul de a informa
+          conducătorii de vehicule asupra unor obiective turistice.
+        </div>
+      </div>
+      <div class="card card__aditionale" data-categorie="panouri">
+        <img src="https://www.scoalarutiera.ro/upload/img/categories/img/panouri-aditionale.jpg"
+          alt="Panouri aditionale" class="card__img" />
+        <div class="card__title">Panouri aditionale</div>
+        <div class="card__content">
+          Panourile aditionale au rolul de a completa indicatoarele rutiere.
+        </div>
+      </div>
+
+      <div class="card card__semafoare-dirijare" data-categorie="semafoare">
+        <img src="https://www.scoalarutiera.ro/upload/img/categories/img/semafoare-pentru-dirijarea-circulatiei.jpg"
+          alt="Panouri aditionale" class="card__img" />
+        <div class="card__title">Semafoare pentru dirijarea circulației</div>
+        <div class="card__content">
+          Semafoarele pentru dirijarea circulației au rolul de a dirija
+          circulația rutieră în intersecții sau în alte situații de
+          circulație.
+        </div>
+      </div>
+      <div class="card card__trecere-ferata" data-categorie="calea_ferata">
+        <img
+          src="https://www.scoalarutiera.ro/upload/img/categories/img/semnale-luminoase-la-trecerile-la-nivel-cu-calea-ferata.jpg"
+          alt="Panouri aditionale" class="card__img" />
+        <div class="card__title">
+          Semnale luminoase la trecerile la nivel de cale ferată
+        </div>
+        <div class="card__content">
+          Semnale luminoase la trecerile la nivel de cale ferată au rolul de a
+          dirija circulația rutieră în intersecții sau în alte situații de
+          circulație.
+        </div>
+      </div>
+
+      <div class="card card__luminoase-dirijare" data-categorie="dispozitive_luminoase">
+        <img
+          src="https://www.scoalarutiera.ro/upload/img/categories/img/dispozitive-luminoase-pentru-dirijarea-circulatiei-pe-benzi.jpg"
+          alt="Panouri aditionale" class="card__img" />
+        <div class="card__title">
+          Dispozitive luminoase pentru dirijarea circulației pe benzi
+        </div>
+        <div class="card__content">
+          Dispozitivele luminoase pentru dirijarea circulației pe benzi au
+          rolul de a dirija circulația rutieră în intersecții sau în alte
+          situații de circulație.
+        </div>
+      </div>
+      <div class="card card__longitudinale" data-categorie="marcaje_longitudinale">
+        <img src="https://www.scoalarutiera.ro/upload/img/categories/img/longitudinale.jpg" alt="Panouri aditionale"
+          class="card__img" />
+        <div class="card__title">
+          Marcaje longitudinale
+        </div>
+        <div class="card__content">
+          Marcajele longitudinale au rolul de a dirija circulația rutieră în
+          intersecții sau în alte situații de circulație.
+        </div>
+      </div>
+
+      <div class="card card__transversale" data-categorie="marcaje_transversale">
+        <img src="https://www.scoalarutiera.ro/upload/img/categories/img/transversale.jpg" alt="Panouri aditionale"
+          class="card__img" />
+        <div class="card__title">
+          Marcaje transversale
+        </div>
+        <div class="card__content">
+          Marcajele transversale au rolul de a dirija circulația rutieră în
+          intersecții sau în alte situații de circulație.
+        </div>
+      </div>
+      <div class="card card__diverse" data-categorie="marcaje_diverse">
+        <img src="https://www.scoalarutiera.ro/upload/img/categories/img/diverse.jpg" alt="Panouri aditionale"
+          class="card__img" />
+        <div class="card__title">
+          Marcaje diverse
+        </div>
+        <div class="card__content">
+          Marcajele diverse au rolul de a dirija circulația rutieră în
+          intersecții sau în alte situații de circulație.
+        </div>
+      </div>
+
+      <div class="card card__marcaje-temporare" data-categorie="temporare">
+        <img
+          src="https://www.scoalarutiera.ro/upload/img/categories/img/marcaje-temporare-pentru-semnalizarea-lucrarilor-in-zona-drumului-public.jpg"
+          alt="Panouri aditionale" class="card__img" />
+        <div class="card__title">
+          Marcaje temporare pentru semnalizarea lucrărilor în zona drumului
+        </div>
+        <div class="card__content">
+          Marcajele temporare pentru semnalizarea lucrărilor în zona drumului
+          au rolul de a dirija circulația rutieră în intersecții sau în alte
+          situații de circulație.
+        </div>
+      </div>
+      <div class="card card__marcaje-laterale" data-categorie="marcaje_laterale">
+        <img src="https://www.scoalarutiera.ro/upload/img/categories/img/laterale.jpg" alt="Panouri aditionale"
+          class="card__img" />
+        <div class="card__title">
+          Marcaje laterale
+        </div>
+        <div class="card__content">
+          Marcajele laterale au rolul de a dirija circulația rutieră în
+          intersecții sau în alte situații de circulație.
+        </div>
+      </div>
+
+      <div class="card card__indicatoare-temporare" data-categorie="rutiere_temporare">
+        <img src="https://www.scoalarutiera.ro/upload/img/categories/img/indicatoare-rutiere-temporare.jpg"
+          alt="Panouri aditionale" class="card__img" />
+        <div class="card__title">
+          Indicatoare rutiere temporare
+        </div>
+        <div class="card__content">
+          Indicatoarele rutiere temporare au rolul de a dirija circulația
+          rutieră în intersecții sau în alte situații de circulație.
+        </div>
+      </div>
+      <div class="card card__semnalizare-lucrari" data-categorie="lucrari_drumuri">
+        <img src="https://www.scoalarutiera.ro/upload/img/categories/img/mijloace-de-semnalizare-a-lucrarilor.jpg"
+          alt="Panouri aditionale" class="card__img" />
+        <div class="card__title">
+          Mijloace de semnalizare a lucrărilor
+        </div>
+        <div class="card__content">
+          Mijloacele de semnalizare a lucrărilor au rolul de a dirija
+          circulația rutieră în intersecții sau în alte situații de
+          circulație.
+        </div>
+      </div>
+
+      <div class="card card__indicator-kilometri" data-categorie="kilometric">
+        <img src="https://www.scoalarutiera.ro/upload/img/categories/img/indicator-kilometric.jpg"
+          alt="Panouri aditionale" class="card__img" />
+        <div class="card__title">
+          Indicator kilometric
+        </div>
+        <div class="card__content">
+          Indicatorul kilometric are rolul de a indica distanța față de
+          punctul de reper al drumului.
+        </div>
+      </div>
+      <div class="card card__indicator-hectometric" data-categorie="hectometric">
+        <img src="https://www.scoalarutiera.ro/upload/img/categories/img/indicator-hectometric.jpg"
+          alt="Panouri aditionale" class="card__img" />
+        <div class="card__title">
+          Indicator hectometric
+        </div>
+        <div class="card__content">
+          Indicatorul hectometric are rolul de a indica distanța față de
+          punctul de reper al drumului.
+        </div>
+      </div>
+    </div>
+
+    <button class="lessons__back">Înapoi la categorii</button> <br /> <br />
+    <div class="lessons"></div>
+
+    <div class="lesson">
+      <div class="lesson__title">Curba la stanga</div>
+      <div class="lesson__content">
+        <div class="lesson__content-text">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab,
+          consequuntur ex. Culpa aspernatur quod ab dignissimos eveniet?
+          Quaerat obcaecati sequi corporis repellat sapiente quam sint.
+          Dolorem tenetur ex labore corporis! Lorem ipsum dolor sit amet
+          consectetur adipisicing elit. Voluptatibus consequuntur maiores, hic
+          numquam eum dolor dolorem sed fuga magnam. Sint doloremque fuga vel.
+          Aut veniam quo voluptatem eaque quas commodi? Lorem ipsum dolor sit
+          amet consectetur adipisicing elit. Ad eum distinctio cum eligendi
+          consectetur. Ab, molestiae vero sint repellat aliquam provident
+          atque quisquam? Fugiat cumque exercitationem quisquam recusandae cum
+          repudiandae.
+        </div>
+        <div class="lesson__image">
+          <img src="" alt="doesn exist" class="lesson__image--visible" />
+        </div>
+      </div>
+      <div class="lesson__panel">
+        <div class="lesson__panel-prev-lesson">Previous Lesson</div>
+        <div class="lesson__panel-next-lesson">Next Lesson</div>
+      </div>
+    </div>
+  </main>
+</body>
+
 </html>

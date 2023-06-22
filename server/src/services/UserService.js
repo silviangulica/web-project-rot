@@ -125,17 +125,6 @@ const updateScoreForUserQuiz = async (quizId, userId, score) => {
     { $set: { "quizList.$.score": score } }
   );
 };
-
-const increaseCorrectAnswerStats = async (userId) => {
-  await User.updateOne({ _id: userId }, { $inc: { correctAnswers: 1 } });
-  await updateTotalScore(userId, 1);
-};
-
-const increaseWrongAnswerStats = async (userId) => {
-  await User.updateOne({ _id: userId }, { $inc: { wrongAnswers: 1 } });
-  await updateTotalScore(userId, -1);
-};
-
 const updateTotalScore = async (userId, scoreToAdd) => {
   const user = await User.findById(userId);
   let newScore = user.totalScore + scoreToAdd;
@@ -144,6 +133,31 @@ const updateTotalScore = async (userId, scoreToAdd) => {
     newScore = 0;
   }
   await User.updateOne({ _id: userId }, { totalScore: newScore });
+};
+const increaseScoreForUserQuiz = async (quizId, userId, score) => {
+  await User.updateOne(
+    { _id: userId, "quizList.quiz": quizId },
+    { $inc: { "quizList.$.score": score } }
+  );
+};
+
+const increaseCorrectAnswerStats = async (userId, quizId) => {
+  await User.updateOne({ _id: userId }, { $inc: { correctAnswers: 1 } });
+  await updateTotalScore(userId, 1);
+  await increaseScoreForUserQuiz(quizId, userId, 1);
+};
+
+const increaseWrongAnswerStats = async (userId) => {
+  await User.updateOne({ _id: userId }, { $inc: { wrongAnswers: 1 } });
+  await updateTotalScore(userId, -1);
+};
+
+const getQuizTime = async (userId, quizId) => {
+  let document = await User.findOne(
+    { _id: userId, "quizList.quiz": quizId },
+    { "quizList.$": 1, _id: 0 }
+  );
+  return document.quizList[0].startTime;
 };
 module.exports = {
   createUser,
@@ -162,4 +176,5 @@ module.exports = {
   updateScoreForUserQuiz,
   increaseWrongAnswerStats,
   increaseCorrectAnswerStats,
+  getQuizTime,
 };

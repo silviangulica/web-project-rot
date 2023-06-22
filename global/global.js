@@ -44,3 +44,7 @@ function authStatusCodesCheck(response) {
   else if (response.status == 403)
     alert("You are not authorized to perform this action");
 }
+
+function removeCurrentState() {
+  localStorage.removeItem("currentState");
+}

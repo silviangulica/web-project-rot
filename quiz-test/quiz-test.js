@@ -14,27 +14,29 @@ const submitButton = document.querySelector(".quiz__submit-btn");
 const image = document.querySelector(".quiz__image img");
 const timer = document.querySelector(".quiz__stat-time #remaining-time");
 const quizTitle = document.querySelector(".quiz__title");
+quizTitle.textContent = currentQuiz.quizTitle;
 const quizQuestion = document.querySelector(".quiz__question-text");
 const quizAnswers = document.querySelectorAll(".quiz__answer-btn");
 let countDownDate;
 let currentQuestionIndex = 0;
 let correctAnswersCount = 0;
 let wrongAnswersCount = 0;
-const currentState = JSON.parse(localStorage.getItem("currentState"));
+
+let currentState = JSON.parse(localStorage.getItem("currentState"));
+
 (async () => {
   await checkIfUserAuthDidNotExpire();
   if (currentQuiz == null) {
     window.location.href = "../quizzes/quiz.html";
   }
-  if (currentState === null) beginQuiz();
-
+  beginQuiz();
   setInterval(() => {
     let now = new Date().getTime();
     let time = countDownDate - now;
     let minutes = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
     let seconds = Math.floor((time % (1000 * 60)) / 1000);
     timer.textContent = `${minutes}:${seconds > 9 ? seconds : "0" + seconds}`;
-
+    saveState();
     if (time < 0) {
       timer.textContent = "0:00";
       submitQuiz();
@@ -67,23 +69,42 @@ answers.forEach((answer) => {
 });
 
 skipButton.addEventListener("click", () => {
+  if (currentQuiz.questions.length === 0) {
+    submitQuiz();
+  }
   if (currentQuestionIndex < currentQuiz.questions.length - 1) {
     currentQuestionIndex++;
     updateQuizPage();
-  } else if (currentQuiz.questions.length >= 1) {
+  } else {
     currentQuestionIndex = 0;
     updateQuizPage();
-  } else {
-    skipButton.disabled = true;
   }
 });
 async function beginQuiz() {
-  await sendStartQuizRequest();
+  if (currentState === null) await sendStartQuizRequest();
+  else loadState();
   updateQuizPage();
 }
 
 const submitQuiz = async () => {
-  console.log("OK");
+  const response = await fetch(
+    `http://localhost:8081/quiz/submit?quizId=${currentQuiz._id}`,
+    {
+      method: "POST",
+      credentials: "include",
+    }
+  );
+  const data = await response.json();
+  console.log(data);
+  if (response.ok) {
+    localStorage.removeItem("currentQuiz");
+    localStorage.removeItem("currentState");
+    window.location.href = "../quizzes/quiz.html";
+  } else {
+    authStatusCodesCheck(response);
+    console.log(response);
+    alert("Something went wrong");
+  }
 };
 
 submitButton.addEventListener("click", async () => {
@@ -95,9 +116,8 @@ submitButton.addEventListener("click", async () => {
       );
     }
   });
-
-  await sendCurrentQuestionAnswers(chosenAnswers);
   if (chosenAnswers.length === 0) return;
+  await sendCurrentQuestionAnswers(chosenAnswers);
   skipButton.dispatchEvent(new Event("click"));
 });
 
@@ -122,10 +142,11 @@ const sendStartQuizRequest = async () => {
 };
 
 function updateQuizPage() {
+  loadQuestion(currentQuestionIndex);
   unansweredQuestionsText.textContent = currentQuiz.questions.length;
   correctAnswersText.textContent = correctAnswersCount;
   wrongAnswersText.textContent = wrongAnswersCount;
-  loadQuestion(currentQuestionIndex);
+
   answers.forEach((answer) => {
     answer.classList.remove("quiz__answer-btn--chosen");
     answer.classList.add("quiz__answer-btn--not-chosen");
@@ -133,7 +154,7 @@ function updateQuizPage() {
 }
 
 function loadQuestion(index) {
-  quizTitle.textContent = "Întrebarea " + (index + 1);
+  submitButton.disabled = false;
   quizQuestion.textContent = currentQuiz.questions[index].question;
   console.log(currentQuiz.questions[index]);
   if (currentQuiz.questions[index].image_url === "none") {
@@ -149,6 +170,8 @@ function loadQuestion(index) {
 }
 
 async function sendCurrentQuestionAnswers(chosenAnswers) {
+  submitButton.disabled = true;
+  console.log(currentQuiz._id);
   console.log(currentQuiz.questions[currentQuestionIndex]._id);
   const response = await fetch(
     `http://localhost:8081/quiz/answer?quizId=${currentQuiz._id}&questionId=${currentQuiz.questions[currentQuestionIndex]._id}`,
@@ -180,4 +203,31 @@ async function sendCurrentQuestionAnswers(chosenAnswers) {
 
 function removeQuestion(currentQuestionIndex) {
   currentQuiz.questions.splice(currentQuestionIndex, 1);
+
+  if (currentQuiz.questions.length === 0) {
+    skipButton.disabled = true;
+    skipButton.style.display = "none";
+  }
+}
+
+function loadState() {
+  if (currentState !== null) {
+    countDownDate = currentState.countDownDate;
+    currentQuestionIndex = currentState.currentQuestionIndex;
+    correctAnswersCount = currentState.correctAnswersCount;
+    wrongAnswersCount = currentState.wrongAnswersCount;
+    currentQuiz = currentState.currentQuiz;
+  }
+}
+
+function saveState() {
+  localStorage.removeItem("currentState");
+  currentState = {
+    countDownDate,
+    currentQuestionIndex,
+    correctAnswersCount,
+    wrongAnswersCount,
+    currentQuiz,
+  };
+  localStorage.setItem("currentState", JSON.stringify(currentState));
 }

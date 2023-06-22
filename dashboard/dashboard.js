@@ -5,6 +5,7 @@ let tableRows = document.querySelectorAll("tbody tr");
 
 window.addEventListener("scroll", changeNavBarColor);
 (async () => {
+  removeCurrentState();
   await updateUserData(JSON.parse(localStorage.getItem("user")));
   user = JSON.parse(localStorage.getItem("user"));
   topButtons[0].dispatchEvent(new Event("click"));

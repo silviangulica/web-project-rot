@@ -1,12 +1,12 @@
+// Removes "currentState" from localStorage if it exists
+removeCurrentState();
+
 const fancyAlert = (msg) => {
-  // Creeam un div nou
   let alert = document.createElement("div");
   alert.classList.add("alert");
   alert.innerHTML = msg;
-  // Adaugam div-ul la body
   document.body.appendChild(alert);
 
-  // Facem un style frumos la div
   alert.style.position = "fixed";
   alert.style.top = "10px";
   alert.style.left = "50%";
@@ -21,7 +21,7 @@ const fancyAlert = (msg) => {
   alert.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.5)";
   alert.style.zIndex = "1000";
 
-  // Stergem div-ul dupa 3 secunde
+  // Remove alert after 3 seconds
   setTimeout(() => {
     document.body.removeChild(alert);
   }, 3000);
@@ -38,9 +38,7 @@ function changeNavBarColor() {
 }
 
 window.addEventListener("scroll", changeNavBarColor);
-// -- End Pretty navbar
 
-// -- Start dom manipulation
 const lesson_panel = document.querySelector(".lesson");
 lesson_panel.style.display = "none";
 
