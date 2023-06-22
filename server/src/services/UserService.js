@@ -1,4 +1,4 @@
-const { userToUserDtoMapper } = require("../../dto/UserDto");
+const { userToUserDtoMapper } = require("../dto/UserDto");
 const User = require("../models/User");
 
 const createUser = async (username, email, password) => {
@@ -126,6 +126,25 @@ const updateScoreForUserQuiz = async (quizId, userId, score) => {
   );
 };
 
+const increaseCorrectAnswerStats = async (userId) => {
+  await User.updateOne({ _id: userId }, { $inc: { correctAnswers: 1 } });
+  await updateTotalScore(userId, 1);
+};
+
+const increaseWrongAnswerStats = async (userId) => {
+  await User.updateOne({ _id: userId }, { $inc: { wrongAnswers: 1 } });
+  await updateTotalScore(userId, -1);
+};
+
+const updateTotalScore = async (userId, scoreToAdd) => {
+  const user = await User.findById(userId);
+  let newScore = user.totalScore + scoreToAdd;
+
+  if (newScore < 0) {
+    newScore = 0;
+  }
+  await User.updateOne({ _id: userId }, { totalScore: newScore });
+};
 module.exports = {
   createUser,
   getUsers,
@@ -141,4 +160,6 @@ module.exports = {
   updateStartTimeForUserQuiz,
   updateEndTimeForUserQuiz,
   updateScoreForUserQuiz,
+  increaseWrongAnswerStats,
+  increaseCorrectAnswerStats,
 };

@@ -104,23 +104,26 @@ main {
   height: auto;
 }
 
-.lessons__categories, .lessons {
+.lessons__categories,
+.lessons {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: flex-start;
   width: 100%;
 }
-.lessons__categories__back, .lessons__back {
+.lessons__categories__back,
+.lessons__back {
   display: none;
 }
 
-.card, .card-lesson {
+.card,
+.card-lesson {
   border: 1px solid #ccc;
   border-radius: 10px;
   padding: 0.5em;
-  background: #FFFFFF;
-  background: linear-gradient(135deg, #FFFFFF, #ADB0B6);
+  background: #ffffff;
+  background: linear-gradient(135deg, #ffffff, #adb0b6);
   box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.395);
   margin: 1em;
   display: flex;
@@ -131,18 +134,21 @@ main {
   transition: transform 0.2s ease-in-out;
   height: 25em;
 }
-.card__img, .card-lesson__img {
+.card__img,
+.card-lesson__img {
   width: 100%;
   height: 10em;
   border-radius: 10px;
   margin-bottom: auto;
   align-self: flex-start !important;
 }
-.card__title, .card-lesson__title {
+.card__title,
+.card-lesson__title {
   font-size: 1.5em;
   margin-bottom: 0.5em;
 }
-.card:hover, .card-lesson:hover {
+.card:hover,
+.card-lesson:hover {
   transform: scale(1.1);
   cursor: pointer;
 }

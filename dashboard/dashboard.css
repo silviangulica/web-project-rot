@@ -412,10 +412,13 @@ main .container .profile .fa-gear:hover {
 }
 @media screen and (max-width: 500px) {
   html {
-    font-size: 11px;
+    font-size: 15px;
   }
   .hero {
     background-position: center 0;
+  }
+  .hero .nav {
+    font-size: 11px;
   }
   .hero .nav__logo {
     padding-left: 2.5vw;

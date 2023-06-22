@@ -29,13 +29,11 @@ connect();
 
 // -- Mail settings
 const mailOptions = {
-  from: 'webrot7@gmail.com',
-  to: 'gulica.sv@gmail.com',
-  subject: 'Sending Email using Node.js',
-  text: 'That was easy!'
+  from: "webrot7@gmail.com",
+  to: "gulica.sv@gmail.com",
+  subject: "Sending Email using Node.js",
+  text: "That was easy!",
 };
-
-
 
 // -- Server
 const server = http.createServer((req, res) => {

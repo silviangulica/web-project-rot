@@ -489,11 +489,12 @@ main {
 }
 @media screen and (max-width: 500px) {
   html {
-    font-size: 11px;
+    font-size: 15px;
   }
   .hero {
     background-position: center 0;
     .nav {
+      font-size: 11px;
       &__logo {
         padding-left: $margin-padding-2;
       }
