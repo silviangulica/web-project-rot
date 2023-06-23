@@ -1,7 +1,7 @@
 const router = require("../routers/router");
 const userService = require("../services/UserService");
 const authService = require("../services/AuthService");
-const quizService = require("../services/QuizService");
+const questionService = require("../services/QuestionService");
 const { handleErrors, getRequestBody } = require("../utils/RequestUtils");
 
 router.add("get", "/users", async (req, res) => {
@@ -85,9 +85,7 @@ router.add("patch", "/users/quizzes/questions", async (req, res) => {
 
     let questionId = req.params.questionId;
     let answers = JSON.parse(await getRequestBody(req));
-    let correct = await quizService.verifyAnswers(
-      id,
-      quizId,
+    let correct = await questionService.verifyAnswersForQuestion(
       questionId,
       answers
     );

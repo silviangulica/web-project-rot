@@ -15,7 +15,7 @@ const generateRandomQuiz = async (id) => {
   return quizToBeAdded;
 };
 
-function getQuizWithAnswers(quiz) {
+function getQuizWithSingleListAnswers(quiz) {
   let questions = quiz.questions;
   questions = questions.map((questionToChange) => {
     return {
@@ -52,20 +52,13 @@ const getQuizById = async (quizId) => {
   let foundQuiz = await Quiz.findById(quizId);
   if (foundQuiz === null)
     throw new QuizDoesNotExistError(`Quiz with id ${quizId} does not exist`);
+  foundQuiz = await foundQuiz.populate("questions");
   return foundQuiz;
-};
-
-const verifyAnswers = async (userId, quizId, questionId, answers) => {
-  let quiz = await getQuizById(quizId);
-  quiz = await quiz.populate("questions");
-  let correct = await verifyAnswersForQuestion(questionId, answers);
-  return correct;
 };
 
 module.exports = {
   generateRandomQuiz,
   removeQuiz,
   getQuizById,
-  getQuizWithAnswers,
-  verifyAnswers,
+  getQuizWithSingleListAnswers,
 };

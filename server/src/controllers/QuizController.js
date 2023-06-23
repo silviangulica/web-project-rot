@@ -4,7 +4,7 @@ const {
   generateRandomQuiz,
   removeQuiz,
   getQuizById,
-  getQuizWithAnswers,
+  getQuizWithSingleListAnswers,
   startQuizForUser,
   verifyAnswers,
   checkIfQuizIsFinished,
@@ -45,10 +45,13 @@ router.add("delete", "/quizzes", async (req, res) => {
 router.add("get", "/quizzes", async (req, res) => {
   try {
     let quizId = req.params.quizId;
-    let id = verifyAuthorization(req, res, "user");
+    let answersFormat = req.params.answersFormat;
+    console.log(answersFormat);
+    await verifyAuthorization(req, res, "user");
     let quiz = await getQuizById(quizId);
-    await quiz.populate("questions");
-    res.end(JSON.stringify(getQuizWithAnswers(quiz)));
+    if (answersFormat === "singleList")
+      quiz = getQuizWithSingleListAnswers(quiz);
+    res.end(JSON.stringify(quiz));
   } catch (err) {
     console.log(err);
     handleErrors(err, res);

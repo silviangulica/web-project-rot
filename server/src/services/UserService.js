@@ -156,8 +156,10 @@ const startQuizForUser = async (userId, quizId) => {
 };
 
 const endQuizForUser = async (userId, quizId) => {
-  await updateEndTimeForUserQuiz(quizId, userId, Date.now());
+  let endTime = Date.now();
+  await updateEndTimeForUserQuiz(quizId, userId, endTime);
   await increasePassedQuizStats(userId, quizId);
+  return endTime;
 };
 
 const checkIfQuizIsFinished = async (userId, quizId, res) => {

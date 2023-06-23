@@ -35,7 +35,7 @@
     <div class="quiz">
       <h2 class="quiz__title"></h2>
       <div class="quiz__stats">
-        <span class="quiz__stat quiz__stat-time">Timp rămas: <span id="remaining-time">30:00</span></span>
+        <span class="quiz__stat quiz__stat-time">Timp rămas: <span id="remaining-time"></span></span>
         <span class="quiz__stat quiz__stat-remaining">Întrebari rămase: <span id="remaining-questions"></span></span>
         <span class="quiz__stat quiz__stat-correct">Răspunsuri corecte: <span id="correct-answers"></span></span>
         <span class="quiz__stat quiz__stat-wrong">Răspunsuri greșite: <span id="wrong-answers"></span></span>
@@ -51,16 +51,19 @@
           <li>
             <button class="quiz__answer-btn quiz__answer-btn--not-chosen">
               <span class="quiz__answer-label">A. </span><span class="quiz__answer-text"></span>
+              <span class="quiz__answer-corectness"></span>
             </button>
           </li>
           <li>
             <button class="quiz__answer-btn quiz__answer-btn--not-chosen">
               <span class="quiz__answer-label">B. </span><span class="quiz__answer-text"></span>
+              <span class="quiz__answer-corectness"></span>
             </button>
           </li>
           <li>
             <button class="quiz__answer-btn quiz__answer-btn--not-chosen">
               <span class="quiz__answer-label">C. </span><span class="quiz__answer-text"></span>
+              <span class="quiz__answer-corectness"></span>
             </button>
           </li>
         </ul>
@@ -68,6 +71,7 @@
       <div class="quiz__controls">
         <button class="quiz__submit-btn">Trimite răspuns</button>
         <button class="quiz__skip-btn">Sari peste</button>
+        <button class="quiz__see-correct-answers-btn">Vezi ce ai gresit</button>
       </div>
     </div>
   </main>

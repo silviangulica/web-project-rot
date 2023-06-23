@@ -156,7 +156,7 @@ async function beginQuiz(e) {
   const response = await fetch(
     `http://127.0.0.1:8081/quizzes?quizId=${e.target.parentElement.parentElement.getAttribute(
       "data-quiz-id"
-    )}`,
+    )}&answersFormat=singleList`,
     {
       method: "GET",
       credentials: "include",

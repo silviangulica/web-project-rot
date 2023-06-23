@@ -117,6 +117,7 @@ main {
 .quiz__title {
   font-size: 24px;
   margin-top: 0;
+  margin-bottom: 2em;
 }
 .quiz__stats {
   display: flex;
@@ -219,7 +220,12 @@ main {
   font-weight: bold;
   margin-right: 5px;
 }
-.quiz__submit-btn, .quiz__skip-btn {
+.quiz__answer-corectness {
+  font-size: 18px;
+  font-weight: bold;
+  margin-right: 5px;
+}
+.quiz__submit-btn, .quiz__skip-btn, .quiz__see-correct-answers-btn {
   font-size: 18px;
   padding: 10px;
   margin: 5px;
@@ -232,9 +238,11 @@ main {
 .quiz__skip-btn {
   background-color: #008bff;
 }
-.quiz__submit-btn:hover,
-.quiz .quiz__skip-btn:hover {
+.quiz__submit-btn:hover, .quiz__skip-btn:hover, .quiz__see-correct-answers-btn:hover {
   opacity: 0.8;
+}
+.quiz__see-correct-answers-btn {
+  display: none;
 }
 
 @media screen and (max-width: 930px) {
