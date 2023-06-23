@@ -102,3 +102,19 @@ router.add("patch", "/users/quizzes/questions", async (req, res) => {
     handleErrors(err, res);
   }
 });
+
+
+// PUT: /users/updateUser
+router.add("put", "/users", async (req, res) => {
+  try {
+    let id = authService.verifyAuthorization(req, res, "user");
+    let body = JSON.parse(await getRequestBody(req));
+    let user = await userService.updateUser(id, body.userObj);
+    console.log(body);
+    console.log(user);
+    res.end(JSON.stringify( {msg: "User updated successfully"} ));
+  } catch (err) {
+    handleErrors(err, res);
+  }
+});
+

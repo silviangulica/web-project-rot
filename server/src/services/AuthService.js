@@ -28,7 +28,7 @@ const register = async (username, email, password) => {
     throw new EmailDuplicateError(`Email ${email} already exists`);
   }
 
-  const hashedPassword = await bcrypt.hash(password, saltRounds);
+  const hashedPassword = await getHashedPassword(password);
   const user = await userService.createUser(username, email, hashedPassword);
   return user;
 };
@@ -101,10 +101,16 @@ const verifyRole = (role, requiredRole) => {
   }
   throw new UserHasNoPermissionError("User has no permission");
 };
+
+const getHashedPassword = async (password) => {
+  return await bcrypt.hash(password, saltRounds);
+}
+
 module.exports = {
   register,
   login,
   checkThatTokenIsPresent,
   verifyIfRequestCameFromUser,
   verifyAuthorization,
+  getHashedPassword
 };

@@ -4,6 +4,7 @@ const userController = require("./controllers/UserController");
 const lessonController = require("./controllers/LessonController");
 const supportController = require("./controllers/SupportController");
 const quizController = require("./controllers/QuizController");
+const uploadController = require("./controllers/UploaderController");
 let router = require("./routers/router");
 
 const mongoose = require("mongoose");

@@ -175,7 +175,7 @@ body {
   margin-top: 1.2em;
 }
 
-.change__button {
+.change__button, .sameButton {
   height: 2em;
   border-radius: 0.5em;
   border: 1px solid gray;
@@ -186,10 +186,10 @@ body {
   background-color: #4a82f5;
   color: white;
 }
-.change__button:focus {
+.change__button:focus, .sameButton:focus {
   outline: none;
 }
-.change__button:hover {
+.change__button:hover, .sameButton:hover {
   background-color: #667aea;
   transition: transform 0.2s ease-in-out;
   cursor: pointer;

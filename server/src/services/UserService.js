@@ -1,5 +1,10 @@
 const { userToUserDtoMapper } = require("../dto/UserDto");
 const User = require("../models/User");
+const authService = require("./AuthService");
+const {
+  UsernameDuplicateError,
+  EmailDuplicateError,
+} = require("../utils/CustomErrors");
 
 const createUser = async (username, email, password) => {
   const user = new User({
@@ -167,6 +172,34 @@ const checkIfQuizIsFinished = async (userId, quizId, res) => {
   if ((now - time) / (1000 * 60) > 30) res.finished = true;
 };
 
+const updateUser = async (id, modifications) => {
+  let user = await User.findById(id);
+  if (modifications.username) {
+    checkIfUserExists = await findUserByUsername(modifications.username);
+    if (checkIfUserExists) {
+      throw new UsernameDuplicateError(
+        `Username ${modifications.username} already exists`
+      );
+    }
+    user.username = modifications.username;
+  }
+  if (modifications.email) {
+    checkIfEmailExists = await findByEmail(modifications.email);
+    if (checkIfEmailExists) {
+      throw new EmailDuplicateError(`Email ${modifications.email} already exists`);
+    }
+    user.email = modifications.email;
+  }
+  if (modifications.password) {
+    user.password = authService.getHashedPassword(modifications.password);
+  }
+  if (modifications.picture) {
+    user.profilePicture = modifications.picture;
+  }
+  await user.save();
+  return await findUserById(id);
+}
+
 module.exports = {
   createUser,
   getUsers,
@@ -189,4 +222,5 @@ module.exports = {
   endQuizForUser,
   checkIfQuizIsFinished,
   increasePassedQuizStats,
+  updateUser
 };
