@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const UserQuizSchema = require("./UserQuiz");
+const RecoveryCode = require("./RecoveryCode");
 
 const UserSchema = new mongoose.Schema({
   username: {
@@ -44,6 +45,11 @@ const UserSchema = new mongoose.Schema({
   },
 
   quizList: [UserQuizSchema],
+  recoveryCode: RecoveryCode,
+  needRecovery: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 module.exports = mongoose.model("User", UserSchema);

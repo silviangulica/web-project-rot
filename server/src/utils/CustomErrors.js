@@ -54,6 +54,13 @@ class QuizDoesNotExistError extends Error {
   }
 }
 
+class InvalidCodeError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "InvalidCodeError";
+  }
+}
+
 module.exports = {
   UserNotFoundError,
   InvalidCredentialsError,
@@ -63,4 +70,5 @@ module.exports = {
   TokenInvalidError,
   UserHasNoPermissionError,
   QuizDoesNotExistError,
+  InvalidCodeError,
 };

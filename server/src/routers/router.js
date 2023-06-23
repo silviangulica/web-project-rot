@@ -9,9 +9,6 @@ class Router {
     if (!this.routes[method]) {
       this.routes[method] = {};
     }
-    //extract the named parameters from path stuff like ?id=1
-    const paramNames = [];
-
     this.routes[method][path] = handler;
   }
 

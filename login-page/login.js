@@ -108,3 +108,118 @@ signupForm.addEventListener("submit", async (e) => {
     }
   }
 });
+
+// Recovery sistem for password
+const recoveryButton = document.querySelector(".login-panel__forgor-password");
+
+recoveryButton.addEventListener("click", async (e) => {
+  Swal.fire({
+    title: "Recuperare parola",
+    text: "Introduceti o adresa de email",
+    input: "text",
+    showCancelButton: true,
+    confirmButtonText: "Submit",
+    cancelButtonText: "Cancel",
+    showLoaderOnConfirm: true,
+    preConfirm: async (inputValue) => {
+      let response = await fetch("http://127.0.0.1:8081/recovery", {
+        method: "POST",
+        body: JSON.stringify({
+          email: inputValue,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      let data = await response.json();
+      if (response.ok) {
+        return data;
+      } else if (response.status === 404) {
+        return Swal.showValidationMessage(`Emailul nu a fost gasit!`);
+      }
+    },
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire({
+        title: "Succes!",
+        text: "Un email a fost trimis! Verificati-va emailul! Introducti codul primit pentru a va reseta parola!",
+        icon: "success",
+        input: "text",
+        showCancelButton: true,
+        confirmButtonText: "Submit",
+        cancelButtonText: "Cancel",
+        showLoaderOnConfirm: true,
+        preConfirm: async (inputValue) => {
+          let response = await fetch("http://127.0.0.1:8081/checkCode", {
+            method: "POST",
+            body: JSON.stringify({
+              code: inputValue,
+              email: result.value.email,
+            }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+
+          let data = await response.json();
+          console.log(response);
+          if (response.ok) {
+            return data;
+          } else if (response.status === 404) {
+            return Swal.showValidationMessage(
+              `Codul este invalid sau a expirat!`
+            );
+          }
+        },
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: "Succes!",
+            text: "Introduceti noua parola!",
+            icon: "success",
+            input: "password",
+            showCancelButton: true,
+            confirmButtonText: "Submit",
+            cancelButtonText: "Cancel",
+            showLoaderOnConfirm: true,
+            preConfirm: async (inputValue) => {
+              let response = await fetch(
+                "http://127.0.0.1:8081/changePassword",
+                {
+                  method: "POST",
+                  body: JSON.stringify({
+                    password: inputValue,
+                    email: result.value.email,
+                  }),
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                }
+              );
+
+              let data = await response.json();
+              if (response.ok) {
+                return data;
+              } else {
+                return Swal.showValidationMessage(
+                  `Parola nu a putut fi schimbata!`
+                );
+              }
+            },
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire({
+                title: "Succes!",
+                text: "Parola a fost schimbata cu succes!",
+                icon: "success",
+                showCancelButton: false,
+                confirmButtonText: "Ok",
+                cancelButtonText: "Cancel",
+              });
+            }
+          });
+        }
+      });
+    }
+  });
+});

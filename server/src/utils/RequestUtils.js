@@ -34,7 +34,8 @@ function handleErrors(err, res) {
     res.statusCode = 403;
   else if (
     err instanceof errors.UserNotFoundError ||
-    err instanceof errors.QuizDoesNotExistError
+    err instanceof errors.QuizDoesNotExistError ||
+    err instanceof errors.InvalidCodeError
   )
     res.statusCode = 404;
   else {

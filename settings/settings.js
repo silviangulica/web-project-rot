@@ -62,13 +62,13 @@ saveButton.addEventListener("click", async function () {
   //saveChanges(userObj);
 
   Swal.fire({
-    title: "Are you sure?",
-    text: "You won't be able to revert this!",
+    title: "Esti sigur?",
+    text: "Nu vei putea readuce la loc schimbarile facute!",
     icon: "warning",
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
-    confirmButtonText: "Yes, delete it!",
+    confirmButtonText: "Salveaza modificarile",
   }).then(async (result) => {
     if (result.isConfirmed) {
       await saveChanges(userObj);
@@ -77,7 +77,7 @@ saveButton.addEventListener("click", async function () {
 });
 
 const saveChanges = async (userObj) => {
-  let response = await fetch("http://localhost:8081/users", {
+  let response = await fetch("http://127.0.0.1:8081/users", {
     method: "PUT",
     body: JSON.stringify({ userObj }),
     headers: {
@@ -147,7 +147,7 @@ sendButton.addEventListener("click", async function () {
   let formData = new FormData();
   formData.append("fileToUpload", fileToUpload.files[0]);
 
-  let response = await fetch("http://localhost:8081/upload", {
+  let response = await fetch("http://127.0.0.1:8081/upload", {
     method: "POST",
     body: formData,
     credentials: "include",

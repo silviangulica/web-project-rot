@@ -12,6 +12,7 @@ router.add("post", "/upload", async (req, res) => {
 
   const fileStream = fs.createReadStream(files.fileToUpload[0].filepath);
 
+
   const response = await client.upload({
     image: fileStream,
   });
@@ -28,6 +29,7 @@ router.add("post", "/upload", async (req, res) => {
     await userService.updateUser(id, { picture: response.data.link });
   } catch (err) {
     handleErrors(err, res);
+    console.log(err);
   }
 
   res.end(JSON.stringify({ link: response.data.link }));
