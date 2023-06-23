@@ -1,9 +1,12 @@
 const { userToUserDtoMapper } = require("../dto/UserDto");
 const User = require("../models/User");
+const Quiz = require("../models/Quiz");
 const authService = require("./AuthService");
 const {
   UsernameDuplicateError,
   EmailDuplicateError,
+  UserNotFoundError,
+  UserIsAdminError
 } = require("../utils/CustomErrors");
 
 const createUser = async (username, email, password) => {
@@ -202,6 +205,27 @@ const updateUser = async (id, modifications) => {
   return await findUserById(id);
 }
 
+const deleteUser = async (id) => {
+  // Find the user first
+  let user = await User.findById(id);
+
+  if (user.role === "admin") {
+    throw new UserIsAdminError("Admins cannot be deleted");
+  }
+
+  // Delete all the quizzes that the user has passed
+  user.quizList.forEach(async (quiz) => {
+    let result = await Quiz.findByIdAndDelete(quiz.quiz);
+    console.log(result);
+  });
+
+  // Delete the user
+  let userDeleteResult = await User.findByIdAndDelete(id);
+  if (userDeleteResult === null) {
+    throw new UserNotFoundError(`User with id ${id} does not exist`);
+  }
+}
+
 module.exports = {
   createUser,
   getUsers,
@@ -224,5 +248,6 @@ module.exports = {
   endQuizForUser,
   checkIfQuizIsFinished,
   increasePassedQuizStats,
-  updateUser
+  updateUser,
+  deleteUser
 };

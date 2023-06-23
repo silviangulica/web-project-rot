@@ -13,7 +13,6 @@ router.add("get", "/users", async (req, res) => {
     } else {
       result = await userService.getUsers();
     }
-    console.log(result);
     res.end(JSON.stringify(result));
   } catch (err) {
     handleErrors(err, res);
@@ -108,9 +107,22 @@ router.add("put", "/users", async (req, res) => {
     let id = authService.verifyAuthorization(req, res, "user");
     let body = JSON.parse(await getRequestBody(req));
     let user = await userService.updateUser(id, body.userObj);
-    console.log(body);
-    console.log(user);
     res.end(JSON.stringify( {msg: "User updated successfully"} ));
+  } catch (err) {
+    handleErrors(err, res);
+  }
+});
+
+// DELETE: /users?id=...
+router.add("delete", "/users", async (req, res) => {
+  try {
+    let id = authService.verifyAuthorization(req, res, "admin");
+    let userId = req.params.id;
+    await userService.deleteUser(userId);
+
+    // Show log
+    console.log("[\x1b[31mDELETE\x1b[0m]: User deleted with id: " + userId);
+    res.end(JSON.stringify({ msg: "User deleted successfully" }));
   } catch (err) {
     handleErrors(err, res);
   }

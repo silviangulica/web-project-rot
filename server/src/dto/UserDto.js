@@ -9,6 +9,7 @@ class UserDto {
     this.wrongAnswers = user.wrongAnswers;
     this.totalScore = user.totalScore;
     this.quizList = user.quizList;
+    this.role = user.role;
   }
 }
 
