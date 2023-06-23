@@ -342,6 +342,10 @@ main {
       &__title {
         margin-top: 2em;
       }
+      &__rss:hover {
+        cursor: pointer;
+        opacity: 0.8;
+      }
     }
 
     .profile {

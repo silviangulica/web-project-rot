@@ -5,6 +5,8 @@ const logoutButton = document.querySelector(".logout__btn");
 let topButtons = document.querySelectorAll(".leaderboard__button");
 let tableRows = document.querySelectorAll("tbody tr");
 const card = document.querySelector(".card");
+const rssButton = document.querySelector(".leaderboard__rss");
+let rssFetc;
 window.addEventListener("scroll", changeNavBarColor);
 
 (async () => {
@@ -80,9 +82,6 @@ const setStats = async () => {
   setLastCompletedQuizScore();
 };
 
-// delete method , just gotta change the .card__link to an actual logout button
-//
-
 logoutButton.addEventListener("click", async (e) => {
   e.preventDefault();
   const response = await fetch("http://127.0.0.1:8081/logout", {
@@ -132,10 +131,23 @@ card.addEventListener("click", (e) => {
   window.location.href = "../quizzes/quiz.html";
 });
 
-// Take the settings
 const settings = document.querySelector(".settings__btn");
 
 settings.addEventListener("click", async (e) => {
   e.preventDefault();
   window.location.href = "../settings/settings.html";
+});
+
+rssButton.addEventListener("click", async (e) => {
+  e.preventDefault();
+  let response = await fetch("http://127.0.0.1:8081/users/top-10-rss", {
+    method: "GET",
+    credentials: "include",
+  });
+  if (response.ok) {
+    window.location.href = "http://127.0.0.1:8081/users/top-10-rss";
+  } else {
+    console.log(response);
+    authStatusCodesCheck(response);
+  }
 });

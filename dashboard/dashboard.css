@@ -304,6 +304,10 @@ main .container .leaderboard__user-placement {
 main .container .leaderboard__title {
   margin-top: 2em;
 }
+main .container .leaderboard__rss:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
 main .container .profile {
   grid-area: profile;
   min-height: 30vh;

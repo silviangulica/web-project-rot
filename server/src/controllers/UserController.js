@@ -101,6 +101,17 @@ router.add("patch", "/users/quizzes/questions", async (req, res) => {
   }
 });
 
+router.add("get", "/users/top-10-rss", async (req, res) => {
+  try {
+    authService.verifyAuthorization(req, res, "user");
+    let feed = await userService.getTop10RssFeed();
+    res.setHeader("Content-Type", "application/rss+xml");
+    res.end(feed);
+  } catch (err) {
+    console.log(err);
+    handleErrors(err, res);
+  }
+});
 
 // PUT: /users/updateUser
 router.add("put", "/users", async (req, res) => {
@@ -110,9 +121,8 @@ router.add("put", "/users", async (req, res) => {
     let user = await userService.updateUser(id, body.userObj);
     console.log(body);
     console.log(user);
-    res.end(JSON.stringify( {msg: "User updated successfully"} ));
+    res.end(JSON.stringify({ msg: "User updated successfully" }));
   } catch (err) {
     handleErrors(err, res);
   }
 });
-
