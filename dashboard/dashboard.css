@@ -133,6 +133,7 @@ main .container .stats__box {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
   gap: 0.5em;
   margin: 1em;
   border-radius: 1em;
@@ -343,6 +344,19 @@ main .container .profile .fa-gear:hover {
   transform: rotate(360deg);
   cursor: pointer;
   color: #00b691;
+}
+main .container .profile .logout__btn {
+  font-size: 18px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #008bff;
+  color: white;
+  cursor: pointer;
+  margin-top: 1.3em;
+}
+main .container .profile .logout__btn:hover {
+  opacity: 0.8;
 }
 
 @media screen and (max-width: 930px) {

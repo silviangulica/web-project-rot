@@ -1,6 +1,7 @@
 let user;
 const username = document.querySelector(".profile__name");
 const picture__source = document.querySelector(".picture__source");
+const logoutButton = document.querySelector(".logout__btn");
 let topButtons = document.querySelectorAll(".leaderboard__button");
 let tableRows = document.querySelectorAll("tbody tr");
 const card = document.querySelector(".card");
@@ -81,19 +82,19 @@ const setStats = async () => {
 
 // delete method , just gotta change the .card__link to an actual logout button
 //
-// const card_links = document.querySelector(".card__link");
-// card_links.addEventListener("click", async (e) => {
-//   e.preventDefault();
-//   const response = await fetch("http://127.0.0.1:8081/logout", {
-//     method: "GET",
-//     credentials: "include",
-//   });
-//   const data = await response.json();
-//   if (response.ok) {
-//     localStorage.removeItem("user");
-//     window.location.href = "../login-page/login.html";
-//   }
-// });
+
+logoutButton.addEventListener("click", async (e) => {
+  e.preventDefault();
+  const response = await fetch("http://127.0.0.1:8081/logout", {
+    method: "GET",
+    credentials: "include",
+  });
+  const data = await response.json();
+  if (response.ok) {
+    localStorage.removeItem("user");
+    window.location.href = "../login-page/login.html";
+  }
+});
 
 function setLastCompletedQuizScore() {
   const lastCompletedQuizCard = document.querySelector(".card");
