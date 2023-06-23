@@ -9,6 +9,7 @@
       src="https://kit.fontawesome.com/6666f8a27a.js"
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="settings.css" />
     <title>Profile</title>
   </head>
@@ -74,10 +75,13 @@
                 placeholder="Introduceți o adresa imgur nouă"
               />
             </div>
+
+            <div class="file__uploader">
+              <input type="file" name="fileToUpload" id="fileToUpload" class="fileToUpload" />
+              <button class="uploader sameButton">Incarca o fotografie</button>
+            </div>
           </div>
-          <div class="main__input-description">
-              Username
-          </div>
+          <div class="main__input-description">Adaugă modificările dorite!</div>
         </div>
         <button class="change__button">Salveaza modificarile</button>
       </div>

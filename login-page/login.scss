@@ -120,6 +120,17 @@ body {
   }
 }
 
+.login-panel__forgor-password {
+  color: $color-tertiary;
+  text-decoration: none;
+  font-weight: 700;
+  &:hover {
+    transition: color 0.3s;
+    color: $color-secondary;
+    cursor: pointer;
+  }
+}
+
 .login-panel {
   &__input:nth-of-type(1) {
     margin-top: 2em;

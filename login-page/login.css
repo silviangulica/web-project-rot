@@ -118,6 +118,17 @@ body {
   cursor: pointer;
 }
 
+.login-panel__forgor-password {
+  color: #a53c7d;
+  text-decoration: none;
+  font-weight: 700;
+}
+.login-panel__forgor-password:hover {
+  transition: color 0.3s;
+  color: #8868d1;
+  cursor: pointer;
+}
+
 .login-panel__input:nth-of-type(1) {
   margin-top: 2em;
   gap: 0;

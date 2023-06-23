@@ -50,68 +50,47 @@ btn.addEventListener("click", (e) => {
 
 });
 
-const checkInputs = () => {
-  const nameInputValue = nameInput.value.trim();
-  const emailValue = email.value.trim();
-  const messageValue = message.value.trim();
-  const phoneValue = phone.value.trim();
-  const subjectValue = subject.value.trim();
-
-  if (nameInputValue === "") {
-    setErrorFor(nameInput, "Name cannot be blank");
+const checkIfEmailisEmpty = () => {
+  if (email.value === "") {
     return true;
-  } else {
-    setSuccessFor(nameInput);
   }
-
-  if (emailValue === "") {
-    setErrorFor(email, "Email cannot be blank");
-    return true;
-  } else if (!isEmail(emailValue)) {
-    setErrorFor(email, "Email is not valid");
-    return true;
-  } else {
-    setSuccessFor(email);
-  }
-
-  if (messageValue === "") {
-    setErrorFor(message, "Message cannot be blank");
-    return true;
-  } else {
-    setSuccessFor(message);
-  }
-
-  if (phoneValue === "") {
-    setErrorFor(phone, "Phone cannot be blank");
-    return true;
-  } else {
-    setSuccessFor(phone);
-  }
-
-  if (subjectValue === "") {
-    setErrorFor(subject, "Subject cannot be blank");
-    return true;
-  } else {
-    setSuccessFor(subject);
-  }
-
   return false;
 }
 
-function setErrorFor(input, message) {
-  const formControl = input.parentElement;
-  const small = formControl.querySelector("small");
-
-  small.innerText = message;
-
-  formControl.className = "form-control error";
+const checkIfNameisEmpty = () => {
+  if (nameInput.value === "") {
+    return true;
+  }
+  return false;
 }
 
-function setSuccessFor(input) {
-  const formControl = input.parentElement;
-  formControl.className = "form-control success";
+const checkIfMessageisEmpty = () => {
+  if (message.value === "") {
+    return true;
+  }
+  return false;
 }
 
-function isEmail(email) {
-  return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
+
+const checkInputs = () => {
+  let isEmpty = false;
+  if (checkIfEmailisEmpty()) {
+    email.style.borderColor = "red";
+    email.value = "";
+    email.placeholder = "Email can't be empty";
+    isEmpty = true;
+  }
+  if (checkIfNameisEmpty()) {
+    nameInput.style.borderColor = "red";
+    nameInput.value = "";
+    nameInput.placeholder = "Name can't be empty";
+    isEmpty = true;
+  }
+  if (checkIfMessageisEmpty()) {
+    message.style.borderColor = "red";
+    message.value = "";
+    message.placeholder = "Message can't be empty";
+    isEmpty = true;
+  }
+  return isEmpty;
 }

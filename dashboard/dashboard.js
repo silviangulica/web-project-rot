@@ -1,5 +1,6 @@
 let user;
 const username = document.querySelector(".profile__name");
+const picture__source = document.querySelector(".picture__source");
 let topButtons = document.querySelectorAll(".leaderboard__button");
 let tableRows = document.querySelectorAll("tbody tr");
 const card = document.querySelector(".card");
@@ -11,6 +12,7 @@ window.addEventListener("scroll", changeNavBarColor);
   user = JSON.parse(localStorage.getItem("user"));
   topButtons[0].dispatchEvent(new Event("click"));
   username.textContent = user.username;
+  picture__source.src = user.profilePicture;
   setStats();
 })();
 
