@@ -70,7 +70,7 @@ answers.forEach((answer) => {
 
 const submitQuiz = async () => {
   const response = await fetch(
-    `http://localhost:8081/users/quizzes?quizId=${currentQuiz._id}`,
+    `http://127.0.0.1:8081/users/quizzes?quizId=${currentQuiz._id}`,
     {
       method: "PATCH",
       credentials: "include",
@@ -126,7 +126,7 @@ submitButton.addEventListener("click", async () => {
 
 const sendStartQuizRequest = async () => {
   const response = await fetch(
-    `http://localhost:8081/users/quizzes?quizId=${currentQuiz._id}`,
+    `http://127.0.0.1:8081/users/quizzes?quizId=${currentQuiz._id}`,
     {
       method: "PATCH",
       credentials: "include",
@@ -179,7 +179,7 @@ async function sendCurrentQuestionAnswers(chosenAnswers) {
   console.log(currentQuiz._id);
   console.log(currentQuiz.questions[currentQuestionIndex]._id);
   const response = await fetch(
-    `http://localhost:8081/users/quizzes/questions?quizId=${currentQuiz._id}&questionId=${currentQuiz.questions[currentQuestionIndex]._id}`,
+    `http://127.0.0.1:8081/users/quizzes/questions?quizId=${currentQuiz._id}&questionId=${currentQuiz.questions[currentQuestionIndex]._id}`,
     {
       method: "PATCH",
       credentials: "include",

@@ -1,5 +1,5 @@
 async function checkIfUserAuthDidNotExpire() {
-  const response = await fetch("http://localhost:8081/verifyToken", {
+  const response = await fetch("http://127.0.0.1:8081/verifyToken", {
     method: "GET",
     credentials: "include",
     headers: {
@@ -16,7 +16,7 @@ async function checkIfUserAuthDidNotExpire() {
 }
 
 async function updateUserData(user) {
-  const response = await fetch(`http://localhost:8081/users/me`, {
+  const response = await fetch(`http://127.0.0.1:8081/users/me`, {
     method: "GET",
     credentials: "include",
     headers: {
@@ -41,7 +41,7 @@ function logUserOut() {
 
 function authStatusCodesCheck(response) {
   if (response.status == 401) logUserOut();
-  else if (response.status == 403){
+  else if (response.status == 403) {
     alert("You are not authorized to perform this action");
     window.location.href = "../dashboard/dashboard.html";
   }

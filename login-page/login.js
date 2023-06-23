@@ -27,7 +27,7 @@ loginForm.addEventListener("submit", async (e) => {
   );
   email.style.borderColor = "transparent";
   password.style.borderColor = "transparent";
-  const response = await fetch("http://localhost:8081/login", {
+  const response = await fetch("http://127.0.0.1:8081/login", {
     method: "POST",
     body: JSON.stringify({
       email: email.value,
@@ -80,7 +80,7 @@ signupForm.addEventListener("submit", async (e) => {
     return;
   }
   passwordConfirmation.style.borderColor = "transparent";
-  const response = await fetch("http://localhost:8081/register", {
+  const response = await fetch("http://127.0.0.1:8081/register", {
     method: "POST",
     body: JSON.stringify({
       username: username.value,

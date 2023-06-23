@@ -3,7 +3,7 @@ const username = document.querySelector(".profile__name");
 const picture__source = document.querySelector(".picture__source");
 let topButtons = document.querySelectorAll(".leaderboard__button");
 let tableRows = document.querySelectorAll("tbody tr");
-
+const card = document.querySelector(".card");
 window.addEventListener("scroll", changeNavBarColor);
 
 (async () => {
@@ -37,7 +37,7 @@ topButtons.forEach((button) => {
     });
     button.classList.add("leaderboard__button--selected");
     const response = await fetch(
-      `http://localhost:8081/users/${button.getAttribute("id")}`,
+      `http://127.0.0.1:8081/users/${button.getAttribute("id")}`,
       {
         method: "GET",
         credentials: "include",
@@ -84,7 +84,7 @@ const setStats = async () => {
 // const card_links = document.querySelector(".card__link");
 // card_links.addEventListener("click", async (e) => {
 //   e.preventDefault();
-//   const response = await fetch("http://localhost:8081/logout", {
+//   const response = await fetch("http://127.0.0.1:8081/logout", {
 //     method: "GET",
 //     credentials: "include",
 //   });
@@ -126,8 +126,12 @@ function setLastCompletedQuizScore() {
   lastCompletedQuizCard.querySelector(".card__score").textContent = score;
 }
 
+card.addEventListener("click", (e) => {
+  e.preventDefault();
+  window.location.href = "../quizzes/quiz.html";
+});
 
-// Take the settings 
+// Take the settings
 const settings = document.querySelector(".settings__btn");
 
 settings.addEventListener("click", async (e) => {

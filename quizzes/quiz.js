@@ -11,7 +11,7 @@ removeCurrentState();
     generate quiz cards for each quiz in the user's quiz list, otherwise log user out
 */
 (async () => {
-  await checkIfUserAuthDidNotExpire();
+  await updateUserData();
   for (
     let i = 0;
     i < JSON.parse(localStorage.getItem("user")).quizList.length;
@@ -40,7 +40,7 @@ The response is the UserQuiz obj which is added to the user's quiz list in local
 */
 generateRandomQuizButton.addEventListener("click", async (e) => {
   e.preventDefault();
-  const response = await fetch(`http://localhost:8081/quizzes`, {
+  const response = await fetch(`http://127.0.0.1:8081/quizzes`, {
     method: "POST",
     credentials: "include",
   });
@@ -114,7 +114,7 @@ async function removeQuiz(e) {
   e.target.parentElement.parentElement.getAttribute("data-quiz-id");
 
   const response = await fetch(
-    `http://localhost:8081/quizzes?quizId=${e.target.parentElement.parentElement.getAttribute(
+    `http://127.0.0.1:8081/quizzes?quizId=${e.target.parentElement.parentElement.getAttribute(
       "data-quiz-id"
     )}`,
     {
@@ -154,7 +154,7 @@ const renameQuizzesAfterDelete = () => {
 async function beginQuiz(e) {
   localStorage.removeItem("currentQuiz");
   const response = await fetch(
-    `http://localhost:8081/quizzes?quizId=${e.target.parentElement.parentElement.getAttribute(
+    `http://127.0.0.1:8081/quizzes?quizId=${e.target.parentElement.parentElement.getAttribute(
       "data-quiz-id"
     )}`,
     {
