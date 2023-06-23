@@ -62,7 +62,7 @@ cards.forEach((card) => {
 
 function getNewLesson(id) {
   // Make a fetch request to the server
-  fetch(`http://localhost:8081/law-lessons?id=${id}`)
+  fetch(`http://127.0.0.1:8081/law-lessons?id=${id}`)
     .then((response) => {
       return response.json();
     })

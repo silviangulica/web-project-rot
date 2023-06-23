@@ -35,7 +35,7 @@ topButtons.forEach((button) => {
     });
     button.classList.add("leaderboard__button--selected");
     const response = await fetch(
-      `http://localhost:8081/users/${button.getAttribute("id")}`,
+      `http://127.0.0.1:8081/users/${button.getAttribute("id")}`,
       {
         method: "GET",
         credentials: "include",
@@ -82,7 +82,7 @@ const setStats = async () => {
 // const card_links = document.querySelector(".card__link");
 // card_links.addEventListener("click", async (e) => {
 //   e.preventDefault();
-//   const response = await fetch("http://localhost:8081/logout", {
+//   const response = await fetch("http://127.0.0.1:8081/logout", {
 //     method: "GET",
 //     credentials: "include",
 //   });

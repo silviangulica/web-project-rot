@@ -18,10 +18,18 @@ async function connect() {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    console.log("[" + '\x1b[32m' + 'Info'+  '\x1b[0m' + "]: Connected to database!");
+    console.log(
+      "[" + "\x1b[32m" + "Info" + "\x1b[0m" + "]: Connected to database!"
+    );
   } catch (error) {
     console.log(error);
-    console.log("[" + '\x1b[31m' + 'Error'+  '\x1b[0m' + "]: Could not connect to database!");
+    console.log(
+      "[" +
+        "\x1b[31m" +
+        "Error" +
+        "\x1b[0m" +
+        "]: Could not connect to database!"
+    );
   }
 }
 
@@ -38,7 +46,7 @@ const mailOptions = {
 // -- Server
 const server = http.createServer((req, res) => {
   res.setHeader("Content-Type", "application/json");
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:5500");
+  res.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5500");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE,PATCH");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   res.setHeader("Access-Control-Allow-Credentials", "true");
