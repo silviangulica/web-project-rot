@@ -126,9 +126,36 @@ router.add("put", "/users", async (req, res) => {
     let id = authService.verifyAuthorization(req, res, "user");
     let body = JSON.parse(await getRequestBody(req));
     let user = await userService.updateUser(id, body.userObj);
-    console.log(body);
-    console.log(user);
-    res.end(JSON.stringify({ msg: "User updated successfully" }));
+    res.end(JSON.stringify( {msg: "User updated successfully"} ));
+  } catch (err) {
+    handleErrors(err, res);
+  }
+});
+// DELETE: /users?id=...
+router.add("delete", "/users", async (req, res) => {
+  try {
+    let id = authService.verifyAuthorization(req, res, "admin");
+    let userId = req.params.id;
+    await userService.deleteUser(userId);
+
+    // Show log
+    console.log("[\x1b[31mDELETE\x1b[0m]: User deleted with id: " + userId);
+    res.end(JSON.stringify({ msg: "User deleted successfully" }));
+  } catch (err) {
+    handleErrors(err, res);
+  }
+});
+
+
+// UPDATE: /users/email?id=...
+router.add("put", "/users/email", async (req, res) => {
+  try {
+    let id = authService.verifyAuthorization(req, res, "admin");
+    let { email, userId } = JSON.parse(await getRequestBody(req));
+    console.log(email, userId);
+    await userService.updateUserEmail(userId, email);
+    console.log("[\x1b[32mUPDATE\x1b[0m]: User email updated with id: " + userId);
+    res.end(JSON.stringify({ msg: "User email updated successfully" }));
   } catch (err) {
     handleErrors(err, res);
   }

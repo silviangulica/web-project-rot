@@ -1,9 +1,12 @@
 const { userToUserDtoMapper } = require("../dto/UserDto");
 const User = require("../models/User");
+const Quiz = require("../models/Quiz");
 const authService = require("./AuthService");
 const {
   UsernameDuplicateError,
   EmailDuplicateError,
+  UserNotFoundError,
+  UserIsAdminError
 } = require("../utils/CustomErrors");
 let RSS = require("rss");
 
@@ -205,6 +208,26 @@ const updateUser = async (id, modifications) => {
   return await findUserById(id);
 };
 
+const deleteUser = async (id) => {
+  // Find the user first
+  let user = await User.findById(id);
+
+  if (user.role === "admin") {
+    throw new UserIsAdminError("Admins cannot be deleted");
+  }
+
+  // Delete all the quizzes that the user has passed
+  user.quizList.forEach(async (quiz) => {
+    let result = await Quiz.findByIdAndDelete(quiz.quiz);
+    console.log(result);
+  });
+
+  // Delete the user
+  let userDeleteResult = await User.findByIdAndDelete(id);
+  if (userDeleteResult === null) {
+    throw new UserNotFoundError(`User with id ${id} does not exist`);
+  }
+}
 const getTop10RssFeed = async () => {
   let top10UsersByScore = await getTop10UsersByScore();
   let top10UsersByQuizzes = await getTop10UsersByQuizzes();
@@ -243,6 +266,17 @@ const getTop10RssFeed = async () => {
 
   return feed.xml();
 };
+
+const updateUserEmail = async (id, email) => {
+  let user = await User.findById(id);
+  if (user.email === email) {
+    console.log("Emails are the same");
+    throw new EmailDuplicateError(`Email ${email} already exists`);
+  }
+  user.email = email;
+  await user.save();
+}
+
 module.exports = {
   createUser,
   getUsers,
@@ -266,5 +300,7 @@ module.exports = {
   checkIfQuizIsFinished,
   increasePassedQuizStats,
   updateUser,
+  deleteUser,
   getTop10RssFeed,
+  updateUserEmail
 };

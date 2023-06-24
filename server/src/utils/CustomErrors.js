@@ -61,6 +61,13 @@ class InvalidCodeError extends Error {
   }
 }
 
+class UserIsAdminError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "UserIsAdminError";
+  }
+}
+
 module.exports = {
   UserNotFoundError,
   InvalidCredentialsError,
@@ -71,4 +78,5 @@ module.exports = {
   UserHasNoPermissionError,
   QuizDoesNotExistError,
   InvalidCodeError,
+  UserIsAdminError,
 };

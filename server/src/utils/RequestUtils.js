@@ -35,7 +35,7 @@ function handleErrors(err, res) {
   else if (
     err instanceof errors.UserNotFoundError ||
     err instanceof errors.QuizDoesNotExistError ||
-    err instanceof errors.InvalidCodeError
+    err instanceof errors.InvalidCodeError 
   )
     res.statusCode = 404;
   else {
@@ -46,6 +46,8 @@ function handleErrors(err, res) {
       code = "email_duplicate";
     else if (err instanceof errors.PasswordTooShortError) {
       code = "password_too_short";
+    } else if (err instanceof errors.UserIsAdminError) {
+      code = "user_is_admin";
     }
   }
   let response = { message: err.message };
