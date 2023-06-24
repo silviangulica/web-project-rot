@@ -1,6 +1,8 @@
 const router = require("../routers/router");
 const lessonService = require("../services/LessonService");
 
+/* Endpoint to create a new lesson
+ */
 router.add("post", "/lessons", async (req, res) => {
   let lessonType = req.params.type;
   let idStart = parseInt(req.params.id_start);
@@ -16,6 +18,7 @@ router.add("post", "/lessons", async (req, res) => {
 });
 
 // GET: /lessons?type=avetizare
+// Gets all lessons of a certain type
 router.add("get", "/lessons", async (req, res) => {
   const lessonType = req.params.type;
   const lessons = await lessonService.getLessonsByType(lessonType);
@@ -25,9 +28,10 @@ router.add("get", "/lessons", async (req, res) => {
 });
 
 // GET: /law-lessons?id=1
+// Gets a lesson by id
 router.add("get", "/law-lessons", async (req, res) => {
   const lessonId = req.params.id;
   const lesson = await lessonService.getLawLessonById(lessonId);
-  console.log('[GET]: \"' + req.url + '\" responded with = {' + lesson + "}");
+  console.log('[GET]: "' + req.url + '" responded with = {' + lesson + "}");
   res.end(JSON.stringify(lesson));
 });

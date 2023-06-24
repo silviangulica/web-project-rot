@@ -30,6 +30,8 @@ let wasSeeAnswersButtonClicked = false;
 let endTime;
 let currentState = JSON.parse(localStorage.getItem("currentState"));
 
+/* If quiz is not finished, a timer is started and the current question is loaded
+ */
 (async () => {
   await checkIfUserAuthDidNotExpire();
 
@@ -113,6 +115,8 @@ skipButton.addEventListener("click", () => {
   if (isFinished === false) saveState(); // in the end screen I don't want to save the state cause currentQuiz will be changed
 });
 
+/* This function is called each time the page is loaded or refreshed
+ */
 async function beginQuiz() {
   if (currentState === null) {
     await sendStartQuizRequest();
@@ -141,6 +145,8 @@ submitButton.addEventListener("click", async () => {
   skipButton.dispatchEvent(new Event("click"));
 });
 
+/* A request to start  the quiz is sent (to set startTime on the server)
+ */
 const sendStartQuizRequest = async () => {
   const response = await fetch(
     `http://127.0.0.1:8081/users/quizzes?quizId=${currentQuiz._id}`,
@@ -248,7 +254,8 @@ async function sendCurrentQuestionAnswers(chosenAnswers) {
   if (response.ok) {
     if (data.finished === true) {
       console.log("Quiz finished");
-      submitQuiz();
+      await submitQuiz();
+      return;
     }
     if (data.correct === true) {
       correctAnswersCount++;
@@ -292,7 +299,7 @@ function loadState() {
 
 function saveState() {
   //localStorage.removeItem("currentState");
-  console.log("SAVED");
+  //console.log("SAVED");
   currentState = {
     startTime,
     currentQuestionIndex,
@@ -367,7 +374,7 @@ seeCorrectAnswersButton.addEventListener("click", async () => {
   const data = await response.json();
   console.log(data);
   if (response.ok) {
-    currentQuiz = data;
+    currentQuiz = data; // <- will be replaced with the correct/wrong answers quizz and saved in the local storage
     wasSeeAnswersButtonClicked = true;
     skipButton.style.display = "block";
     skipButton.disabled = false;
@@ -379,7 +386,6 @@ seeCorrectAnswersButton.addEventListener("click", async () => {
       answer.style.display = "block";
     });
     updateQuizPage();
-    //localStorage.setItem("correctQuiz", JSON.stringify(correctQuiz));
   } else {
     authStatusCodesCheck(response);
     console.log(response);
@@ -401,7 +407,8 @@ function highlightUserSelectedAnswers() {
     }
   });
 }
-
+/* Adds the correct/incorrect answers to the quiz page when user clicks the see correct answers button
+ */
 function setCorrectIncorrectAnswers() {
   let questions = JSON.parse(localStorage.getItem("currentState")).currentQuiz
     .questions;

@@ -10,6 +10,7 @@ const User = require("../models/User");
 const sendMail = require("../services/MailService");
 const bcrypt = require("bcryptjs");
 
+// Generates a random code for recovery
 const generateRandomCode = () => {
   let code = "";
   for (let i = 0; i < 6; i++) {
@@ -23,6 +24,8 @@ const generateRandomCode = () => {
   return code;
 };
 
+/* Generates the recovery code and sends it to the user's email
+ */
 router.add("post", "/recovery", async (req, res) => {
   try {
     let body = await getRequestBody(req);
@@ -62,7 +65,7 @@ router.add("post", "/recovery", async (req, res) => {
       subject: "Recovery code",
       text: `Your recovery code is: ${code}`,
     };
-    //sendMail(mailOptions);
+    sendMail(mailOptions);
 
     res.end(JSON.stringify({ email: user.email }));
   } catch (err) {
@@ -70,6 +73,8 @@ router.add("post", "/recovery", async (req, res) => {
   }
 });
 
+/* Checks if the code is valid and if it is, sends the user's email
+ */
 router.add("post", "/checkCode", async (req, res) => {
   try {
     let body = await getRequestBody(req);

@@ -33,6 +33,8 @@ const register = async (username, email, password) => {
   return user;
 };
 
+/* If user credentials are valid, create the token and return it with the user
+ */
 const login = async (email, password) => {
   const user = await userService.findByEmail(email);
 
@@ -52,6 +54,10 @@ const login = async (email, password) => {
   return { user, token };
 };
 
+/* Verify if the token is valid and if the user has the required role and
+  refreshes the token if it is about to expire ( 30 minutes left)
+  * If the token is valid, return the user id
+ */
 const verifyAuthorization = (req, res, requiredRole) => {
   let token = checkThatTokenIsPresent(req);
   const decoded = jwt.verify(token, secretKey);
@@ -84,16 +90,6 @@ const checkThatTokenIsPresent = (req) => {
   token = token.substring("token=".length);
   return token;
 };
-const verifyIfRequestCameFromUser = (req, userId) => {
-  let token = checkThatTokenIsPresent(req);
-  token = jwt.verify(token, secretKey);
-  if (token.role === "admin") {
-    return;
-  }
-  if (token.id !== userId) {
-    throw new TokenInvalidError("Request came from another user");
-  }
-};
 
 const verifyRole = (role, requiredRole) => {
   if (role === "admin" || role === requiredRole) {
@@ -104,13 +100,12 @@ const verifyRole = (role, requiredRole) => {
 
 const getHashedPassword = async (password) => {
   return await bcrypt.hash(password, saltRounds);
-}
+};
 
 module.exports = {
   register,
   login,
   checkThatTokenIsPresent,
-  verifyIfRequestCameFromUser,
   verifyAuthorization,
-  getHashedPassword
+  getHashedPassword,
 };

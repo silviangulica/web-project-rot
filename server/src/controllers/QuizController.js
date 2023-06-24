@@ -5,19 +5,12 @@ const {
   removeQuiz,
   getQuizById,
   getQuizWithSingleListAnswers,
-  startQuizForUser,
-  verifyAnswers,
-  checkIfQuizIsFinished,
 } = require("../services/QuizService");
-const { getRequestBody } = require("../utils/RequestUtils");
 const { verifyAuthorization } = require("../services/AuthService");
 const { handleErrors } = require("../utils/RequestUtils");
-const {
-  getUserQuiz,
-  increaseCorrectAnswerStats,
-  increaseWrongAnswerStats,
-} = require("../services/UserService");
+const { getUserQuiz } = require("../services/UserService");
 
+// Generates a random quiz and adds it to the user's quizzes array as well
 router.add("post", "/quizzes", async (req, res) => {
   try {
     let id = verifyAuthorization(req, res, "user");
@@ -30,6 +23,7 @@ router.add("post", "/quizzes", async (req, res) => {
   }
 });
 
+// Deletes a quiz and also removes it from the user's quizzes array
 router.add("delete", "/quizzes", async (req, res) => {
   try {
     let quizId = req.params.quizId;
@@ -42,6 +36,7 @@ router.add("delete", "/quizzes", async (req, res) => {
   }
 });
 
+// Returns the quiz either with all answers in one array or with answers in separate arrays( correctQ, wrongQ)
 router.add("get", "/quizzes", async (req, res) => {
   try {
     let quizId = req.params.quizId;
