@@ -8,6 +8,7 @@ const {
   UserNotFoundError,
   UserIsAdminError
 } = require("../utils/CustomErrors");
+let RSS = require("rss");
 
 const createUser = async (username, email, password) => {
   const user = new User({
@@ -191,7 +192,9 @@ const updateUser = async (id, modifications) => {
   if (modifications.email) {
     checkIfEmailExists = await findByEmail(modifications.email);
     if (checkIfEmailExists) {
-      throw new EmailDuplicateError(`Email ${modifications.email} already exists`);
+      throw new EmailDuplicateError(
+        `Email ${modifications.email} already exists`
+      );
     }
     user.email = modifications.email;
   }
@@ -203,7 +206,7 @@ const updateUser = async (id, modifications) => {
   }
   await user.save();
   return await findUserById(id);
-}
+};
 
 const deleteUser = async (id) => {
   // Find the user first
@@ -224,6 +227,54 @@ const deleteUser = async (id) => {
   if (userDeleteResult === null) {
     throw new UserNotFoundError(`User with id ${id} does not exist`);
   }
+}
+const getTop10RssFeed = async () => {
+  let top10UsersByScore = await getTop10UsersByScore();
+  let top10UsersByQuizzes = await getTop10UsersByQuizzes();
+  let top10UsersByCorrectAnswers = await getTop10UsersByCorrectAnswers();
+
+  const feed = new RSS({
+    title: "Top 10 Users",
+    description: "The top 10 users in each category",
+  });
+
+  top10UsersByScore.forEach((user, i) => {
+    feed.item({
+      title: `Top Users by Score: Number ${i + 1}`,
+      description: `User: ${user.username} --- Score: ${user.totalScore}`,
+      guid: user._id,
+    });
+  });
+
+  top10UsersByQuizzes.forEach((user, i) => {
+    feed.item({
+      title: `Top Users by Quizzes: Number ${i + 1}`,
+      description: `User: ${user.username} --- Quizzes: ${user.quizzesPassed}`,
+
+      guid: user._id,
+    });
+  });
+
+  top10UsersByCorrectAnswers.forEach((user, i) => {
+    feed.item({
+      title: `Top Users by Correct Answers: Number ${i + 1}`,
+      description: `User: ${user.username} --- Correct Answers: ${user.correctAnswers}`,
+
+      guid: user._id,
+    });
+  });
+
+  return feed.xml();
+};
+
+const updateUserEmail = async (id, email) => {
+  let user = await User.findById(id);
+  if (user.email === email) {
+    console.log("Emails are the same");
+    throw new EmailDuplicateError(`Email ${email} already exists`);
+  }
+  user.email = email;
+  await user.save();
 }
 
 module.exports = {
@@ -249,5 +300,7 @@ module.exports = {
   checkIfQuizIsFinished,
   increasePassedQuizStats,
   updateUser,
-  deleteUser
+  deleteUser,
+  getTop10RssFeed,
+  updateUserEmail
 };

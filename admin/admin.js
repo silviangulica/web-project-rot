@@ -37,6 +37,7 @@ let domain = "http://127.0.0.1:8081";
 btn_user.addEventListener("click", manageUserSection);
 btn_resurse.addEventListener("click", manageResurseSection);
 btn_delete_users.addEventListener("click", deleteSelectedUsers);
+btn_change_user.addEventListener("click", changeSelectedUser);
 
 // Event functions
 function manageUserSection() {
@@ -81,11 +82,13 @@ async function deleteSelectedUsers() {
     let selectedUsers = document.querySelectorAll(
       ".lista__useri-item--selected"
     );
-    await selectedUsers.forEach(async (user) => {
+
+    for (let user of selectedUsers) {
       let id = user.getAttribute("id");
-      result = await deleteUser(id);
-      if (result) {
+      let deletionResult = await deleteUser(id);
+      if (deletionResult) {
         user.remove();
+        result = true;
       } else {
         Swal.fire({
           icon: "error",
@@ -94,12 +97,59 @@ async function deleteSelectedUsers() {
         });
         return;
       }
-    });
+    }
     console.log(result);
     if (result) {
       Swal.fire("Sterse!", "Utilizatorii au fost stersi.", "success");
     }
   }
+}
+
+async function changeSelectedUser() {
+  let selectedUsers = document.querySelectorAll(".lista__useri-item--selected");
+
+  if (selectedUsers.length > 1) {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Poti sterge doar un utilizator!",
+    });
+    return;
+  }
+
+  // Daca este doar un user selectat, atunci il stergem
+  let response = false;
+  Swal.fire({
+    title: "Introdu un nou email",
+    input: "text",
+    inputAttributes: {
+      autocapitalize: "off",
+    },
+    showCancelButton: true,
+    confirmButtonText: "Modifica",
+    showLoaderOnConfirm: true,
+    preConfirm: async (login) => {
+      let id = selectedUsers[0].getAttribute("id");
+      response = await modifyUser(id, login);
+    },
+    allowOutsideClick: () => !Swal.isLoading(),
+  }).then((result) => {
+    if (result.isConfirmed) {
+      if (response) {
+        Swal.fire({
+          icon: "success",
+          title: "Succes!",
+          text: "Utilizatorul a fost modificat!",
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Ceva nu a mers bine!",
+        });
+      }
+    }
+  });
 }
 
 // Display section functions
@@ -173,9 +223,51 @@ async function deleteUser(id) {
     },
     credentials: "include",
   });
+  let data = await response.json();
   if (response.ok) {
     return true;
+  } else if (response.status == 400) {
+    if (data.code == "user_is_admin") {
+      await Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Adminii nu pot fi stersi!",
+      });
+      return false;
+    }
   } else {
+    authStatusCodesCheck(response);
+  }
+  return false;
+}
+
+async function modifyUser(id, newEmail) {
+  let response = await fetch(domain + "/users/email", {
+    method: "PUT",
+    body: JSON.stringify({
+      userId: id,
+      email: newEmail,
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+  });
+
+  let data = await response.json();
+  if (response.ok) {
+    return true;
+  } else if (response.status == 400) {
+    if (data.code == "email_duplicate") {
+      await Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Email-ul este deja folosit!",
+      });
+      return false;
+    }
+  }
+  else {
     authStatusCodesCheck(response);
   }
   return false;
