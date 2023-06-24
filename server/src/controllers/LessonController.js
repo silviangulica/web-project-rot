@@ -10,6 +10,7 @@ router.add("get", "/lessons", async (req, res) => {
   if (lessonType) {
     lessons = await lessonService.getLessonsByType(lessonType);
   } else {
+    let id = await authService.verifyAuthorization(req, res, "admin");
     lessons = await lessonService.getLessons();
   }
   console.log('[GET]: "' + req.url + '" responded with = {' + lessons + "}");

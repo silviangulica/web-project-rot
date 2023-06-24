@@ -22,7 +22,6 @@ const btn_resurse = document.querySelector(".buton__management-resurse");
 const btn_delete_users = document.querySelector(".buton__sterge-user");
 const btn_change_user = document.querySelector(".buton__change-user");
 const buton__go_back = document.querySelector(".buton__go-back");
-const btn_change_resursa = document.querySelector(".buton__change-resursa");
 const btn_delete_resursa = document.querySelector(".buton__sterge-resursa");
 const btn_add_resursa = document.querySelector(".buton__add-resursa");
 
@@ -163,27 +162,122 @@ async function changeSelectedUser() {
 }
 
 async function addNewLesson() {
-  let desicion = false;
+  let canContinue = false;
   let newLesson = {};
-// ! am ramas aiaic,,,, vezi la text area defapt
+
+  // Introduce the title
   await Swal.fire({
     title: "Introduceti titlul lectiei",
-    input: "textarea",
-    inputLabel: "Message",
-    inputPlaceholder: "Type your message here...",
+    input: "text",
     inputAttributes: {
-      "aria-label": "Type your message here",
+      autocapitalize: "off",
     },
     showCancelButton: true,
-    confirmButtonText: "Look up",
+    confirmButtonText: "Continua",
     showLoaderOnConfirm: true,
-    preConfirm: (inputValue) => {},
+    preConfirm: (inputValue) => {
+      newLesson.title = inputValue;
+    },
     allowOutsideClick: () => !Swal.isLoading(),
   }).then((result) => {
     if (result.isConfirmed) {
-      desicion = true;
+      canContinue = true;
     }
   });
+
+  if (!canContinue) {
+    return;
+  }
+  canContinue = false;
+
+  // Introduce tipul lectiei
+  await Swal.fire({
+    title: "Introduceti tipul lectiei",
+    text: "Ex: avertizare, obligare etc. [! Este important sa fie una din cele deja prestabilite !]",
+    input: "text",
+    inputAttributes: {
+      autocapitalize: "off",
+    },
+    showCancelButton: true,
+    confirmButtonText: "Continua",
+    showLoaderOnConfirm: true,
+    preConfirm: (inputValue) => {
+      newLesson.type = inputValue;
+    },
+    allowOutsideClick: () => !Swal.isLoading(),
+  }).then((result) => {
+    if (result.isConfirmed) {
+      canContinue = true;
+    }
+  });
+
+  if (!canContinue) {
+    return;
+  }
+  canContinue = false;
+
+  // Introduce textul lectiei
+  await Swal.fire({
+    title: "Introduceti textul lectiei",
+    text: "A se prefara cod HTML",
+    input: "textarea",
+    inputLabel: "Textul lectiei",
+    inputPlaceholder: "Textul lectiei ...",
+    inputAttributes: {
+      "aria-label": "Introduce textul lectiei",
+    },
+    showCancelButton: true,
+    confirmButtonText: "Continua",
+    showLoaderOnConfirm: true,
+    preConfirm: (inputValue) => {
+      newLesson.description = inputValue;
+    },
+    allowOutsideClick: () => !Swal.isLoading(),
+  }).then((result) => {
+    if (result.isConfirmed) {
+      canContinue = true;
+    }
+  });
+
+  if (!canContinue) {
+    return;
+  }
+  canContinue = false;
+
+  // Introduce url-imagine lectiei
+  await Swal.fire({
+    title: "Introduceti url-ul imaginii lectiei",
+    text: "Alegeti un url de pe internet, sau incarcati prin imgur. Daca nu doriti o poza, scrieti simplu \"none\".",
+    input: "text",
+    inputAttributes: {
+      autocapitalize: "off",
+    },
+    showCancelButton: true,
+    confirmButtonText: "Continua",
+    showLoaderOnConfirm: true,
+    preConfirm: (inputValue) => {
+      newLesson.image_url = inputValue;
+    },
+  }).then((result) => {
+    if (result.isConfirmed) {
+      canContinue = true;
+    }
+  });
+
+  response = await sendLesson(newLesson);
+  if (response) {
+    Swal.fire({
+      icon: "success",
+      title: "Succes!",
+      text: "Lectia a fost adaugata!",
+    });
+  } else {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Ceva nu a mers bine!",
+    });
+  }
 }
 
 // Display section functions
@@ -212,7 +306,6 @@ function displayUsers(users) {
 
 async function displayResurseSection() {
   lista__useri.classList.remove("hidden");
-  btn_change_resursa.classList.remove("hidden");
   btn_delete_resursa.classList.remove("hidden");
   btn_add_resursa.classList.remove("hidden");
   buton__go_back.classList.remove("hidden");
@@ -253,7 +346,6 @@ function hideUserSection() {
 }
 
 function hideResurseSection() {
-  btn_change_resursa.classList.add("hidden");
   btn_delete_resursa.classList.add("hidden");
   btn_add_resursa.classList.add("hidden");
 }
@@ -350,4 +442,23 @@ async function getResurse() {
   } else {
     authStatusCodesCheck(response);
   }
+}
+
+async function sendLesson(lesson) {
+  let response = await fetch(domain + "/lessons", {
+    method: "POST",
+    body: JSON.stringify({ lesson: lesson }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+  });
+
+  let data = await response.json();
+  if (response.ok) {
+    return true;
+  } else {
+    authStatusCodesCheck(response);
+  }
+  return false;
 }
