@@ -7,12 +7,14 @@ let tableRows = document.querySelectorAll("tbody tr");
 const card = document.querySelector(".card");
 const rssButton = document.querySelector(".leaderboard__rss");
 let rssFetc;
+const adminButton = document.querySelector(".admin__btn");
 window.addEventListener("scroll", changeNavBarColor);
 
 (async () => {
   removeCurrentState();
   await updateUserData(JSON.parse(localStorage.getItem("user")));
   user = JSON.parse(localStorage.getItem("user"));
+  verifyIfUserIsAdmin();
   topButtons[0].dispatchEvent(new Event("click"));
   username.textContent = user.username;
   picture__source.src = user.profilePicture;
@@ -150,4 +152,18 @@ rssButton.addEventListener("click", async (e) => {
     console.log(response);
     authStatusCodesCheck(response);
   }
+});
+
+function verifyIfUserIsAdmin() {
+  adminButton.disabled = true;
+  adminButton.style.display = "none";
+  if (user.role == "admin") {
+    adminButton.disabled = false;
+    adminButton.style.display = "inline-block";
+  }
+}
+
+adminButton.addEventListener("click", async (e) => {
+  e.preventDefault();
+  window.location.href = "../admin/admin.html";
 });
