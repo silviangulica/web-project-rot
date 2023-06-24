@@ -1,7 +1,7 @@
 const router = require("../routers/router");
 const lessonService = require("../services/LessonService");
 const { handleErrors, getRequestBody } = require("../utils/RequestUtils");
-
+const authService = require("../services/AuthService");
 // GET: /lessons?type=avetizare
 // Gets all lessons of a certain type
 router.add("get", "/lessons", async (req, res) => {
@@ -10,7 +10,11 @@ router.add("get", "/lessons", async (req, res) => {
   if (lessonType) {
     lessons = await lessonService.getLessonsByType(lessonType);
   } else {
-    let id = await authService.verifyAuthorization(req, res, "admin");
+    try {
+      let id = await authService.verifyAuthorization(req, res, "admin");
+    } catch (err) {
+      handleErrors(err, res);
+    }
     lessons = await lessonService.getLessons();
   }
   console.log('[GET]: "' + req.url + '" responded with = {' + lessons + "}");
