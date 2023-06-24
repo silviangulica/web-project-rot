@@ -47,6 +47,7 @@ buton__go_back.addEventListener("click", () => {
   window.location.href = "/admin/admin.html";
 });
 btn_add_resursa.addEventListener("click", addNewLesson);
+btn_delete_resursa.addEventListener("click", deleteSelectedLesson);
 
 // Event functions
 function manageUserSection() {
@@ -280,6 +281,56 @@ async function addNewLesson() {
   }
 }
 
+async function deleteSelectedLesson() {
+  let lessons_selected = document.querySelectorAll(".lista__useri-item--selected");
+
+  if (lessons_selected.length > 1) {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Poti sterge doar o lectie!",
+    });
+    return;
+  }
+
+  let decision = false;
+
+  await Swal.fire({
+    title: "Esti sigur?",
+    text: "Nu vei putea repara ce ai stricat!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Sterge!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      decision = true;
+    }
+  });
+
+  if (!decision) {
+    return;
+  }
+
+  let id = lessons_selected[0].getAttribute("id");
+  let response = await deleteLesson(id);
+  if (response) {
+    Swal.fire({
+      icon: "success",
+      title: "Succes!",
+      text: "Lectia a fost stearsa!",
+    });
+    lessons_selected[0].remove();
+  } else {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Ceva nu a mers bine!",
+    });
+  }
+}
+
 // Display section functions
 async function displayUserSection() {
   lista__useri.classList.remove("hidden");
@@ -448,6 +499,24 @@ async function sendLesson(lesson) {
   let response = await fetch(domain + "/lessons", {
     method: "POST",
     body: JSON.stringify({ lesson: lesson }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+  });
+
+  let data = await response.json();
+  if (response.ok) {
+    return true;
+  } else {
+    authStatusCodesCheck(response);
+  }
+  return false;
+}
+
+async function deleteLesson(id) {
+  let response = await fetch(domain + "/lessons?id=" + id, {
+    method: "DELETE",
     headers: {
       "Content-Type": "application/json",
     },

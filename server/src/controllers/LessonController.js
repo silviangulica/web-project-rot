@@ -47,7 +47,7 @@ router.add("post", "/lessons", async (req, res) => {
   try {
     let id = await authService.verifyAuthorization(req, res, "admin");
     let body = await getRequestBody(req);
-    let lesson = JSON.parse(body);
+    let lesson = JSON.parse(body).lesson;
     lesson = await lessonService.createLesson(lesson);
     res.end(JSON.stringify(lesson));
   } catch (err) {

@@ -29,8 +29,8 @@ const getLessonsByType = async (type) => {
 }
 
 const deleteLesson = async (id) => {
-  const lesson = await Lesson.findOne({ id });
-  await lesson.remove();
+  const lesson = await Lesson.findByIdAndDelete(id);
+  console.log(lesson);
   return lesson;
 }
 
