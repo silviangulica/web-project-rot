@@ -28,10 +28,24 @@ const getLessonsByType = async (type) => {
   return lessons;
 }
 
+const deleteLesson = async (id) => {
+  const lesson = await Lesson.findOne({ id });
+  await lesson.remove();
+  return lesson;
+}
+
+const createLesson = async (lesson) => {
+  const newLesson = new Lesson(lesson);
+  await newLesson.save();
+  return newLesson;
+}
+
 module.exports = { 
   getLessons,
   getLessonById,
   updateLessonType,
   getLessonsByType,
-  getLawLessonById
+  getLawLessonById,
+  deleteLesson,
+  createLesson
 };

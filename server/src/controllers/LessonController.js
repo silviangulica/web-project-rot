@@ -1,25 +1,16 @@
 const router = require("../routers/router");
 const lessonService = require("../services/LessonService");
-
-router.add("post", "/lessons", async (req, res) => {
-  let lessonType = req.params.type;
-  let idStart = parseInt(req.params.id_start);
-  let idEnd = parseInt(req.params.id_end);
-  console.log(lessonType, idStart, idEnd);
-  for (let i = idStart; i <= idEnd; i++) {
-    let result = await lessonService.updateLessonType(i, lessonType);
-  }
-  console.log(
-    '[POST]: "' + req.url + '" responded with = {' + res.statusCode + "}"
-  );
-  res.end();
-});
+const { handleErrors, getRequestBody } = require("../utils/RequestUtils");
 
 // GET: /lessons?type=avetizare
 router.add("get", "/lessons", async (req, res) => {
   const lessonType = req.params.type;
-  const lessons = await lessonService.getLessonsByType(lessonType);
-  console.log(lessons, lessonType);
+  let lessons;
+  if (lessonType) {
+    lessons = await lessonService.getLessonsByType(lessonType);
+  } else {
+    lessons = await lessonService.getLessons();
+  }
   console.log('[GET]: "' + req.url + '" responded with = {' + lessons + "}");
   res.end(JSON.stringify(lessons));
 });
@@ -30,4 +21,29 @@ router.add("get", "/law-lessons", async (req, res) => {
   const lesson = await lessonService.getLawLessonById(lessonId);
   console.log('[GET]: \"' + req.url + '\" responded with = {' + lesson + "}");
   res.end(JSON.stringify(lesson));
+});
+
+// DELET: /lessons?id=1
+router.add("delete", "/lessons", async (req, res) => {
+  try {
+    let id = await authService.verifyAuthorization(req, res, "admin");
+    let lessonId = req.params.id;
+    let lesson = await lessonService.deleteLesson(lessonId);
+    res.end(JSON.stringify(lesson));
+  } catch (err) {
+    handleErrors(err, res);
+  }
+});
+
+// POST: /lessons
+router.add("post", "/lessons", async (req, res) => {
+  try {
+    let id = await authService.verifyAuthorization(req, res, "admin");
+    let body = await getRequestBody(req);
+    let lesson = JSON.parse(body);
+    lesson = await lessonService.createLesson(lesson);
+    res.end(JSON.stringify(lesson));
+  } catch (err) {
+    handleErrors(err, res);
+  }
 });

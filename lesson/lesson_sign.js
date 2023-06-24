@@ -137,6 +137,7 @@ let prev_button = document.querySelector(".lesson__panel-prev-lesson");
 let next_button = document.querySelector(".lesson__panel-next-lesson");
 
 prev_button.addEventListener("click", () => {
+  // cauta indexul lectiei curente in lessons
   let lesson_index = lessons.findIndex(
     (lesson) => lesson._id === currentLesson._id
   );

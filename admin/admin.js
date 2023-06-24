@@ -21,12 +21,18 @@ const btn_user = document.querySelector(".buton__management-user");
 const btn_resurse = document.querySelector(".buton__management-resurse");
 const btn_delete_users = document.querySelector(".buton__sterge-user");
 const btn_change_user = document.querySelector(".buton__change-user");
+const buton__go_back = document.querySelector(".buton__go-back");
+const btn_change_resursa = document.querySelector(".buton__change-resursa");
+const btn_delete_resursa = document.querySelector(".buton__sterge-resursa");
+const btn_add_resursa = document.querySelector(".buton__add-resursa");
 
+// !: Lista useri v-a fi trata ca si lista de resurse
 const lista__useri = document.querySelector(".lista__useri");
 
 // Global variables
 let domain = "http://127.0.0.1:8081";
 
+// MAIN
 (() => {
   showButtons();
   hideUserSection();
@@ -38,6 +44,10 @@ btn_user.addEventListener("click", manageUserSection);
 btn_resurse.addEventListener("click", manageResurseSection);
 btn_delete_users.addEventListener("click", deleteSelectedUsers);
 btn_change_user.addEventListener("click", changeSelectedUser);
+buton__go_back.addEventListener("click", () => {
+  window.location.href = "/admin/admin.html";
+});
+btn_add_resursa.addEventListener("click", addNewLesson);
 
 // Event functions
 function manageUserSection() {
@@ -152,11 +162,36 @@ async function changeSelectedUser() {
   });
 }
 
+async function addNewLesson() {
+  let desicion = false;
+  let newLesson = {};
+// ! am ramas aiaic,,,, vezi la text area defapt
+  await Swal.fire({
+    title: "Introduceti titlul lectiei",
+    input: "textarea",
+    inputLabel: "Message",
+    inputPlaceholder: "Type your message here...",
+    inputAttributes: {
+      "aria-label": "Type your message here",
+    },
+    showCancelButton: true,
+    confirmButtonText: "Look up",
+    showLoaderOnConfirm: true,
+    preConfirm: (inputValue) => {},
+    allowOutsideClick: () => !Swal.isLoading(),
+  }).then((result) => {
+    if (result.isConfirmed) {
+      desicion = true;
+    }
+  });
+}
+
 // Display section functions
 async function displayUserSection() {
   lista__useri.classList.remove("hidden");
   btn_delete_users.classList.remove("hidden");
   btn_change_user.classList.remove("hidden");
+  buton__go_back.classList.remove("hidden");
   let users = await getUsers();
   displayUsers(users);
 }
@@ -175,7 +210,29 @@ function displayUsers(users) {
   });
 }
 
-function displayResurseSection() {}
+async function displayResurseSection() {
+  lista__useri.classList.remove("hidden");
+  btn_change_resursa.classList.remove("hidden");
+  btn_delete_resursa.classList.remove("hidden");
+  btn_add_resursa.classList.remove("hidden");
+  buton__go_back.classList.remove("hidden");
+  let resurse = await getResurse();
+  displayResurse(resurse);
+}
+
+function displayResurse(resurse) {
+  resurse.forEach((resursa) => {
+    // Create a new list item
+    let li = document.createElement("li");
+    li.classList.add("lista__useri-item");
+    li.textContent = resursa.title + " - " + resursa.type;
+    li.setAttribute("id", resursa._id);
+    li.addEventListener("click", () => {
+      makeItemSelected(li);
+    });
+    lista__useri.appendChild(li);
+  });
+}
 
 function showButtons() {
   btn_user.classList.remove("hidden");
@@ -192,9 +249,14 @@ function hideUserSection() {
   lista__useri.classList.add("hidden");
   btn_delete_users.classList.add("hidden");
   btn_change_user.classList.add("hidden");
+  buton__go_back.classList.add("hidden");
 }
 
-function hideResurseSection() {}
+function hideResurseSection() {
+  btn_change_resursa.classList.add("hidden");
+  btn_delete_resursa.classList.add("hidden");
+  btn_add_resursa.classList.add("hidden");
+}
 
 // Fetch functions
 async function getUsers() {
@@ -266,9 +328,26 @@ async function modifyUser(id, newEmail) {
       });
       return false;
     }
-  }
-  else {
+  } else {
     authStatusCodesCheck(response);
   }
   return false;
+}
+
+async function getResurse() {
+  let response = await fetch(domain + "/lessons", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+  });
+
+  let data = await response.json();
+  console.log(data);
+  if (response.ok) {
+    return data;
+  } else {
+    authStatusCodesCheck(response);
+  }
 }
