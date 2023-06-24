@@ -6,7 +6,7 @@ const {
   UsernameDuplicateError,
   EmailDuplicateError,
   UserNotFoundError,
-  UserIsAdminError
+  UserIsAdminError,
 } = require("../utils/CustomErrors");
 let RSS = require("rss");
 
@@ -66,9 +66,6 @@ const getTop10UsersByCorrectAnswers = async () => {
 };
 
 const getUserQuiz = async (quizId, userId) => {
-  // let us = await User.find({ _id: userId }, { quizList: 1, _id: 0 });
-  // console.log(us);
-
   let userQuizArray = await User.find(
     { _id: userId, "quizList.quiz": quizId },
     { quizList: 1, _id: 0, startTime: 1, endTime: 1, score: 1 }
@@ -227,7 +224,7 @@ const deleteUser = async (id) => {
   if (userDeleteResult === null) {
     throw new UserNotFoundError(`User with id ${id} does not exist`);
   }
-}
+};
 const getTop10RssFeed = async () => {
   let top10UsersByScore = await getTop10UsersByScore();
   let top10UsersByQuizzes = await getTop10UsersByQuizzes();
@@ -275,7 +272,7 @@ const updateUserEmail = async (id, email) => {
   }
   user.email = email;
   await user.save();
-}
+};
 
 module.exports = {
   createUser,
@@ -302,5 +299,5 @@ module.exports = {
   updateUser,
   deleteUser,
   getTop10RssFeed,
-  updateUserEmail
+  updateUserEmail,
 };

@@ -349,7 +349,7 @@ main .container .profile .fa-gear:hover {
   cursor: pointer;
   color: #00b691;
 }
-main .container .profile .logout__btn {
+main .container .profile__buttons .logout__btn {
   font-size: 18px;
   padding: 10px;
   border: none;
@@ -359,7 +359,22 @@ main .container .profile .logout__btn {
   cursor: pointer;
   margin-top: 1.3em;
 }
-main .container .profile .logout__btn:hover {
+main .container .profile__buttons .logout__btn:hover {
+  opacity: 0.8;
+}
+main .container .profile__buttons .admin__btn {
+  font-size: 18px;
+  padding: 10px;
+  margin-left: 0.5em;
+  border: none;
+  border-radius: 5px;
+  background-color: #008bff;
+  color: white;
+  cursor: pointer;
+  margin-top: 0.3em;
+  display: none;
+}
+main .container .profile__buttons .admin__btn:hover {
   opacity: 0.8;
 }
 

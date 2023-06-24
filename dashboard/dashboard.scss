@@ -392,18 +392,35 @@ main {
         }
       }
 
-      .logout__btn {
-        font-size: 18px;
-        padding: 10px;
+      &__buttons {
+        .logout__btn {
+          font-size: 18px;
+          padding: 10px;
 
-        border: none;
-        border-radius: 5px;
-        background-color: $color-primary;
-        color: white;
-        cursor: pointer;
-        margin-top: 1.3em;
-        &:hover {
-          opacity: 0.8;
+          border: none;
+          border-radius: 5px;
+          background-color: $color-primary;
+          color: white;
+          cursor: pointer;
+          margin-top: 1.3em;
+          &:hover {
+            opacity: 0.8;
+          }
+        }
+        .admin__btn {
+          font-size: 18px;
+          padding: 10px;
+          margin-left: 0.5em;
+          border: none;
+          border-radius: 5px;
+          background-color: $color-primary;
+          color: white;
+          cursor: pointer;
+          margin-top: 0.3em;
+          &:hover {
+            opacity: 0.8;
+          }
+          display: none;
         }
       }
     }
