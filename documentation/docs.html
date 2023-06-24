@@ -32,7 +32,22 @@
               </li>
             </ol>
           </li>
-          <li>&nbsp;<a href="#apis"> API</a></li>
+          <li>&nbsp;<a href="#apis"> API</a>
+            <ol>
+              <li><a href="#sistemlogin"> Sistem de Login</a></li>
+              <li><a href="#sistemquizz"> Sistem de Quizz</a></li>
+              <li><a href="#sistemlectii"> Sistem de Invatare </a></li>
+              <li><a href="#paginaprofil"> Pagina de profil</a></li>
+              <li><a href="#sistemcontact"> Sistem de Contact</a></li>
+            </ol>
+          </li>
+          <li>&nbsp;<a href="#arhitectura"> Arhitectura</a>
+            <ol>
+              <li><a href="#context"> Context</a></li>
+              <li><a href="#container"> Containere</a></li>
+              <li><a href="#componente"> Containere</a></li>
+            </ol>
+          </li>
           <li>&nbsp;<a href="#concluzie"> Concluzie</a></li>
         </ol>
       </div>
@@ -99,7 +114,8 @@
           tehnologii:
           <ul>
             <li>Node.js</li>
-            <li>PostgreSQL</li>
+            <li>MongoDB</li>
+            <li>ImgurAPI</li>
           </ul>
         </div>
       </div>
@@ -189,7 +205,7 @@
         <p>
           RoT folosește un API intern pentru a putea stoca datele
           utilizatorilor, informații despre teste și lecții. API-ul este
-          realizat folosind Node.js și PostgreSQL.
+          realizat folosind Node.js și MongoDB.
           <br />
           API-ul este folosit pentru a putea stoca datele utilizatorilor, precum
           și pentru a putea realiza interacțiunea între front-end și back-end.
@@ -198,8 +214,103 @@
         </p>
       </div>
 
+      <div id="sistemlogin">
+        <h3>6.1 Sistem de login</h3>
+        <p>
+          API-ul nostru ofera posibilitatea de a crea un cont nou, de a te
+          loga, de a te deloga, de a reseta parola, de a schimba parola. 
+        </p>
+        <p>
+          Logarea se face prin intermediul unui token JWT, care este generat la
+          momentul logării și este trimis către client. Acest token este folosit
+          pentru a verifica dacă utilizatorul este logat sau nu. Dacă token-ul 
+          este valid, atunci utilizatorul este logat, altfel nu. Token-ul este 
+          trimis de către client la fiecare request către server, printr-un cookie HTTP ONLY.
+        </p>
+        <p>
+          Un utilizator poate să își creeze un cont nou, folosind o adresă de email. 
+          In momentul creeari contului, parola este criptată folosind bcrypt, iar
+          apoi este stocată în baza de date.
+        </p>
+
+        <p>
+          Un utilizator poate să își schimbe parola, folosind adresa de email setata la crearea contului, in cazul in care a uitat-o.
+          Odata introdus emailul, sistemul intern de mailing, trimite un email cu un cod de resetare a parolei.
+          Acest cod este generat aleatoriu, si este stocat in baza de date, avand o valabilitate de 5 minute.
+          Daca codul este valid, utilizatorul poate sa isi schimbe parola.
+          In momentul schimbarii parolei, parola este criptată folosind bcrypt, iar apoi este stocată în baza de date. 
+        </p>
+      </div>
+
+      <div id="sistemquizz">
+        <h3>6.2 Sistem de Quizz</h3>
+        <p>
+          API-ul nostru ofera posibilitatea de genera quizuri random, de a le sterge si de a le comlpeta.
+        </p>
+        <p>
+          Fiecare quizz va fi salvat in baza de date, si va fi asociat utilizatorului care l-a generat. Cand acesta incepe un chestionar, un timer de 30 de minute este pornit. Timpul de start al chestionarului este salvat in baza de date, si este folosit pentru a calcula timpul ramas la fiecare cerere de verificare a raspunsului. Daca utilizatorul nu a reusit sa termine chestionarul in 30 de minute, acesta este automat incheiat, iar rezultatul este salvat in baza de date. Deoarece startTime-ul este generat de server si stocat in baza de date, userul nu poate manipula in mod fraudulent timpul ramas.
+        </p>
+        <p>
+          In timpul chestionarului, utilizatorul poate sari peste o intrebare pentru a reveni la ea mai tarziu, sau poate trimite raspunsurile dupa ce le selecteaza.
+          De asemenea, state-ul chestionarului este updatat in permanenta in localStorage, astfel incat daca utilizatorul da refresh la pagina, quizzul va continua.Dupa fiecare intrebare la care raspunde utilizatorul, se vor actualiza si scorurile acestuia in baza de date.
+        </p>
+
+        <p>
+         La finalul chestionarului, utilizatorului i se arata timpul pe care il mai avea pentru a completa chestionarul, punctajul si daca a promovat sau nu. Daca a avut intrebari gresite, are optiunea de a vedea raspunsurile corecte prin efectuarea unei cereri catre server care returneaza chestionarul cu raspunsurile corecte.  
+        </p>
+      </div>
+
+      <div id="sistemlectii">
+        <h3>6.3 Sistem de Invatare</h3>
+        <p> API-ul nostru ofera clientului o gama variata de lectii ce pot fi studiate in vederea intelegerii parofundate a indicatoarelor si legislației. </p>
+        <p> Lectiile sunt de doua categorii, (Indicatoare si Legislație), care la au la randul lor o varietate de subcategorii. </p>
+        <p> Un utilizator cu privilegii de admin, poate adauga noi lectii sau poate sterge lectiile actuale.</p>
+      </div>
+
+      <div id="paginaprofil">
+        <h3>6.4 Pagina de Profil </h3>
+        <p> API-ul nostru pune la dispozitie utilizatorului, informatii despre contul pe care il detine, statistici si quizz-uri ce au fost completate sau create.</p>
+        <p> In pagina de profil, utilizatorul poate vedea informatii despre contul sau, cum ar fi punctajul total, numarul de teste completate, numarul de raspunsuri corecte si numarul de raspunsuri gresite. </p>
+        <p> Mai mult decat atat, utilizatorul poate sa vada top-uri diverse si chiar sa se aboneze la RSS pentru a vedea utlimele modificari! </p>
+      </div>
+
+      <div id="sistemcontact">
+        <h3>6.5 Sistem de contact</h3>
+        <p> In cazul in care se depisteaza o problema sau unul dintre utilizatori doreste sa comunice ceva unui admin, API-ul nostru implementeaza un sistem de contact. </p>
+        <p> In <a href="#contact">pagina de contact</a> poate fi completat un formular ce v-a crea un corp de email si v-a trimite continutul API-ului care il va trimite prin email echipei RoT</p>
+      </div>
+
+      <div id="arhitectura">
+        <h2>7. Arhitectura</h2>
+        
+      </div>
+
+      <div id="context">
+        <h3>7.1 Context</h3>
+        <p>
+          Acest nivel descrie imaginea de ansamblu a sistemului, inclusiv limitele sistemului, principalii utilizatori și interacțiunile cu sistemele externe.
+        </p>
+        <img src="../img/context.png" alt="Context" />
+      </div>
+
+      <div id="container">
+        <h3>7.2 Container</h3>
+        <p>
+          Acest nivel detaliază ce tehnologii de nivel înalt sau depozite de date sunt utilizate în sistem.
+        </p>
+        <img src="../img/nivel2.png" alt="Containers" />
+      </div>
+
+      <div id="componente">
+        <h3>7.3 Componente</h3>
+        <p>
+          Acest nivel oferă o perspectivă asupra principalelor componente ale sistemului și a modului în care acestea interacționează.
+        </p>
+        <img src="../img/C4.drawio.png" alt="Containers" />
+      </div>
+
       <div id="concluzie">
-        <h2>7. Concluzie</h2>
+        <h2>8. Concluzie</h2>
         <p>
           RoT poate fi cu siguranță un proiect de succes. Acesta va fi folosit
           de către o mulțime de persoane, deoarece este un proiect utilitar,

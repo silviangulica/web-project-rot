@@ -48,4 +48,9 @@ body .color__box--3 {
 }
 body .color__box--4 {
   background-color: #00b691;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }/*# sourceMappingURL=docs.css.map */
