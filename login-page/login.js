@@ -1,5 +1,6 @@
+// If user is already logged in, redirect to dashboard
 (async () => {
-  const response = await checkIfUserAuthDidNotExpire();
+  await checkIfUserAuthDidNotExpire();
 })();
 
 const loginPanelFooterAnchor = document.querySelector(
@@ -16,9 +17,10 @@ loginPanelFooterAnchor.addEventListener("click", () => {
 signupPanelFooterAnchor.addEventListener("click", () => {
   panel.classList.toggle("panel--flip");
 });
-
 const loginForm = document.querySelector(".login-panel__form");
-
+/* Used to check the user's credentials and log them in
+or display the input form errors if pass doesn't exist /email is invalid 
+ */
 loginForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const email = document.querySelector('.login-panel__input[name="username"]');
@@ -57,6 +59,9 @@ loginForm.addEventListener("submit", async (e) => {
 
 const signupForm = document.querySelector(".sign-up-panel__form");
 
+/* Used to register a new user and display the appropriate input form errors
+if something is wrong with the input data
+ */
 signupForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const username = document.querySelector(
@@ -109,9 +114,14 @@ signupForm.addEventListener("submit", async (e) => {
   }
 });
 
-// Recovery sistem for password
 const recoveryButton = document.querySelector(".login-panel__forgor-password");
 
+/*Implements a recovery system for password by using SweetAlert2
+1) When the button is pressed, a popup appears asking for the user's email
+2) If the email is found in the database, a code is sent to the user's email
+3) The user is asked to input the code received in the email ( the code expires in a while)
+4) If the code is correct, the user is asked to input a new password
+ */
 recoveryButton.addEventListener("click", async (e) => {
   Swal.fire({
     title: "Recuperare parola",

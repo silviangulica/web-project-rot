@@ -3,6 +3,7 @@ const lessonService = require("../services/LessonService");
 const { handleErrors, getRequestBody } = require("../utils/RequestUtils");
 
 // GET: /lessons?type=avetizare
+// Gets all lessons of a certain type
 router.add("get", "/lessons", async (req, res) => {
   const lessonType = req.params.type;
   let lessons;
@@ -16,10 +17,11 @@ router.add("get", "/lessons", async (req, res) => {
 });
 
 // GET: /law-lessons?id=1
+// Gets a lesson by id
 router.add("get", "/law-lessons", async (req, res) => {
   const lessonId = req.params.id;
   const lesson = await lessonService.getLawLessonById(lessonId);
-  console.log('[GET]: \"' + req.url + '\" responded with = {' + lesson + "}");
+  console.log('[GET]: "' + req.url + '" responded with = {' + lesson + "}");
   res.end(JSON.stringify(lesson));
 });
 

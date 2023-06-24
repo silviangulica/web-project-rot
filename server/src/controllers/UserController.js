@@ -4,6 +4,7 @@ const authService = require("../services/AuthService");
 const questionService = require("../services/QuestionService");
 const { handleErrors, getRequestBody } = require("../utils/RequestUtils");
 
+// Get all users (needs admin role) or a specific user by id
 router.add("get", "/users", async (req, res) => {
   try {
     let result;
@@ -19,6 +20,7 @@ router.add("get", "/users", async (req, res) => {
   }
 });
 
+// Validates the user JWT and returns the user data
 router.add("get", "/users/me", async (req, res) => {
   try {
     let id = authService.verifyAuthorization(req, res, "user");
@@ -29,6 +31,7 @@ router.add("get", "/users/me", async (req, res) => {
   }
 });
 
+// Returns the top 10 users by their score
 router.add("get", "/users/top-points", async (req, res) => {
   try {
     authService.verifyAuthorization(req, res, "user");
@@ -39,6 +42,7 @@ router.add("get", "/users/top-points", async (req, res) => {
   }
 });
 
+// Returns the top 10 users by the number of quizzes they have passed
 router.add("get", "/users/top-quizzes", async (req, res) => {
   try {
     authService.verifyAuthorization(req, res, "user");
@@ -49,6 +53,7 @@ router.add("get", "/users/top-quizzes", async (req, res) => {
   }
 });
 
+// Returns the top 10 users by the number of correct answers they have given
 router.add("get", "/users/top-answers", async (req, res) => {
   try {
     authService.verifyAuthorization(req, res, "user");
@@ -59,6 +64,7 @@ router.add("get", "/users/top-answers", async (req, res) => {
   }
 });
 
+// Depending on the body.action value, it either starts or ends a quiz for the user ( sets the endTime + startTime and updates the passed count if it was passed) and returns the time.
 router.add("patch", "/users/quizzes", async (req, res) => {
   try {
     let id = authService.verifyAuthorization(req, res, "user");
@@ -76,6 +82,7 @@ router.add("patch", "/users/quizzes", async (req, res) => {
   }
 });
 
+// Verifies the question answer and UPDATES the user's score and correctAnswers/wrongAnswers count
 router.add("patch", "/users/quizzes/questions", async (req, res) => {
   try {
     let id = authService.verifyAuthorization(req, res, "user");
@@ -100,6 +107,7 @@ router.add("patch", "/users/quizzes/questions", async (req, res) => {
   }
 });
 
+// Endpoint to get all the 3 top 10 users in one request, as a rss feed
 router.add("get", "/users/top-10-rss", async (req, res) => {
   try {
     authService.verifyAuthorization(req, res, "user");
@@ -112,7 +120,7 @@ router.add("get", "/users/top-10-rss", async (req, res) => {
   }
 });
 
-// PUT: /users/updateUser
+// Used to update an user's data
 router.add("put", "/users", async (req, res) => {
   try {
     let id = authService.verifyAuthorization(req, res, "user");

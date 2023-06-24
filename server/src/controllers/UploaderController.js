@@ -10,8 +10,8 @@ const { handleErrors, getRequestBody } = require("../utils/RequestUtils");
 router.add("post", "/upload", async (req, res) => {
   const { fields, files } = await getFormDataFromRequest(req);
 
+  // This is a readable stream of the file wewant to upload
   const fileStream = fs.createReadStream(files.fileToUpload[0].filepath);
-
 
   const response = await client.upload({
     image: fileStream,

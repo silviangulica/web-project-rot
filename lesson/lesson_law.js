@@ -39,7 +39,6 @@ function changeNavBarColor() {
 
 window.addEventListener("scroll", changeNavBarColor);
 
-// Login to the program
 const cards = document.querySelectorAll(".card");
 
 // Make the lesson invisible
@@ -49,7 +48,7 @@ lesson_container.style.display = "none";
 // Make a global variable for currentLesson
 let currentLesson = {};
 
-// Itter through all cards and add event listeners
+// Iterate through all cards and add event listeners
 cards.forEach((card) => {
   // Get the data-categorie attribute from the card
   const categorie = card.dataset.categorie;

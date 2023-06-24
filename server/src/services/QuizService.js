@@ -29,6 +29,8 @@ function getQuizWithSingleListAnswers(quiz) {
   });
   return { _id: quiz._id, questions: questions };
 }
+
+// Mixes the answers order for a question
 function getMixedAnswers(question) {
   let allAnswers = question.incorrectQ.concat(question.correctQ);
   let mixedAnswers = [];
