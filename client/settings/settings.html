@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script defer src="../global/global.js"></script>
+  <script defer src="./settings.js"></script>
+  <script src="https://kit.fontawesome.com/6666f8a27a.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet" href="settings.css" />
+  <title>Profile</title>
+</head>
+
+<body>
+  <header class="hero">
+    <nav class="nav">
+      <div class="nav__logo">RoT</div>
+      <ul class="nav__list">
+        <li class="nav__list-item">
+          <a href="../dashboard/dashboard.html" class="anchor--not-selected">Profil</a>
+        </li>
+        <li class="nav__list-item">
+          <a href="../quizzes/quiz.html" class="anchor--not-selected">Teste</a>
+        </li>
+        <li class="nav__list-item">
+          <a href="../lessons/lessons.html" class="anchor--not-selected">Lecții</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="hero__display"></div>
+  </header>
+
+  <main class="main">
+    <div class="main__panel">
+      <div class="main__title"><span>Configurare Profil</span></div>
+      <div class="main__content">
+        <div class="main__inputs">
+          <div class="input__with-icon">
+            <i class="fa-solid fa-user"></i>
+            <input type="text" class="main__username-input" placeholder="Introduceți un username nou" />
+          </div>
+          <div class="input__with-icon">
+            <i class="fa-solid fa-lock"></i>
+            <input type="text" class="main__password-input" placeholder="Introduceți o parola nouă" />
+          </div>
+          <div class="input__with-icon">
+            <i class="fa-solid fa-envelope"></i>
+            <input type="text" class="main__email-input" placeholder="Introduceți un email nou" />
+          </div>
+          <div class="input__with-icon">
+            <i class="fa-solid fa-image"></i>
+            <input type="text" class="main__picture-input" placeholder="Introduceți o adresa imgur nouă" />
+          </div>
+
+          <div class="file__uploader">
+            <input type="file" name="fileToUpload" id="fileToUpload" class="fileToUpload" />
+            <button class="uploader sameButton">Incarca o fotografie</button>
+          </div>
+        </div>
+        <div class="main__input-description">Adaugă modificările dorite!</div>
+      </div>
+      <button class="change__button">Salveaza modificarile</button>
+    </div>
+  </main>
+</body>
+
+</html>
