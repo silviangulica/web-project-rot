@@ -17,7 +17,6 @@ router.add("get", "/lessons", async (req, res) => {
     }
     lessons = await lessonService.getLessons();
   }
-  console.log('[GET]: "' + req.url + '" responded with = {' + lessons + "}");
   res.end(JSON.stringify(lessons));
 });
 
@@ -26,11 +25,10 @@ router.add("get", "/lessons", async (req, res) => {
 router.add("get", "/law-lessons", async (req, res) => {
   const lessonId = req.params.id;
   const lesson = await lessonService.getLawLessonById(lessonId);
-  console.log('[GET]: "' + req.url + '" responded with = {' + lesson + "}");
   res.end(JSON.stringify(lesson));
 });
 
-// DELET: /lessons?id=1
+// DELETE: /lessons?id=1
 router.add("delete", "/lessons", async (req, res) => {
   try {
     let id = await authService.verifyAuthorization(req, res, "admin");

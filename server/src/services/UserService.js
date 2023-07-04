@@ -171,7 +171,6 @@ const endQuizForUser = async (userId, quizId) => {
 const checkIfQuizIsFinished = async (userId, quizId, res) => {
   let time = await getQuizTime(userId, quizId);
   let now = Date.now();
-  console.log((now - time) / (1000 * 60));
   if ((now - time) / (1000 * 60) > 30) res.finished = true;
 };
 
@@ -216,7 +215,6 @@ const deleteUser = async (id) => {
   // Delete all the quizzes that the user has passed
   user.quizList.forEach(async (quiz) => {
     let result = await Quiz.findByIdAndDelete(quiz.quiz);
-    console.log(result);
   });
 
   // Delete the user
@@ -267,7 +265,6 @@ const getTop10RssFeed = async () => {
 const updateUserEmail = async (id, email) => {
   let user = await User.findById(id);
   if (user.email === email) {
-    console.log("Emails are the same");
     throw new EmailDuplicateError(`Email ${email} already exists`);
   }
   user.email = email;

@@ -77,7 +77,7 @@ saveButton.addEventListener("click", async function () {
 });
 
 const saveChanges = async (userObj) => {
-  let response = await fetch("http://127.0.0.1:8081/users", {
+  let response = await fetch(domain + "/users", {
     method: "PUT",
     body: JSON.stringify({ userObj }),
     headers: {
@@ -147,7 +147,7 @@ sendButton.addEventListener("click", async function () {
   let formData = new FormData();
   formData.append("fileToUpload", fileToUpload.files[0]);
 
-  let response = await fetch("http://127.0.0.1:8081/upload", {
+  let response = await fetch(domain + "/upload", {
     method: "POST",
     body: formData,
     credentials: "include",
@@ -163,4 +163,3 @@ sendButton.addEventListener("click", async function () {
     Swal.fire("Error!", "Poza de profil nu a fost schimbata!", "error");
   }
 });
-

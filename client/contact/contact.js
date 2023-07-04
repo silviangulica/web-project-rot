@@ -7,7 +7,6 @@ const subject = document.getElementById("subject");
 
 const btn = document.querySelector(".form__button--submit");
 
-
 btn.addEventListener("click", (e) => {
   e.preventDefault();
 
@@ -20,7 +19,7 @@ btn.addEventListener("click", (e) => {
     message.value +
     `<br>Numar de telefon: ${phone.value}` +
     `<br>Email: ${email.value}`;
-  fetch("http://localhost:8081/support", {
+  fetch(domain + "/support", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -31,23 +30,19 @@ btn.addEventListener("click", (e) => {
       subject: subject.value,
     }),
   })
-  .then(async response => {
-    window.location.reload();
+    .then(async (response) => {
+      window.location.reload();
 
-    if (response.ok) {
-      alert("Cererea a fost realizată cu succes.");
-    } else {
+      if (response.ok) {
+        alert("Cererea a fost realizată cu succes.");
+      } else {
+        alert("Cererea nu a putut fi realizată.");
+      }
+    })
+    .catch((error) => {
+      window.location.reload();
       alert("Cererea nu a putut fi realizată.");
-    }
-
-
-  })
-  .catch(error => {
-    window.location.reload();
-    alert("Cererea nu a putut fi realizată.");
-
-  });
-
+    });
 });
 
 const checkIfEmailisEmpty = () => {
@@ -55,22 +50,21 @@ const checkIfEmailisEmpty = () => {
     return true;
   }
   return false;
-}
+};
 
 const checkIfNameisEmpty = () => {
   if (nameInput.value === "") {
     return true;
   }
   return false;
-}
+};
 
 const checkIfMessageisEmpty = () => {
   if (message.value === "") {
     return true;
   }
   return false;
-}
-
+};
 
 const checkInputs = () => {
   let isEmpty = false;
@@ -93,4 +87,4 @@ const checkInputs = () => {
     isEmpty = true;
   }
   return isEmpty;
-}
+};

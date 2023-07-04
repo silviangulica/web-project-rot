@@ -1,9 +1,6 @@
 const router = require("../routers/router");
 const { getRequestBody, handleErrors } = require("../utils/RequestUtils");
 const authService = require("../services/AuthService");
-const User = require("../models/User");
-const Question = require("../models/Question");
-const QuizSchema = require("../models/Quiz");
 const { userToUserDtoMapper } = require("../dto/UserDto");
 
 /*Used to create a new user, might throw errors if the username or email are already taken, or if the password is too short*/
@@ -55,7 +52,6 @@ router.add("get", "/verifyToken", async (req, res) => {
     authService.verifyAuthorization(req, res, "user");
     res.end(JSON.stringify({ message: "Token is valid" }));
   } catch (err) {
-    console.log(err);
     handleErrors(err, res);
   }
 });

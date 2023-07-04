@@ -14,40 +14,33 @@ function changeNavBarColor() {
 }
 
 window.addEventListener("scroll", changeNavBarColor);
-// ---
 
 // Get all documents
 const btn_user = document.querySelector(".buton__management-user");
-const btn_resurse = document.querySelector(".buton__management-resurse");
+const btn_resources = document.querySelector(".buton__management-resurse");
 const btn_delete_users = document.querySelector(".buton__sterge-user");
 const btn_change_user = document.querySelector(".buton__change-user");
 const buton__go_back = document.querySelector(".buton__go-back");
-const btn_delete_resursa = document.querySelector(".buton__sterge-resursa");
-const btn_add_resursa = document.querySelector(".buton__add-resursa");
-
-// !: Lista useri v-a fi trata ca si lista de resurse
+const btn_delete_resource = document.querySelector(".buton__sterge-resursa");
+const btn_add_resource = document.querySelector(".buton__add-resursa");
 const lista__useri = document.querySelector(".lista__useri");
 
-// Global variables
-let domain = "http://127.0.0.1:8081";
-
-// MAIN
 (() => {
   showButtons();
   hideUserSection();
-  hideResurseSection();
+  hideResourcesSection();
 })();
 
 // Event sections
 btn_user.addEventListener("click", manageUserSection);
-btn_resurse.addEventListener("click", manageResurseSection);
+btn_resources.addEventListener("click", manageResourcesSection);
 btn_delete_users.addEventListener("click", deleteSelectedUsers);
 btn_change_user.addEventListener("click", changeSelectedUser);
 buton__go_back.addEventListener("click", () => {
   window.location.href = "/admin/admin.html";
 });
-btn_add_resursa.addEventListener("click", addNewLesson);
-btn_delete_resursa.addEventListener("click", deleteSelectedLesson);
+btn_add_resource.addEventListener("click", addNewLesson);
+btn_delete_resource.addEventListener("click", deleteSelectedLesson);
 
 // Event functions
 function manageUserSection() {
@@ -55,9 +48,9 @@ function manageUserSection() {
   displayUserSection();
 }
 
-function manageResurseSection() {
+function manageResourcesSection() {
   hideButtons();
-  displayResurseSection();
+  displayResourcesSection();
 }
 
 function makeItemSelected(element) {
@@ -248,7 +241,7 @@ async function addNewLesson() {
   // Introduce url-imagine lectiei
   await Swal.fire({
     title: "Introduceti url-ul imaginii lectiei",
-    text: "Alegeti un url de pe internet, sau incarcati prin imgur. Daca nu doriti o poza, scrieti simplu \"none\".",
+    text: 'Alegeti un url de pe internet, sau incarcati prin imgur. Daca nu doriti o poza, scrieti simplu "none".',
     input: "text",
     inputAttributes: {
       autocapitalize: "off",
@@ -282,7 +275,9 @@ async function addNewLesson() {
 }
 
 async function deleteSelectedLesson() {
-  let lessons_selected = document.querySelectorAll(".lista__useri-item--selected");
+  let lessons_selected = document.querySelectorAll(
+    ".lista__useri-item--selected"
+  );
 
   if (lessons_selected.length > 1) {
     Swal.fire({
@@ -343,7 +338,6 @@ async function displayUserSection() {
 
 function displayUsers(users) {
   users.forEach((user) => {
-    // Create a new list item
     let li = document.createElement("li");
     li.classList.add("lista__useri-item");
     li.textContent = user.username;
@@ -355,22 +349,21 @@ function displayUsers(users) {
   });
 }
 
-async function displayResurseSection() {
+async function displayResourcesSection() {
   lista__useri.classList.remove("hidden");
-  btn_delete_resursa.classList.remove("hidden");
-  btn_add_resursa.classList.remove("hidden");
+  btn_delete_resource.classList.remove("hidden");
+  btn_add_resource.classList.remove("hidden");
   buton__go_back.classList.remove("hidden");
-  let resurse = await getResurse();
-  displayResurse(resurse);
+  let resources = await getResources();
+  displayResources(resources);
 }
 
-function displayResurse(resurse) {
-  resurse.forEach((resursa) => {
-    // Create a new list item
+function displayResources(resources) {
+  resources.forEach((resource) => {
     let li = document.createElement("li");
     li.classList.add("lista__useri-item");
-    li.textContent = resursa.title + " - " + resursa.type;
-    li.setAttribute("id", resursa._id);
+    li.textContent = resource.title + " - " + resource.type;
+    li.setAttribute("id", resource._id);
     li.addEventListener("click", () => {
       makeItemSelected(li);
     });
@@ -380,13 +373,13 @@ function displayResurse(resurse) {
 
 function showButtons() {
   btn_user.classList.remove("hidden");
-  btn_resurse.classList.remove("hidden");
+  btn_resources.classList.remove("hidden");
 }
 
 // Hide Section functions
 function hideButtons() {
   btn_user.classList.add("hidden");
-  btn_resurse.classList.add("hidden");
+  btn_resources.classList.add("hidden");
 }
 
 function hideUserSection() {
@@ -396,9 +389,9 @@ function hideUserSection() {
   buton__go_back.classList.add("hidden");
 }
 
-function hideResurseSection() {
-  btn_delete_resursa.classList.add("hidden");
-  btn_add_resursa.classList.add("hidden");
+function hideResourcesSection() {
+  btn_delete_resource.classList.add("hidden");
+  btn_add_resource.classList.add("hidden");
 }
 
 // Fetch functions
@@ -477,7 +470,7 @@ async function modifyUser(id, newEmail) {
   return false;
 }
 
-async function getResurse() {
+async function getResources() {
   let response = await fetch(domain + "/lessons", {
     method: "GET",
     headers: {

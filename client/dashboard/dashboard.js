@@ -42,7 +42,7 @@ topButtons.forEach((button) => {
     });
     button.classList.add("leaderboard__button--selected");
     const response = await fetch(
-      `http://127.0.0.1:8081/users/${button.getAttribute("id")}`,
+      domain + `/users/${button.getAttribute("id")}`,
       {
         method: "GET",
         credentials: "include",
@@ -86,7 +86,7 @@ const setStats = async () => {
 
 logoutButton.addEventListener("click", async (e) => {
   e.preventDefault();
-  const response = await fetch("http://127.0.0.1:8081/logout", {
+  const response = await fetch(domain + "/logout", {
     method: "GET",
     credentials: "include",
   });
@@ -142,12 +142,13 @@ settings.addEventListener("click", async (e) => {
 
 rssButton.addEventListener("click", async (e) => {
   e.preventDefault();
-  let response = await fetch("http://127.0.0.1:8081/users/top-10-rss", {
+  let response = await fetch(domain + "/users/top-10-rss", {
     method: "GET",
     credentials: "include",
   });
   if (response.ok) {
-    window.location.href = "http://127.0.0.1:8081/users/top-10-rss";
+    window.location.href =
+      "http://api.romaniantraffictutor.tech/users/top-10-rss";
   } else {
     console.log(response);
     authStatusCodesCheck(response);

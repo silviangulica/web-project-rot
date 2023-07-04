@@ -25,11 +25,9 @@ router.add("post", "/upload", async (req, res) => {
 
   try {
     let id = authService.verifyAuthorization(req, res, "user");
-    console.log(id);
     await userService.updateUser(id, { picture: response.data.link });
   } catch (err) {
     handleErrors(err, res);
-    console.log(err);
   }
 
   res.end(JSON.stringify({ link: response.data.link }));
@@ -41,7 +39,6 @@ const getFormDataFromRequest = async (req) => {
     formidable = await import("formidable");
   } catch (error) {
     // Handle the error if the module fails to import
-    console.error("Failed to import 'formidable':", error);
     return;
   }
   return new Promise((resolve, reject) => {
@@ -49,7 +46,6 @@ const getFormDataFromRequest = async (req) => {
 
     formData.parse(req, (err, fields, files) => {
       if (err) {
-        console.error(err);
         reject(err);
       }
       resolve({ fields, files });

@@ -18,7 +18,6 @@ router.add("post", "/quizzes", async (req, res) => {
     quiz = await getUserQuiz(quiz._id, id);
     res.end(JSON.stringify(quiz));
   } catch (err) {
-    console.log(err);
     handleErrors(err, res);
   }
 });
@@ -31,7 +30,6 @@ router.add("delete", "/quizzes", async (req, res) => {
     await removeQuiz(id, quizId);
     res.end(JSON.stringify({ message: "Quiz removed successfully" }));
   } catch (err) {
-    console.log(err);
     handleErrors(err, res);
   }
 });
@@ -41,14 +39,12 @@ router.add("get", "/quizzes", async (req, res) => {
   try {
     let quizId = req.params.quizId;
     let answersFormat = req.params.answersFormat;
-    console.log(answersFormat);
     await verifyAuthorization(req, res, "user");
     let quiz = await getQuizById(quizId);
     if (answersFormat === "singleList")
       quiz = getQuizWithSingleListAnswers(quiz);
     res.end(JSON.stringify(quiz));
   } catch (err) {
-    console.log(err);
     handleErrors(err, res);
   }
 });

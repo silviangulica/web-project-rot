@@ -102,7 +102,6 @@ router.add("patch", "/users/quizzes/questions", async (req, res) => {
     }
     res.end(JSON.stringify({ correct }));
   } catch (err) {
-    console.log(err);
     handleErrors(err, res);
   }
 });
@@ -115,7 +114,6 @@ router.add("get", "/users/top-10-rss", async (req, res) => {
     res.setHeader("Content-Type", "application/rss+xml");
     res.end(feed);
   } catch (err) {
-    console.log(err);
     handleErrors(err, res);
   }
 });
@@ -126,7 +124,7 @@ router.add("put", "/users", async (req, res) => {
     let id = authService.verifyAuthorization(req, res, "user");
     let body = JSON.parse(await getRequestBody(req));
     let user = await userService.updateUser(id, body.userObj);
-    res.end(JSON.stringify( {msg: "User updated successfully"} ));
+    res.end(JSON.stringify({ msg: "User updated successfully" }));
   } catch (err) {
     handleErrors(err, res);
   }
@@ -139,22 +137,18 @@ router.add("delete", "/users", async (req, res) => {
     await userService.deleteUser(userId);
 
     // Show log
-    console.log("[\x1b[31mDELETE\x1b[0m]: User deleted with id: " + userId);
     res.end(JSON.stringify({ msg: "User deleted successfully" }));
   } catch (err) {
     handleErrors(err, res);
   }
 });
 
-
 // UPDATE: /users/email?id=...
 router.add("put", "/users/email", async (req, res) => {
   try {
     let id = authService.verifyAuthorization(req, res, "admin");
     let { email, userId } = JSON.parse(await getRequestBody(req));
-    console.log(email, userId);
     await userService.updateUserEmail(userId, email);
-    console.log("[\x1b[32mUPDATE\x1b[0m]: User email updated with id: " + userId);
     res.end(JSON.stringify({ msg: "User email updated successfully" }));
   } catch (err) {
     handleErrors(err, res);

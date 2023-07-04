@@ -29,7 +29,7 @@ loginForm.addEventListener("submit", async (e) => {
   );
   email.style.borderColor = "transparent";
   password.style.borderColor = "transparent";
-  const response = await fetch("http://127.0.0.1:8081/login", {
+  const response = await fetch(domain + "/login", {
     method: "POST",
     body: JSON.stringify({
       email: email.value,
@@ -85,7 +85,7 @@ signupForm.addEventListener("submit", async (e) => {
     return;
   }
   passwordConfirmation.style.borderColor = "transparent";
-  const response = await fetch("http://127.0.0.1:8081/register", {
+  const response = await fetch(domain + "/register", {
     method: "POST",
     body: JSON.stringify({
       username: username.value,
@@ -132,7 +132,7 @@ recoveryButton.addEventListener("click", async (e) => {
     cancelButtonText: "Cancel",
     showLoaderOnConfirm: true,
     preConfirm: async (inputValue) => {
-      let response = await fetch("http://127.0.0.1:8081/recovery", {
+      let response = await fetch(domain + "/recovery", {
         method: "POST",
         body: JSON.stringify({
           email: inputValue,
@@ -160,7 +160,7 @@ recoveryButton.addEventListener("click", async (e) => {
         cancelButtonText: "Cancel",
         showLoaderOnConfirm: true,
         preConfirm: async (inputValue) => {
-          let response = await fetch("http://127.0.0.1:8081/checkCode", {
+          let response = await fetch(domain + "/checkCode", {
             method: "POST",
             body: JSON.stringify({
               code: inputValue,
@@ -193,19 +193,16 @@ recoveryButton.addEventListener("click", async (e) => {
             cancelButtonText: "Cancel",
             showLoaderOnConfirm: true,
             preConfirm: async (inputValue) => {
-              let response = await fetch(
-                "http://127.0.0.1:8081/changePassword",
-                {
-                  method: "POST",
-                  body: JSON.stringify({
-                    password: inputValue,
-                    email: result.value.email,
-                  }),
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                }
-              );
+              let response = await fetch(domain + "/changePassword", {
+                method: "POST",
+                body: JSON.stringify({
+                  password: inputValue,
+                  email: result.value.email,
+                }),
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              });
 
               let data = await response.json();
               if (response.ok) {

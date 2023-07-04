@@ -175,7 +175,8 @@ body {
   margin-top: 1.2em;
 }
 
-.change__button, .sameButton {
+.change__button,
+.sameButton {
   height: 2em;
   border-radius: 0.5em;
   border: 1px solid gray;
@@ -186,11 +187,25 @@ body {
   background-color: #4a82f5;
   color: white;
 }
-.change__button:focus, .sameButton:focus {
+.change__button:focus,
+.sameButton:focus {
   outline: none;
 }
-.change__button:hover, .sameButton:hover {
+.change__button:hover,
+.sameButton:hover {
   background-color: #667aea;
   transition: transform 0.2s ease-in-out;
   cursor: pointer;
+}
+
+@media screen and (max-width: 500px) {
+  .hero {
+    background-position: center 0;
+  }
+  .hero .nav__logo {
+    padding-left: 2.5vw;
+  }
+  .hero .nav__list-item:last-of-type {
+    margin-right: 0;
+  }
 }/*# sourceMappingURL=settings.css.map */

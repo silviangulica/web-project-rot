@@ -1,5 +1,7 @@
+let domain = "http://api.romaniantraffictutor.tech";
+
 async function checkIfUserAuthDidNotExpire() {
-  const response = await fetch("http://127.0.0.1:8081/verifyToken", {
+  const response = await fetch(domain + "/verifyToken", {
     method: "GET",
     credentials: "include",
     headers: {
@@ -16,7 +18,7 @@ async function checkIfUserAuthDidNotExpire() {
 }
 
 async function updateUserData(user) {
-  const response = await fetch(`http://127.0.0.1:8081/users/me`, {
+  const response = await fetch(domain + `/users/me`, {
     method: "GET",
     credentials: "include",
     headers: {

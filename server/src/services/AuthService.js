@@ -10,7 +10,7 @@ const {
 } = require("../utils/CustomErrors");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-require("dotenv").config();
+//require("dotenv").config();
 const saltRounds = 10;
 const secretKey = process.env.JWT_SECRET_KEY;
 

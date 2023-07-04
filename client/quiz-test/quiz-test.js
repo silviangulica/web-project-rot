@@ -80,7 +80,7 @@ On success: call setEndScreen() + set isFinished to true
 */
 const submitQuiz = async () => {
   const response = await fetch(
-    `http://127.0.0.1:8081/users/quizzes?quizId=${currentQuiz._id}`,
+    domain + `/users/quizzes?quizId=${currentQuiz._id}`,
     {
       method: "PATCH",
       credentials: "include",
@@ -149,7 +149,7 @@ submitButton.addEventListener("click", async () => {
  */
 const sendStartQuizRequest = async () => {
   const response = await fetch(
-    `http://127.0.0.1:8081/users/quizzes?quizId=${currentQuiz._id}`,
+    domain + `/users/quizzes?quizId=${currentQuiz._id}`,
     {
       method: "PATCH",
       credentials: "include",
@@ -238,7 +238,8 @@ async function sendCurrentQuestionAnswers(chosenAnswers) {
   console.log(currentQuiz._id);
   console.log(currentQuiz.questions[currentQuestionIndex]._id);
   const response = await fetch(
-    `http://127.0.0.1:8081/users/quizzes/questions?quizId=${currentQuiz._id}&questionId=${currentQuiz.questions[currentQuestionIndex]._id}`,
+    domain +
+      `/users/quizzes/questions?quizId=${currentQuiz._id}&questionId=${currentQuiz.questions[currentQuestionIndex]._id}`,
     {
       method: "PATCH",
       credentials: "include",
@@ -365,7 +366,7 @@ function updateTimer() {
 /*This tries to GET the quizz from the server with the correct/incorrect answers so they can be checked in the end */
 seeCorrectAnswersButton.addEventListener("click", async () => {
   const response = await fetch(
-    `http://127.0.0.1:8081/quizzes?quizId=${currentQuiz._id}&answersFormat=separateLists`,
+    domain + `/quizzes?quizId=${currentQuiz._id}&answersFormat=separateLists`,
     {
       method: "GET",
       credentials: "include",

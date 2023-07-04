@@ -30,7 +30,6 @@ router.add("post", "/recovery", async (req, res) => {
   try {
     let body = await getRequestBody(req);
     let { email } = JSON.parse(body);
-    console.log("[\x1b[32mPOST\x1b[0m]: Email request for recovery: " + email);
 
     let user = await userService.findByEmail(email);
     if (!user) {
@@ -39,11 +38,9 @@ router.add("post", "/recovery", async (req, res) => {
 
     // Generate a code
     let code = generateRandomCode();
-    console.log("[\x1b[32mPOST\x1b[0m]: Generated code: " + code);
 
     // Encrypt code
     let encryptedCode = await bcrypt.hash(code, 10);
-    console.log("[\x1b[32mPOST\x1b[0m]: Encrypted code: " + encryptedCode);
 
     // Update user's recovery code
     let userUpdated = await User.updateOne(
@@ -56,7 +53,6 @@ router.add("post", "/recovery", async (req, res) => {
         },
       }
     );
-    console.log(userUpdated);
 
     // Send email with code
     let mailOptions = {
@@ -91,7 +87,6 @@ router.add("post", "/checkCode", async (req, res) => {
     }
 
     if (Date.now() > user.recoveryCode.expirationTime) {
-      console.log("Crap la timp");
       throw new InvalidCodeError(`Code expired`);
     }
 
@@ -126,8 +121,6 @@ router.add("post", "/changePassword", async (req, res) => {
       }
     );
 
-    console.log(userUpdated);
-    console.log("[\x1b[32mPOST\x1b[0m]: Password changed for: " + email);
     res.end(JSON.stringify({ msg: "Succes" }));
   } catch (err) {
     handleErrors(err, res);

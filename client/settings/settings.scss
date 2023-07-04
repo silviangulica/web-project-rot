@@ -191,7 +191,8 @@ body {
   margin-bottom: 1.6em;
 }
 
-.change__button, .sameButton {
+.change__button,
+.sameButton {
   height: 2em;
   border-radius: 0.5em;
   border: 1px solid gray;
@@ -208,5 +209,22 @@ body {
     background-color: #667aea;
     transition: transform 0.2s ease-in-out;
     cursor: pointer;
+  }
+}
+@media screen and (max-width: 500px) {
+  .hero {
+    background-position: center 0;
+    .nav {
+      &__logo {
+        padding-left: $margin-padding-2;
+      }
+      &__list {
+        &-item {
+          &:last-of-type {
+            margin-right: 0;
+          }
+        }
+      }
+    }
   }
 }
